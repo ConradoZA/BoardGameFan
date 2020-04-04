@@ -1,0 +1,77 @@
+const express = require('express');
+const router = express.Router();
+const { Game, Type, Mechanic, Author, Artist, sequelize } = require('../models/index.js')
+
+const GameController = {
+    getAll(req, res) {
+        Game.findAll({ include: [Type, Mechanic, Author, Artist] })
+            .then(games => res.send(games))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
+    },
+    getOne(req, res) {
+        Game.findOne({
+                include: [Type, Mechanic, Author, Artist],
+                where: { id: req.params.id }
+            })
+            .then(game => res.send(game))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
+
+    },
+    insert(req, res) {
+        Game.create({
+                name: req.body.name,
+                year: req.body.year,
+                image: req.body.image,
+                minPlayer: req.body.minPlayer,
+                maxPlayer: req.body.maxPlayer,
+                time: req.body.time,
+                age: req.body.age,
+                description: req.body.description
+            })
+            .then(game => {
+                game.addType(req.body.TypeId);
+                game.addMechanic(req.body.MechanicId);
+                game.addAuthor(req.body.AuthorId);
+                game.addArtist(req.body.ArtistId);
+                res.send(game);
+
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).send('Ha habido problemas al tratar de actualizar el juego.')
+            })
+    },
+    put(req, res) {
+        Game.update({...req.body }, { where: { id: req.params.id } })
+            .then(game => Game.findByPk(req.params.id))
+            .then(game => {
+                if (req.body.TypeId) {
+                    game.setTypes(req.body.TypeId);
+                }
+                if (req.body.MechanicId) {
+                    game.setMechanics(req.body.MechanicId);
+                }
+                if (req.body.AuthorId) {
+                    game.setAuthors(req.body.AuthorId);
+                }
+                if (req.body.ArtistId) {
+                    game.setArtists(req.body.ArtistId);
+                }
+                res.send(game)
+            })
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de actualizar el juego.'))
+    },
+    async delete(req, res) {
+        try {
+            await Game.destroy({ where: { id: req.params.id } })
+            sequelize.query(`DELETE FROM TypeGames where GameId = ${req.params.id}`);
+            sequelize.query(`DELETE FROM MechanicGames where GameId = ${req.params.id}`);
+            sequelize.query(`DELETE FROM AuthorGames where GameId = ${req.params.id}`);
+            sequelize.query(`DELETE FROM ArtistGames where GameId = ${req.params.id}`);
+            res.send('Juego eliminado.')
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    }
+}
+module.exports = GameController;

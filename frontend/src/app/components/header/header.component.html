@@ -1,0 +1,33 @@
+<mat-toolbar color="primary" class="row">
+
+    <!--     <div class="user" *ngIf="expression" (click)="goToProfile()">
+        <img src="#">
+        <img src="#" *ngIf="expression">
+        <p>nombre</p>
+    </div> -->
+    <div class="row button" (click)="goHome()">
+        <img src="../../../favicon.ico">
+        <p class="title">Board Game Fan</p>
+    </div>
+
+    <!--     <button mat-raised-button color="primary" *ngIf="expression">Mi Colección</button>
+
+    <button mat-button [matMenuTriggerFor]="admin" *ngIf="expression">Administración</button>
+    <mat-menu #admin="matMenu">
+        <button mat-menu-item>Nuevo Juego</button>
+        <button mat-menu-item>Item 2</button>
+    </mat-menu> -->
+
+    <mat-form-field appearance="standard" color="accent" class="search">
+        <mat-label>Buscar Juego</mat-label>
+        <input matInput type="text" [(ngModel)]="value" placeholder="Nombre del juego" (keyup)="searchGame($event)">
+        <button class="size" mat-button *ngIf="value" matSuffix mat-icon-button (click)="value=''">
+          <i class="material-icons-round">close</i>
+        </button>
+        <mat-hint align="end" class="button" (click)="goToAdvSearch()">Búsqueda Avanzada</mat-hint>
+    </mat-form-field>
+
+    <!--     <button mat-button *ngIf="expression">Login</button>
+    <button mat-button *ngIf="expression">Logout</button> -->
+
+</mat-toolbar>
