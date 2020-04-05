@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public latest;
+
+  constructor(public gameService: GameService) { }
+
+  goToGame(id){
+
+  }
 
   ngOnInit(): void {
+    this.gameService.searchLatest()
+          .subscribe(
+            (res) => {this.latest = res;},
+            (error) => console.log(error)
+          );
   }
 
 }

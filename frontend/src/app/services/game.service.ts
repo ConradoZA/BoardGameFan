@@ -8,7 +8,10 @@ export class GameService {
 
   constructor(public httpClient:HttpClient) { }
 
-  searchGame(name:string){
-
+  searchGame(search:string){
+    return this.httpClient.get('http://localhost:3000/search/game=' + search)
+  }
+  searchLatest(){
+    return this.httpClient.get('http://localhost:3000/search/latest')
   }
 }

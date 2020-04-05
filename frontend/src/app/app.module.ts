@@ -10,6 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatInputModule} from '@angular/material/input';
+import {MatCardModule} from '@angular/material/card';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -17,6 +18,7 @@ import { HomeComponent } from './containers/home/home.component';
 import { NotfoundComponent } from './containers/notfound/notfound.component';
 import { AdvSearchComponent } from './containers/adv-search/adv-search.component';
 import { ProfileComponent } from './containers/profile/profile.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ProfileComponent } from './containers/profile/profile.component';
     NotfoundComponent,
     AdvSearchComponent,
     ProfileComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { ProfileComponent } from './containers/profile/profile.component';
     MatButtonModule,
     MatMenuModule,
     MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

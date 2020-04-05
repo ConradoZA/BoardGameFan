@@ -4,11 +4,13 @@ import { HomeComponent } from './containers/home/home.component';
 import { NotfoundComponent } from './containers/notfound/notfound.component';
 import { AdvSearchComponent } from './containers/adv-search/adv-search.component';
 import { ProfileComponent } from './containers/profile/profile.component';
+import { SearchComponent } from './components/search/search.component';
 
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
+  {path:"search/:searchValue", component: SearchComponent },
   {path:"advSearch",component:AdvSearchComponent},
   {path:"profile",component:ProfileComponent},
   {path:'**',component:NotfoundComponent},

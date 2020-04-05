@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { GameService } from 'src/app/services/game.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -11,25 +11,20 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public router:Router, public gameService:GameService) { }
+  constructor(public router:Router, public userService:UserService) { }
 
-public value:string="";
+public searchValue:string="";
 
-  goHome(){
-    this.router.navigate([''])
-  }
-  searchGame(event){
+  searchGame(event):void{
     if(event.key==='Enter'){
-      this.gameService.searchGame(this.value)
+      this.router.navigate(['search', this.searchValue])
     }
   }
-  goToAdvSearch(){
-    this.router.navigate(['advSearch'])
+  logout():void{
+    localStorage.removeItem('authToken');
+    this.userService.setUser({});
   }
-
-  goToProfile(){
-    this.router.navigate(['profile'])
-  }
+  
   ngOnInit(): void {
   }
 
