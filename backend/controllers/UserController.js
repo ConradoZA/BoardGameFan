@@ -42,18 +42,17 @@ const UserController = {
             res.status(500).send({ message: 'Hubo un problema al tratar de logearnos' });
         }
     },
-
-    async getInfo(req, res) {
+    async getMyInfo(req, res) {
         res.send(req.user);
     },
-    async getMine(req, res) {
+    async getMyCol(req, res) {
         try {
             res.send(await UserGame.findAll({ include: [Game], where: { UserId: +req.user.id } }))
         } catch (error) {
             res.status(500).send({ message: "Ha habido problemas al tratar de obtener tu colección de juegos.", error })
         }
     },
-    async newGame(req, res) {
+    async newColGame(req, res) {
         try {
             await UserGame.create({
                 UserId: req.user.id,
@@ -66,15 +65,7 @@ const UserController = {
             res.status(500).send({ message: "Ha habido problemas al tratar de añadir un juego a tu colección.", error })
         }
     },
-    async newManyGame(req, res) { //PREGUNTAR
-        try {
-            await UserGame.bulkCreate([...req.body], { UserId: req.user.id });
-            res.status(201).send({ message: "Se han introducido con éxito todos los juegos a tu colección." })
-        } catch (error) {
-            res.status(500).send({ message: "Ha habido problemas al tratar de añadir un juego a tu colección.", error })
-        }
-    },
-    async putGame(req, res) {
+    async updateColGame(req, res) {
         try {
             await UserGame.update({
                 comment: req.body.comment,
@@ -89,7 +80,7 @@ const UserController = {
             res.status(500).send({ message: "Ha habido problemas al tratar de añadir un juego a tu colección.", error })
         }
     },
-    async deleteGame(req, res) {
+    async deleteColGame(req, res) {
         try {
             await UserGame.destroy({
                 where: {

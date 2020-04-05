@@ -184,6 +184,18 @@ const SearchController = {
             })
             .then(games => res.send(games))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
+    },
+    getLatest(req, res) {
+        Game.findAll({
+                order: [
+                    ['createdAt', 'DESC']
+                ]
+            })
+            .then(games => {
+                if (games.length > 5) { games = games.slice(0, 5) }
+                res.send(games)
+            })
+            .catch(err => res.status(500).send({ message: "Ha habido un problema al cargar los últimos juegos creados", err }))
     }
 }
 module.exports = SearchController;
