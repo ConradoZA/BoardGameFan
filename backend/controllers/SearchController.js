@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { Game, Type, Mechanic, Author, Artist, sequelize, Sequelize } = require('../models/index.js')
+const { Game, Category, Mechanic, Author, Artist, sequelize, Sequelize } = require('../models/index.js')
 const { Op } = Sequelize;
 
 const SearchController = {
     getByName(req, res) {
         Game.findAll({
-                include: [Type, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist],
                 where: {
                     name: {
                         [Op.like]: `%${req.params.game}%`
@@ -16,7 +16,7 @@ const SearchController = {
                     ['name', 'ASC'],
                     [Author, 'name', 'ASC'],
                     [Mechanic, 'name', 'ASC'],
-                    [Type, 'name', 'ASC'],
+                    [Category, 'name', 'ASC'],
                     [Artist, 'name', 'ASC']
                 ]
             })
@@ -25,13 +25,13 @@ const SearchController = {
     },
     getByYear(req, res) {
         Game.findAll({
-                include: [Type, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist],
                 where: { year: req.params.year },
                 order: [
                     ['name', 'ASC'],
                     [Author, 'name', 'ASC'],
                     [Mechanic, 'name', 'ASC'],
-                    [Type, 'name', 'ASC'],
+                    [Category, 'name', 'ASC'],
                     [Artist, 'name', 'ASC']
                 ]
             })
@@ -41,7 +41,7 @@ const SearchController = {
     },
     getByPlayers(req, res) {
         Game.findAll({
-                include: [Type, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist],
                 where: {
                     [Op.and]: [{
                         maxPlayer: {
@@ -57,7 +57,7 @@ const SearchController = {
                     ['name', 'ASC'],
                     [Author, 'name', 'ASC'],
                     [Mechanic, 'name', 'ASC'],
-                    [Type, 'name', 'ASC'],
+                    [Category, 'name', 'ASC'],
                     [Artist, 'name', 'ASC']
                 ]
             })
@@ -80,12 +80,12 @@ const SearchController = {
             .then(mechanics => res.send(mechanics))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener las mecánicas de juego.'))
     },
-    getTypeByName(req, res) {
-        Type.findAll({
+    getCategoryByName(req, res) {
+        Category.findAll({
                 include: [Game],
                 where: {
                     name: {
-                        [Op.like]: `%${req.params.type}%`
+                        [Op.like]: `%${req.params.category}%`
                     }
                 },
                 order: [
@@ -93,7 +93,7 @@ const SearchController = {
                     [Game, 'name', 'ASC']
                 ]
             })
-            .then(types => res.send(types))
+            .then(categories => res.send(categories))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los tipos de juego.'))
     },
     getAuthorByName(req, res) {
@@ -130,17 +130,17 @@ const SearchController = {
     },
     getByTimeMinus(req, res) {
         Game.findAll({
-                include: [Type, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist],
                 where: {
-                    time: {
-                        [Op.lte]: +req.params.time
+                    maxTime: {
+                        [Op.gte]: +req.params.time
                     }
                 },
                 order: [
                     ['name', 'ASC'],
                     [Author, 'name', 'ASC'],
                     [Mechanic, 'name', 'ASC'],
-                    [Type, 'name', 'ASC'],
+                    [Category, 'name', 'ASC'],
                     [Artist, 'name', 'ASC']
                 ]
             })
@@ -149,17 +149,17 @@ const SearchController = {
     },
     getByTimePlus(req, res) {
         Game.findAll({
-                include: [Type, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist],
                 where: {
-                    time: {
-                        [Op.gte]: +req.params.time
+                    minTime: {
+                        [Op.lte]: +req.params.time
                     }
                 },
                 order: [
                     ['name', 'ASC'],
                     [Author, 'name', 'ASC'],
                     [Mechanic, 'name', 'ASC'],
-                    [Type, 'name', 'ASC'],
+                    [Category, 'name', 'ASC'],
                     [Artist, 'name', 'ASC']
                 ]
             })
@@ -168,7 +168,7 @@ const SearchController = {
     },
     getByAge(req, res) {
         Game.findAll({
-                include: [Type, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist],
                 where: {
                     age: {
                         [Op.lte]: +req.params.age
@@ -178,7 +178,7 @@ const SearchController = {
                     ['name', 'ASC'],
                     [Author, 'name', 'ASC'],
                     [Mechanic, 'name', 'ASC'],
-                    [Type, 'name', 'ASC'],
+                    [Category, 'name', 'ASC'],
                     [Artist, 'name', 'ASC']
                 ]
             })
@@ -196,6 +196,15 @@ const SearchController = {
                 res.send(games)
             })
             .catch(err => res.status(500).send({ message: "Ha habido un problema al cargar los últimos juegos creados", err }))
+    },
+    getById(req, res) {
+        Game.findOne({
+                include: [Category, Mechanic, Author, Artist],
+                where: { id: req.params.id }
+            })
+            .then(game => res.send(game))
+            .catch(err => res.status(500).send({ message: 'Ha habido problemas al tratar de obtener el juego.', err }))
+
     }
 }
 module.exports = SearchController;

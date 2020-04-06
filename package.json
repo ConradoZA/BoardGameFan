@@ -12,5 +12,6 @@
         "postinstall": "concurrently \"npm run install:front\" \"npm run install:back\" "
     },
     "author": "Conrado Zafra",
-    "license": "ISC"
+    "license": "ISC",
+    "dependencies": {}
 }

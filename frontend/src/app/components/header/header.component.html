@@ -1,16 +1,17 @@
-<mat-toolbar color="primary" class="row">
+<header *ngIf="userService.getUser() as user">
+    <mat-toolbar color="primary" class="row">
 
-    <!--     <div class="user" *ngIf="expression" routerLink="profile">
-        <img src="#">
-        <img src="#" *ngIf="expression">
-        <p>nombre</p>
-    </div> -->
-    <div class="row" routerLink="">
-        <img src="../../../favicon.ico">
-        <p class="title">Board Game Fan</p>
-    </div>
+        <div class="user" *ngIf="user['id']" routerLink="profile">
+            <!-- <img src="#">
+        <img src="#" *ngIf="expression"> -->
+            <p *ngIf="user['username'] as username">{{username}}</p>
+        </div>
+        <div class="row noSelect" routerLink="" *ngIf="!user['id']">
+            <img src="../../../favicon.ico">
+            <p class="title">Board Game Fan</p>
+        </div>
 
-    <!--     <button mat-raised-button color="primary" *ngIf="expression">Mi Colección</button>
+        <!--     <button mat-raised-button color="primary" *ngIf="expression">Mi Colección</button>
 
     <button mat-button [matMenuTriggerFor]="admin" *ngIf="expression">Administración</button>
     <mat-menu #admin="matMenu">
@@ -18,16 +19,17 @@
         <button mat-menu-item>Item 2</button>
     </mat-menu> -->
 
-    <mat-form-field appearance="standard" color="accent" class="search">
-        <mat-label>Buscar Juego</mat-label>
-        <input matInput type="text" [(ngModel)]="searchValue" placeholder="Nombre del juego" (keyup)="searchGame($event)">
-        <button class="size" mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
+        <mat-form-field appearance="standard" color="accent" class="search">
+            <mat-label>Buscar Juego</mat-label>
+            <input matInput type="text" [(ngModel)]="searchValue" placeholder="Nombre del juego" (keyup)="searchGame($event)">
+            <button class="size" mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
           <i class="material-icons-round">close</i>
         </button>
-        <mat-hint align="end" class="button" routerLink="advSearch">Búsqueda Avanzada</mat-hint>
-    </mat-form-field>
+            <mat-hint align="end" class="button" *ngIf="user['id']" routerLink="advSearch">Búsqueda Avanzada</mat-hint>
+        </mat-form-field>
 
-    <!--     <button mat-button *ngIf="expression">Login</button>
-    <button mat-button *ngIf="expression" (click)="logout()">Logout</button> -->
+        <button mat-button *ngIf="!user['id']" routerLink="login">Login</button>
+        <button mat-button *ngIf="user['id']" (click)="logout()">Logout</button>
 
-</mat-toolbar>
+    </mat-toolbar>
+</header>

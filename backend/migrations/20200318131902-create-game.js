@@ -25,14 +25,17 @@ module.exports = {
             maxPlayer: {
                 type: Sequelize.STRING
             },
-            time: {
+            minTime: {
+                type: Sequelize.STRING
+            },
+            maxTime: {
                 type: Sequelize.STRING
             },
             age: {
                 type: Sequelize.STRING
             },
             description: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             createdAt: {
                 allowNull: false,

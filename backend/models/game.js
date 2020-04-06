@@ -5,23 +5,21 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.STRING
         },
-        year: {
-            allowNull: false,
-            type: DataTypes.STRING
-        },
+        year: DataTypes.STRING,
         image: DataTypes.STRING,
         minPlayer: DataTypes.STRING,
         maxPlayer: DataTypes.STRING,
-        time: DataTypes.STRING,
+        minTime: DataTypes.STRING,
+        maxTime: DataTypes.STRING,
         age: DataTypes.STRING,
-        description: DataTypes.STRING,
+        description: DataTypes.TEXT,
     }, {});
     Game.associate = function(models) {
         Game.belongsToMany(models.Mechanic, {
             through: models.MechanicGame
         });
-        Game.belongsToMany(models.Type, {
-            through: models.TypeGame
+        Game.belongsToMany(models.Category, {
+            through: models.CategoryGame
         });
         Game.belongsToMany(models.Author, {
             through: models.AuthorGame

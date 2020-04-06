@@ -1,9 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
     const Artist = sequelize.define('Artist', {
-        name: DataTypes.STRING,
-        photo: DataTypes.STRING,
-        description: DataTypes.STRING
+        name: DataTypes.STRING
     }, {});
     Artist.associate = function(models) {
         Artist.belongsToMany(models.Game, {

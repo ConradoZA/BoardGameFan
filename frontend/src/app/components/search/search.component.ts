@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
 
 @Component({
@@ -11,10 +11,10 @@ export class SearchComponent implements OnInit {
 
   public gamesRes;
 
-  constructor(public route: ActivatedRoute, public gameService:GameService) { }
+  constructor(public route: ActivatedRoute, public gameService:GameService, public router:Router) { }
 
-  goToGame(id){
-    
+  goToGame(id:string){
+    this.router.navigate(['detail', id])
   }
 
 

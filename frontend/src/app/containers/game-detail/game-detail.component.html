@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-header class="flex">
+        <img mat-card-image src="{{gameDetail.image}}">
+        <!-- <mat-divider [vertical]="true" [inset]="true"></mat-divider> -->
+        <hr>
+        <div>
+            <div class="column">
+                <mat-card-title>{{gameDetail.name}}</mat-card-title>
+                <mat-card-subtitle> ({{gameDetail.year}})</mat-card-subtitle>
+                <hr>
+                <!-- <mat-divider [inset]="true"></mat-divider> -->
+                <div class="flex">
+                    <h4>Jugadores: </h4>
+                    <p>{{gameDetail.minPlayer}} - {{gameDetail.maxPlayer}}</p>
+                    <hr>
+                    <!-- <mat-divider [vertical]="true" [inset]="true"></mat-divider> -->
+                    <h4>Duración: </h4>
+                    <p>{{gameDetail.time}} minutos aprox.</p>
+                    <hr>
+                    <!-- <mat-divider [vertical]="true" [inset]="true"></mat-divider> -->
+                    <h4>Edad mínima: </h4>
+                    <p>{{gameDetail.age}}+</p>
+                </div>
+            </div>
+        </div>
+    </mat-card-header>
+    <mat-card-content class="row">
+    </mat-card-content>
+</mat-card>
+
+
+<!-- {{gameDetail | json}} -->

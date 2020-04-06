@@ -14,4 +14,7 @@ export class GameService {
   searchLatest(){
     return this.httpClient.get('http://localhost:3000/search/latest')
   }
+  getGameById(id:string){
+    return this.httpClient.get('http://localhost:3000/search/' + id)
+  }
 }
