@@ -1,25 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-
-  export class MyErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-      const isSubmitted = form && form.submitted;
-      return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-    }
-  }
-  
-  export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit {
+    
+  constructor(public userService:UserService, public router:Router, private snackBar:MatSnackBar, private fb:FormBuilder) { }
 
     validateForm:FormGroup;
+
     confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
       if (control.value !== this.passwordFormControl.value) {
         return { confirm: true, error: true };
@@ -44,37 +39,31 @@ import { Router } from '@angular/router';
       ]);
 
       submitForm(): void {
+        if(this.validateForm.valid){
           const user =this.validateForm.value;
           this.userService.register(user)
           .subscribe(
             (res) =>{
-
-              // this.notification.success(
-              //   'Registro realizado con éxito',
-              //   res['message']
-              //   );
-                setTimeout(() => {
-                  this.router.navigate([''])
-                }, 2500);
+              this.validateForm.reset();
+              this.snackBar.open(res['message'],"",{duration:3000,horizontalPosition:"center", verticalPosition:"bottom",});
+              setTimeout(() => {
+              this.router.navigate(['/login'])
+              }, 1000);
             },
             (error)=>{
-              // this.notification.error(
-              //   'Problema al registrar usuario',
-              //   error['error']['message']
-              //   );
+              this.snackBar.open(error['error']['message'],"",{duration:2000,horizontalPosition:"center", verticalPosition:"bottom",});
             }
           )
-          this.validateForm.reset();
         }
-  
-    constructor(public userService:UserService, public router:Router) { }
+      }
+
   
     ngOnInit(): void {
-        this.validateForm= new FormGroup({
-          username:this.nameFormControl,
-          email:this.emailFormControl,
-          password:this.passwordFormControl
-        })
+      this.validateForm = this.fb.group({
+        email: this.emailFormControl,
+        password:this.passwordFormControl,
+        checkPassword:this.checkFormControl,
+        username:this.nameFormControl,
+      });
     }
-    matcher = new MyErrorStateMatcher();
   }

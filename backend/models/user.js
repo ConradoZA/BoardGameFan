@@ -3,7 +3,9 @@ module.exports = (sequelize, DataTypes) => {
         username: DataTypes.STRING,
         password: DataTypes.STRING,
         email: DataTypes.STRING,
-        role: DataTypes.STRING
+        role: DataTypes.STRING,
+        gender: DataTypes.STRING,
+        image: DataTypes.STRING,
     }, {});
     User.associate = function(models) {
         User.hasMany(models.Token);

@@ -28,6 +28,6 @@ app.use("/authors", authentication, isAdmin, authorsRouter);
 app.use("/artists", authentication, isAdmin, artistsRouter);
 app.use("/search", searchesRouter);
 app.use("/users", usersRouter);
-app.use("/hacks", /* authentication, isGod, */ hacksRouter);
+app.use("/hacks", authentication, isGod, hacksRouter);
 
 app.listen(PORT, () => console.log('server running on ' + PORT));

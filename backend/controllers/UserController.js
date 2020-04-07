@@ -13,9 +13,11 @@ const UserController = {
                 username: req.body.username,
                 password,
                 email: req.body.email,
-                role: 'user'
+                role: 'user',
+                gender: "",
+                image: ""
             });
-            res.status(201).send({ user, message: 'User creado con éxito' });
+            res.status(201).send({ user, message: 'Usuario creado con éxito' });
         } catch (error) {
             res.status(500).send({ message: 'Hubo un problema al tratar de crear el usuario' });
         }
@@ -40,7 +42,7 @@ const UserController = {
 
             res.send({ message: 'Bienvenid@ ' + user.username, user, token })
         } catch (error) {
-            res.status(500).send({ message: 'Hubo un problema al tratar de logearnos' });
+            res.status(500).send({ message: 'Hubo un problema al tratar de iniciar sesión' });
         }
     },
     async getMyInfo(req, res) {

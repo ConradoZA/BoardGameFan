@@ -1,23 +1,30 @@
-<form>
+<form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="center">
     <mat-form-field>
         <mat-label>Nombre</mat-label>
-        <input matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher">
+        <input id="username" matInput [formControl]="nameFormControl">
         <mat-error *ngIf="nameFormControl.hasError('required')">
             El nombre es <strong>obligatorio</strong>
         </mat-error>
     </mat-form-field>
+    <br><br>
     <mat-divider [inset]="true"></mat-divider>
+    <br>
     <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input matInput #message minlength="8" maxlength="16" [formControl]="passwordFormControl" [errorStateMatcher]="matcher" [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide">
-                        <i class="material-icons-round">{{hide ? 'visibility_off' : 'visibility'}}</i>
-                    </button>
+        <input id="password" matInput #message minlength="8" maxlength="16" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'">
+        <div class="button" mat-icon-button matSuffix (click)="hide = !hide">
+            <i class="material-icons-round">{{hide ? 'visibility_off' : 'visibility'}}</i>
+        </div>
         <mat-hint align="start" *ngIf="message.value.length<8">Min. 8 caracteres </mat-hint>
         <mat-hint align="end" *ngIf="message.value.length<8">{{message.value.length}} / 8</mat-hint>
         <mat-error *ngIf="passwordFormControl.hasError('required')">
             La contraseña es <strong>obligatoria</strong>
         </mat-error>
     </mat-form-field>
+    <br><br>
     <mat-divider [inset]="true"></mat-divider>
+    <br><br>
+    <button mat-raised-button color="primary">Enviar</button>
+    <br>
+    <a class="font8" routerLink="/register" matTooltip="Regístrate, ¡es gratis!">¿Todavía no tienes una cuenta con nosotros?</a>
 </form>
