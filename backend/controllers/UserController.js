@@ -94,6 +94,22 @@ const UserController = {
         } catch (error) {
             res.status(500).send({ message: "Ha habido problemas al tratar de eliminar el juego de tu colección de juegos.", error })
         }
+    },
+    async updateUser(req, res) {
+        try {
+            await User.update({...req.body, role: role }, { where: { UserId: +req.user.id } });
+            res.send({ message: "Has actualizado con éxito tu información." })
+        } catch (error) {
+            res.status(500).send({ message: "Ha habido problemas al actualizar tu información.", error })
+        }
+    },
+    async changeRole(req, res) {
+        try {
+            await User.update({ role: req.body.role }, { where: { UserId: +req.params.id } });
+            res.send({ message: "Has cambiado el rol del usuario." })
+        } catch (error) {
+            res.status(500).send({ message: "¡Problemas jefe!", error })
+        }
     }
 }
 module.exports = UserController;

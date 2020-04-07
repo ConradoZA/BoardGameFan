@@ -187,12 +187,13 @@ const SearchController = {
     },
     getLatest(req, res) {
         Game.findAll({
+                offset: 5,
+                limit: 5,
                 order: [
                     ['createdAt', 'DESC']
                 ]
             })
             .then(games => {
-                if (games.length > 5) { games = games.slice(0, 5) }
                 res.send(games)
             })
             .catch(err => res.status(500).send({ message: "Ha habido un problema al cargar los últimos juegos creados", err }))

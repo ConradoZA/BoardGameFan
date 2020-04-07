@@ -13,6 +13,19 @@ export class GameDetailComponent implements OnInit {
 
   constructor(public gameService:GameService, public route: ActivatedRoute) { }
 
+  goToArtist(id){
+
+  }
+  goToAuthor(id){
+
+  }
+  goToMechanic(id){
+    
+  }
+  goToCategory(id){
+    
+  }
+
   ngOnInit(): void {
     this.route.params
     .subscribe(param => {this.gameService.getGameById(param.id)

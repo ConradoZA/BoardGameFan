@@ -1,3 +1,47 @@
 img {
-    max-width: 12rem;
+    max-width: 15rem;
+}
+
+mat-card {
+    max-width: 80%;
+}
+
+h4 {
+    font-weight: 500;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.sub {
+    font-weight: bold;
+    text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto;
+}
+
+.text {
+    display: flex;
+    margin-left: 1rem;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    p {
+        margin-left: 0.5rem;
+    }
+}
+
+.flex {
+    flex-direction: row;
+    justify-content: safe center;
+}
+
+.selfCenter {
+    align-self: center;
 }

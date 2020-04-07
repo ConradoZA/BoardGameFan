@@ -2,12 +2,12 @@
 <h2>Estos son los últimos juegos introducidos:</h2>
 <div class="row wrap">
     <mat-card *ngFor="let game of latest">
-        <div class="column">
+        <div class="column center">
             <mat-card-header>
                 <mat-card-title>{{game.name}}</mat-card-title>
                 <mat-card-subtitle>{{game.year}}</mat-card-subtitle>
             </mat-card-header>
-            <img mat-card-image src="{{game.image}}" (click)="goToGame(game.id)">
+            <img src="{{game.image}}" (click)="goToGame(game.id)">
         </div>
     </mat-card>
 </div>

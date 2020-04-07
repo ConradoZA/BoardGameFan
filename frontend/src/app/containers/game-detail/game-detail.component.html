@@ -1,32 +1,69 @@
-<mat-card>
-    <mat-card-header class="flex">
-        <img mat-card-image src="{{gameDetail.image}}">
-        <!-- <mat-divider [vertical]="true" [inset]="true"></mat-divider> -->
-        <hr>
-        <div>
+<div class="center">
+    <mat-card>
+        <mat-card-header class="flex">
+            <img mat-card-image src="{{gameDetail.image}}">
+            <mat-divider [vertical]=true [inset]=true></mat-divider>
             <div class="column">
-                <mat-card-title>{{gameDetail.name}}</mat-card-title>
-                <mat-card-subtitle> ({{gameDetail.year}})</mat-card-subtitle>
-                <hr>
-                <!-- <mat-divider [inset]="true"></mat-divider> -->
+                <div class="selfCenter">
+                    <mat-card-title class="title">{{gameDetail.name}}</mat-card-title>
+                    <br>
+                    <mat-card-subtitle class="sub"> ({{gameDetail.year}})</mat-card-subtitle>
+                </div>
+                <mat-divider [inset]=true></mat-divider>
                 <div class="flex">
-                    <h4>Jugadores: </h4>
-                    <p>{{gameDetail.minPlayer}} - {{gameDetail.maxPlayer}}</p>
-                    <hr>
-                    <!-- <mat-divider [vertical]="true" [inset]="true"></mat-divider> -->
-                    <h4>Duración: </h4>
-                    <p>{{gameDetail.time}} minutos aprox.</p>
-                    <hr>
-                    <!-- <mat-divider [vertical]="true" [inset]="true"></mat-divider> -->
-                    <h4>Edad mínima: </h4>
-                    <p>{{gameDetail.age}}+</p>
+                    <div class="text">
+                        <h4>Jugadores: </h4>
+                        <p>{{gameDetail.minPlayer}} - {{gameDetail.maxPlayer}}</p>
+                    </div>
+                    <mat-divider [vertical]=true [inset]=true></mat-divider>
+                    <div class="text">
+                        <h4>Duración: </h4>
+                        <p> {{gameDetail.minTime}} - {{gameDetail.maxTime}} min. aprox.</p>
+                    </div>
+                    <mat-divider [vertical]=true [inset]=true></mat-divider>
+                    <div class="text">
+                        <h4>Edad mínima: </h4>
+                        <p> {{gameDetail.age}}+</p>
+                    </div>
+                    <mat-divider [vertical]=true [inset]=true></mat-divider>
+                </div>
+                <mat-divider [inset]=true></mat-divider>
+                <div class="text">
+                    <h4 *ngIf="gameDetail.Authors.length===1;else autores">Autor:</h4>
+                    <ng-template #autores>
+                        <h4>Autores:</h4>
+                    </ng-template>
+                    <p *ngFor="let item of gameDetail.Authors" class="button" (click)="goToAuthor(item.id)"> {{item.name}},</p>
+                </div>
+                <div class="text">
+                    <h4 *ngIf="gameDetail.Artists.length===1;else artistas">Artista:</h4>
+                    <ng-template #artistas>
+                        <h4>Artistas:</h4>
+                    </ng-template>
+                    <p *ngFor="let item of gameDetail.Artists" class="button" (click)="goToArtist(item.id)"> {{item.name}},</p>
+                </div>
+                <div class="text">
+                    <h4 *ngIf="gameDetail.Mechanics.length===1;else mecanicas">Mecánica del juego:</h4>
+                    <ng-template #mecanicas>
+                        <h4>Mecánicas del juego:</h4>
+                    </ng-template>
+                    <p *ngFor="let item of gameDetail.Mechanics" class="button" (click)="goToMechanic(item.id)"> {{item.name}},</p>
+                </div>
+                <div class="text">
+                    <h4 *ngIf="gameDetail.Categories.length===1;else categorias">Categoría del juego:</h4>
+                    <ng-template #categorias>
+                        <h4>Categorías del juego:</h4>
+                    </ng-template>
+                    <p *ngFor="let item of gameDetail.Categories" class="button" (click)="goToCategory(item.id)"> {{item.name}},</p>
                 </div>
             </div>
-        </div>
-    </mat-card-header>
-    <mat-card-content class="row">
-    </mat-card-content>
-</mat-card>
-
-
-<!-- {{gameDetail | json}} -->
+        </mat-card-header>
+        <mat-card-content class=" row ">
+            <mat-divider [inset]=true></mat-divider>
+            <div class="text ">
+                <h4>Descripción:</h4>
+                <p>{{gameDetail.description}}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
