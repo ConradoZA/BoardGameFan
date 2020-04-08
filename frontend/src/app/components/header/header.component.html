@@ -5,13 +5,12 @@
             <button mat-fab color="accent" class="char">{{user.username.charAt()}}</button>
             <p>{{user.username}}</p>
         </div>
-        <div class="row button" routerLink="" *ngIf="!user['id']">
+        <div class="row button center" routerLink="" *ngIf="!user['id']">
             <img src="../../../favicon.ico">
             <p class="title">Board Game Fan</p>
         </div>
 
-        <!--     <button mat-raised-button color="primary" *ngIf="expression">Mi Colección</button>
-
+        <!--
     <button mat-button [matMenuTriggerFor]="admin" *ngIf="expression">Administración</button>
     <mat-menu #admin="matMenu">
         <button mat-menu-item>Nuevo Juego</button>

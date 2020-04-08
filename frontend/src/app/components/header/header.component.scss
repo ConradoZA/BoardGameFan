@@ -2,10 +2,12 @@
     font-family: ethnocentric;
     font-weight: bold;
     font-size: large;
+    margin: 0;
 }
 
 img {
     max-height: 3rem;
+    margin-right: 1rem;
 }
 
 .size {
@@ -39,4 +41,8 @@ mat-hint {
     margin-right: 1rem;
     width: 3rem;
     height: 3rem;
+}
+
+.center {
+    align-items: center;
 }
