@@ -11,7 +11,10 @@ const AuthorController = {
     getOne(req, res) {
         Author.findOne({
                 include: [Game],
-                where: { id: req.params.id }
+                where: { id: req.params.id },
+                order: [
+                    [Game, 'year', 'ASC']
+                ]
             })
             .then(author => res.send(author))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener el autor.'))

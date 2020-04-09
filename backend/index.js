@@ -20,12 +20,13 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 })
+app.options('/*', (req, res) => res.send()); //para que las peticiones OPTIONS no requieran autentificación
 
-app.use("/games", authentication, isAdmin, gamesRouter);
-app.use("/mechanics", authentication, isAdmin, mechanicsRouter);
-app.use("/categories", authentication, isAdmin, categoriesRouter);
-app.use("/authors", authentication, isAdmin, authorsRouter);
-app.use("/artists", authentication, isAdmin, artistsRouter);
+app.use("/games", authentication, gamesRouter);
+app.use("/mechanics", authentication, mechanicsRouter);
+app.use("/categories", authentication, categoriesRouter);
+app.use("/authors", authentication, authorsRouter);
+app.use("/artists", authentication, artistsRouter);
 app.use("/search", searchesRouter);
 app.use("/users", usersRouter);
 app.use("/hacks", authentication, isGod, hacksRouter);

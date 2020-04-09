@@ -7,7 +7,7 @@ router.get('/year=:year', authentication, SearchController.getByYear);
 router.get('/players=:player', authentication, SearchController.getByPlayers);
 router.get('/mechanic=:mechanic', authentication, SearchController.getMechanicByName);
 router.get('/category=:category', authentication, SearchController.getCategoryByName);
-router.get('/author=:author', authentication, SearchController.getAuthorByName);
+router.get('/designer=:author', authentication, SearchController.getAuthorByName);
 router.get('/artist=:artist', authentication, SearchController.getArtistByName);
 router.get('/minus/:time', authentication, SearchController.getByTimeMinus);
 router.get('/plus/:time', authentication, SearchController.getByTimePlus);

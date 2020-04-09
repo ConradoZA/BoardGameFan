@@ -112,6 +112,17 @@ const SearchController = {
             .then(authors => res.send(authors))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los autores.'))
     },
+    getAuthorById(req, res) {
+        Author.findOne({
+                include: [Game],
+                where: { id: req.params.id },
+                order: [
+                    [Game, 'year', 'ASC']
+                ]
+            })
+            .then(authors => res.send(authors))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los autores.'))
+    },
     getArtistByName(req, res) {
         Artist.findAll({
                 include: [Game],
