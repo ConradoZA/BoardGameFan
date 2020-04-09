@@ -8,6 +8,7 @@ import { SearchComponent } from './components/search/search.component';
 import { GameDetailComponent } from './containers/game-detail/game-detail.component';
 import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
+import { DesignerComponent } from './containers/designer/designer.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"advSearch",component:AdvSearchComponent},
   {path:"profile",component:ProfileComponent},
   {path:"detail/:id", component: GameDetailComponent},
+  {path:"designer/:id", component: DesignerComponent},
   {path:'**',component:NotfoundComponent},
 ];
 

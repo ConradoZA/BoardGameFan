@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-detail',
@@ -11,13 +11,13 @@ export class GameDetailComponent implements OnInit {
 
   public gameDetail
 
-  constructor(public gameService:GameService, public route: ActivatedRoute) { }
+  constructor(public gameService:GameService, public route: ActivatedRoute, public router:Router) { }
 
   goToArtist(id){
 
   }
-  goToAuthor(id){
-
+  goToAuthor(id:string){
+    this.router.navigate(['/designer', id])
   }
   goToMechanic(id){
     

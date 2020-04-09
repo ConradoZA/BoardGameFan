@@ -15,6 +15,9 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -26,6 +29,8 @@ import { SearchComponent } from './components/search/search.component';
 import { GameDetailComponent } from './containers/game-detail/game-detail.component';
 import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
+import { DesignerComponent } from './containers/designer/designer.component';
+import { getSpanishPaginatorIntl } from './esp-paginator-intl';
 
 @NgModule({
   declarations: [
@@ -40,6 +45,7 @@ import { RegisterComponent } from './containers/user/register/register.component
     GameDetailComponent,
     LoginComponent,
     RegisterComponent,
+    DesignerComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +63,13 @@ import { RegisterComponent } from './containers/user/register/register.component
     MatFormFieldModule,
     MatSnackBarModule,
     MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+
   ],
-  providers: [],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
