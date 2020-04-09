@@ -5,4 +5,9 @@
 
 img {
     max-width: 100px;
+    object-fit: contain;
+}
+
+.back {
+    background-color: rgb(245, 245, 212);
 }
