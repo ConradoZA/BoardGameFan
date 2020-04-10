@@ -31,6 +31,9 @@ import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
 import { DesignerComponent } from './containers/designer/designer.component';
 import { getSpanishPaginatorIntl } from './esp-paginator-intl';
+import { ArtistComponent } from './containers/artist/artist.component';
+import { MechanicComponent } from './containers/mechanic/mechanic.component';
+import { CategoryComponent } from './containers/category/category.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { getSpanishPaginatorIntl } from './esp-paginator-intl';
     LoginComponent,
     RegisterComponent,
     DesignerComponent,
+    ArtistComponent,
+    MechanicComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

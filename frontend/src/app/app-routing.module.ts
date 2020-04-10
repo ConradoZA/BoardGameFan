@@ -9,6 +9,9 @@ import { GameDetailComponent } from './containers/game-detail/game-detail.compon
 import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
 import { DesignerComponent } from './containers/designer/designer.component';
+import { ArtistComponent } from './containers/artist/artist.component';
+import { MechanicComponent } from './containers/mechanic/mechanic.component';
+import { CategoryComponent } from './containers/category/category.component';
 
 
 const routes: Routes = [
@@ -21,6 +24,9 @@ const routes: Routes = [
   {path:"profile",component:ProfileComponent},
   {path:"detail/:id", component: GameDetailComponent},
   {path:"designer/:id", component: DesignerComponent},
+  {path:"mechanic/:id", component: MechanicComponent},
+  {path:"category/:id", component: CategoryComponent},
+  {path:"artist/:id", component: ArtistComponent},
   {path:'**',component:NotfoundComponent},
 ];
 

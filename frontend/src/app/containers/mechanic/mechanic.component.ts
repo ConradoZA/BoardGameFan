@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdvSearchService } from 'src/app/services/adv-search.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { GameService } from 'src/app/services/game.service';
+import { async } from '@angular/core/testing';
 
 
 export interface Game{
@@ -14,18 +15,18 @@ export interface Game{
 }
 
 @Component({
-  selector: 'app-designer',
-  templateUrl: './designer.component.html',
-  styleUrls: ['./designer.component.scss']
+  selector: 'app-mechanic',
+  templateUrl: './mechanic.component.html',
+  styleUrls: ['./mechanic.component.scss']
 })
-export class DesignerComponent implements OnInit {
+export class MechanicComponent implements OnInit {
 
   displayedColumns = ['year', 'image', 'name'];
   datosRecibidos=[];
   dataSource;
   datos2=[];
   datos3:Game;
-  autor:string="";
+  mecanica:string="";
   gameId;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -36,10 +37,10 @@ export class DesignerComponent implements OnInit {
   
   ngOnInit() {
     this.route.params
-    .subscribe(param => {this.advSearchService.searchAuthor(param.id)
+    .subscribe(param => {this.advSearchService.searchMechanic(param.id)
         .subscribe(
           (res) => {this.datosRecibidos=res['Games'];
-          this.autor=res['name'];
+          this.mecanica=res['name'];
           this.datosRecibidos.forEach(dato=> {this.datos3={year:dato['year'],image:dato['image'],name:dato['name']};this.datos2.push(this.datos3)})
           this.dataSource = new MatTableDataSource<Game>(this.datos2);
           this.dataSource.paginator = this.paginator;
@@ -57,7 +58,6 @@ export class DesignerComponent implements OnInit {
   }
   goToDetail(gameName:string){
   this.gameService.searchGame(gameName)
-  .subscribe((res)=> { this.router.navigate(['detail', res[0]['id']]);})
+    .subscribe((res)=> { this.router.navigate(['detail', res[0]['id']]);})
   }
 }
-

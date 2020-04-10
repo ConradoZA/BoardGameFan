@@ -13,7 +13,19 @@ export class AdvSearchService {
 
   searchAuthor(search:string) {
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.get('http://localhost:3000/authors/' + search,{headers: {Authorization: this.token}})
+    return this.httpClient.get(`http://localhost:3000/authors/${search}`,{headers: {Authorization: this.token}})
+  }
+  searchArtist(search:string) {
+    this.token = localStorage.getItem('authToken')
+    return this.httpClient.get(`http://localhost:3000/artists/${search}`,{headers: {Authorization: this.token}})
+  }
+  searchMechanic(search:string) {
+    this.token = localStorage.getItem('authToken')
+    return this.httpClient.get(`http://localhost:3000/mechanics/${search}`,{headers: {Authorization: this.token}})
+  }
+  searchCategory(search:string) {
+    this.token = localStorage.getItem('authToken')
+    return this.httpClient.get(`http://localhost:3000/categories/${search}`,{headers: {Authorization: this.token}})
   }
   
 

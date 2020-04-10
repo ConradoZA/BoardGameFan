@@ -9,21 +9,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class GameDetailComponent implements OnInit {
 
-  public gameDetail
+  public gameDetail: Object;
 
   constructor(public gameService:GameService, public route: ActivatedRoute, public router:Router) { }
 
   goToArtist(id){
-
+    this.router.navigate(['/artist', id])
   }
   goToAuthor(id:string){
     this.router.navigate(['/designer', id])
   }
   goToMechanic(id){
-    
+    this.router.navigate(['/mechanic', id])
   }
   goToCategory(id){
-    
+    this.router.navigate(['/category', id])
   }
 
   ngOnInit(): void {

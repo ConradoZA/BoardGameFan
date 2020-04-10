@@ -1,83 +1,83 @@
 <div class="center">
     <mat-card *ngIf="gameDetail">
         <mat-card-header class="flex">
-            <img mat-card-image src="{{gameDetail.image}}">
+            <img mat-card-image src="{{gameDetail['image']}}">
             <mat-divider [vertical]=true [inset]=true></mat-divider>
             <div class="column">
                 <div class="selfCenter">
-                    <mat-card-title class="title">{{gameDetail.name}}</mat-card-title>
+                    <mat-card-title class="title">{{gameDetail['name']}}</mat-card-title>
                     <br>
-                    <mat-card-subtitle class="sub"> ({{gameDetail.year}})</mat-card-subtitle>
+                    <mat-card-subtitle class="sub"> ({{gameDetail['year']}})</mat-card-subtitle>
                 </div>
                 <mat-divider [inset]=true></mat-divider>
                 <div class="flex">
                     <div class="text">
                         <h4>Jugadores: </h4>
-                        <p *ngIf="gameDetail.minPlayer===gameDetail.maxPlayer;else variable">{{gameDetail.minPlayer}}</p>
+                        <p *ngIf="gameDetail['minPlayer']===gameDetail['maxPlayer'];else variable">{{gameDetail['minPlayer']}}</p>
                         <ng-template #variable>
-                            <p>{{gameDetail.minPlayer}} - {{gameDetail.maxPlayer}}</p>
+                            <p>{{gameDetail['minPlayer']}} - {{gameDetail['maxPlayer']}}</p>
                         </ng-template>
                     </div>
                     <mat-divider [vertical]=true [inset]=true></mat-divider>
                     <div class="text">
                         <h4>Duración: </h4>
-                        <p *ngIf="gameDetail.minTime===gameDetail.maxTime;else variable">{{gameDetail.minTime}} min. aprox.</p>
+                        <p *ngIf="gameDetail['minTime']===gameDetail['maxTime'];else variable">{{gameDetail['minTime']}} min. aprox.</p>
                         <ng-template #variable>
-                            <p>{{gameDetail.minTime}} - {{gameDetail.maxTime}} min. aprox.</p>
+                            <p>{{gameDetail['minTime']}} - {{gameDetail['maxTime']}} min. aprox.</p>
                         </ng-template>
 
                     </div>
                     <mat-divider [vertical]=true [inset]=true></mat-divider>
                     <div class="text">
                         <h4>Edad mínima: </h4>
-                        <p>{{gameDetail.age}}+</p>
+                        <p>{{gameDetail['age']}}+</p>
                     </div>
                     <mat-divider [vertical]=true [inset]=true></mat-divider>
                 </div>
                 <mat-divider [inset]=true></mat-divider>
                 <div class="text">
-                    <h4 *ngIf="gameDetail.Authors.length===1;else autores">Autor: </h4>
+                    <h4 *ngIf="gameDetail['Authors'].length===1;else autores">Autor: </h4>
                     <ng-template #autores>
                         <h4>Autores:</h4>
                     </ng-template>
-                    <p *ngFor="let item of gameDetail.Authors; index as i;" class="button" (click)="goToAuthor(item.id)">
-                        <span *ngIf="(gameDetail.Authors.length-1)===i;else cadena"> {{item.name}}.</span>
+                    <p *ngFor="let item of gameDetail['Authors']; index as i;" class="button" (click)="goToAuthor(item.id)">
+                        <span *ngIf="(gameDetail['Authors'].length-1)===i;else cadena"> {{item.name}}.</span>
                         <ng-template #cadena>
                             <span> {{item.name}},</span>
                         </ng-template>
                     </p>
                 </div>
                 <div class="text">
-                    <h4 *ngIf="gameDetail.Artists.length===1;else artistas">Artista:</h4>
+                    <h4 *ngIf="gameDetail['Artists'].length===1;else artistas">Artista:</h4>
                     <ng-template #artistas>
                         <h4>Artistas:</h4>
                     </ng-template>
-                    <p *ngFor="let item of gameDetail.Artists; index as i;" class="button" (click)="goToArtist(item.id)">
-                        <span *ngIf="(gameDetail.Artists.length-1)===i;else cadena"> {{item.name}}.</span>
+                    <p *ngFor="let item of gameDetail['Artists']; index as i;" class="button" (click)="goToArtist(item.id)">
+                        <span *ngIf="(gameDetail['Artists'].length-1)===i;else cadena"> {{item.name}}.</span>
                         <ng-template #cadena>
                             <span> {{item.name}},</span>
                         </ng-template>
                     </p>
                 </div>
                 <div class="text">
-                    <h4 *ngIf="gameDetail.Mechanics.length===1;else mecanicas">Mecánica del juego:</h4>
+                    <h4 *ngIf="gameDetail['Mechanics'].length===1;else mecanicas">Mecánica del juego:</h4>
                     <ng-template #mecanicas>
                         <h4>Mecánicas del juego:</h4>
                     </ng-template>
-                    <p *ngFor="let item of gameDetail.Mechanics; index as i;" class="button" (click)="goToMechanic(item.id)">
-                        <span *ngIf="(gameDetail.Mechanics.length-1)===i;else cadena"> {{item.name}}.</span>
+                    <p *ngFor="let item of gameDetail['Mechanics']; index as i;" class="button" (click)="goToMechanic(item.id)">
+                        <span *ngIf="(gameDetail['Mechanics'].length-1)===i;else cadena"> {{item.name}}.</span>
                         <ng-template #cadena>
                             <span> {{item.name}},</span>
                         </ng-template>
                     </p>
                 </div>
                 <div class="text">
-                    <h4 *ngIf="gameDetail.Categories.length===1;else categorias">Categoría del juego:</h4>
+                    <h4 *ngIf="gameDetail['Categories'].length===1;else categorias">Categoría del juego:</h4>
                     <ng-template #categorias>
                         <h4>Categorías del juego:</h4>
                     </ng-template>
-                    <p *ngFor="let item of gameDetail.Categories; index as i;" class="button" (click)="goToCategory(item.id)">
-                        <span *ngIf="(gameDetail.Categories.length-1)===i;else cadena"> {{item.name}}.</span>
+                    <p *ngFor="let item of gameDetail['Categories']; index as i;" class="button" (click)="goToCategory(item.id)">
+                        <span *ngIf="(gameDetail['Categories'].length-1)===i;else cadena"> {{item.name}}.</span>
                         <ng-template #cadena>
                             <span> {{item.name}},</span>
                         </ng-template>
@@ -89,7 +89,7 @@
             <mat-divider [inset]=true></mat-divider>
             <div class="text ">
                 <h4>Descripción:</h4>
-                <p [innerHTML]="gameDetail.description"></p>
+                <p [innerHTML]="gameDetail['description']"></p>
             </div>
         </mat-card-content>
     </mat-card>

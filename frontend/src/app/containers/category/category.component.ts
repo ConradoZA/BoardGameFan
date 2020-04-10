@@ -14,18 +14,18 @@ export interface Game{
 }
 
 @Component({
-  selector: 'app-designer',
-  templateUrl: './designer.component.html',
-  styleUrls: ['./designer.component.scss']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
-export class DesignerComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
   displayedColumns = ['year', 'image', 'name'];
   datosRecibidos=[];
   dataSource;
   datos2=[];
   datos3:Game;
-  autor:string="";
+  categoria:string="";
   gameId;
 
   @ViewChild(MatSort, { static: false }) sort: MatSort;
@@ -36,10 +36,10 @@ export class DesignerComponent implements OnInit {
   
   ngOnInit() {
     this.route.params
-    .subscribe(param => {this.advSearchService.searchAuthor(param.id)
+    .subscribe(param => {this.advSearchService.searchCategory(param.id)
         .subscribe(
           (res) => {this.datosRecibidos=res['Games'];
-          this.autor=res['name'];
+          this.categoria=res['name'];
           this.datosRecibidos.forEach(dato=> {this.datos3={year:dato['year'],image:dato['image'],name:dato['name']};this.datos2.push(this.datos3)})
           this.dataSource = new MatTableDataSource<Game>(this.datos2);
           this.dataSource.paginator = this.paginator;
@@ -60,4 +60,3 @@ export class DesignerComponent implements OnInit {
   .subscribe((res)=> { this.router.navigate(['detail', res[0]['id']]);})
   }
 }
-
