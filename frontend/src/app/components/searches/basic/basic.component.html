@@ -1,4 +1,4 @@
-<form *ngIf="userService.getUser() as user">
+<form *ngIf="userService.getUser() as user" [style.fontSize.px]="16">
     <mat-form-field appearance="standard" color="accent" class="search">
         <mat-label>Buscar Juego</mat-label>
         <input matInput type="text" [(ngModel)]="searchValue" placeholder="Nombre del juego" (keyup)="searchGame($event)" [formControl]="basicControl" [matAutocomplete]="auto">
@@ -7,7 +7,7 @@
     </button>
         <mat-hint align="end" class="button" *ngIf="user['id']" routerLink="advSearch">Búsqueda Avanzada</mat-hint>
     </mat-form-field>
-    <mat-autocomplete #auto="matAutocomplete">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
         <div *ngIf="searchValue!==''">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}

@@ -15,18 +15,13 @@ const SearchController = {
     },
     getByName(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 where: {
                     name: {
                         [Op.like]: `%${req.params.game}%`
                     }
                 },
                 order: [
-                    ['name', 'ASC'],
-                    [Author, 'name', 'ASC'],
-                    [Mechanic, 'name', 'ASC'],
-                    [Category, 'name', 'ASC'],
-                    [Artist, 'name', 'ASC']
+                    ['name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -34,23 +29,45 @@ const SearchController = {
     },
     getByYear(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 where: { year: req.params.year },
                 order: [
-                    ['name', 'ASC'],
-                    [Author, 'name', 'ASC'],
-                    [Mechanic, 'name', 'ASC'],
-                    [Category, 'name', 'ASC'],
-                    [Artist, 'name', 'ASC']
+                    ['name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
 
     },
+    getByPlayerMinus(req, res) {
+        Game.findAll({
+                where: {
+                    maxPlayer: {
+                        [Op.gte]: +req.params.player
+                    }
+                },
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+            .then(games => res.send(games))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
+    },
+    getByPlayerPlus(req, res) {
+        Game.findAll({
+                where: {
+                    minPlayer: {
+                        [Op.lte]: +req.params.player
+                    }
+                },
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+            .then(games => res.send(games))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
+    },
     getByPlayers(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 where: {
                     [Op.and]: [{
                         maxPlayer: {
@@ -63,11 +80,7 @@ const SearchController = {
                     }]
                 },
                 order: [
-                    ['name', 'ASC'],
-                    [Author, 'name', 'ASC'],
-                    [Mechanic, 'name', 'ASC'],
-                    [Category, 'name', 'ASC'],
-                    [Artist, 'name', 'ASC']
+                    ['name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -121,17 +134,6 @@ const SearchController = {
             .then(authors => res.send(authors))
             .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los autores.'))
     },
-    getAuthorById(req, res) {
-        Author.findOne({
-                include: [Game],
-                where: { id: req.params.id },
-                order: [
-                    [Game, 'year', 'ASC']
-                ]
-            })
-            .then(authors => res.send(authors))
-            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los autores.'))
-    },
     getArtistByName(req, res) {
         Artist.findAll({
                 include: [Game],
@@ -150,18 +152,13 @@ const SearchController = {
     },
     getByTimeMinus(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 where: {
                     maxTime: {
                         [Op.gte]: +req.params.time
                     }
                 },
                 order: [
-                    ['name', 'ASC'],
-                    [Author, 'name', 'ASC'],
-                    [Mechanic, 'name', 'ASC'],
-                    [Category, 'name', 'ASC'],
-                    [Artist, 'name', 'ASC']
+                    ['name', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -169,18 +166,33 @@ const SearchController = {
     },
     getByTimePlus(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 where: {
                     minTime: {
                         [Op.lte]: +req.params.time
                     }
                 },
                 order: [
-                    ['name', 'ASC'],
-                    [Author, 'name', 'ASC'],
-                    [Mechanic, 'name', 'ASC'],
-                    [Category, 'name', 'ASC'],
-                    [Artist, 'name', 'ASC']
+                    ['name', 'ASC']
+                ]
+            })
+            .then(games => res.send(games))
+            .catch(err => res.status(500).send('Ha habido problemas al tratar de obtener los juegos.'))
+    },
+    getByTime(req, res) {
+        Game.findAll({
+                where: {
+                    [Op.and]: [{
+                        maxTime: {
+                            [Op.gte]: +req.params.time
+                        }
+                    }, {
+                        minTime: {
+                            [Op.lte]: +req.params.time
+                        }
+                    }]
+                },
+                order: [
+                    ['name', 'ASC']
                 ]
             })
             .then(games => res.send(games))

@@ -1,0 +1,18 @@
+<h2>Vamos a buscar juegos por su año de publicación:</h2>
+<form [style.fontSize.px]="16">
+    <mat-form-field appearance="fill" color="primary">
+        <mat-label>Buscar por Año</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue" placeholder="2042" (keyup)="searchYear($event)" [formControl]="control" [matAutocomplete]="auto">
+        <button class="size" mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
+    <i class="material-icons-round">close</i>
+</button>
+    </mat-form-field>
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+        <div *ngIf="searchValue!==''">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+                <mat-divider></mat-divider>
+            </mat-option>
+        </div>
+    </mat-autocomplete>
+</form>

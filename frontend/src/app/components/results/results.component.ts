@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GameService } from 'src/app/services/game.service';
+import { AdvSearchService } from 'src/app/services/adv-search.service';
 
 @Component({
   selector: 'app-results',
@@ -9,23 +10,46 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class ResultsComponent implements OnInit {
 
-  public gamesRes;
+  gamesRes;
+  path;
 
-  constructor(public route: ActivatedRoute, public gameService:GameService, public router:Router) { }
+  mapPathToRoute = {
+    'search/game': 'search/game',
+    'search/year': 'search/year',
+    'search/minPlayers': 'search/players/plus',
+    'search/maxPlayers': 'search/players/minus',
+    'search/players': 'search/players',
+    'search/minTime': 'search/time/plus',
+    'search/maxTime': 'search/time/minus',
+    'search/time': 'search/time',
+    'search/age': 'search/age'
+  }
 
-  goToGame(id:string){
+  constructor(public advSearchService: AdvSearchService, public route: ActivatedRoute, public gameService: GameService, public router: Router) { }
+
+  goToGame(id: string) {
     this.router.navigate(['detail', id])
   }
 
 
   ngOnInit(): void {
-    this.route.params
-      .subscribe(param => {this.gameService.searchGame(param.searchValue)
-          .subscribe(
-            (res) => {this.gamesRes = res;},
-            (error) => console.log(error)
-          )
-      });
+    this.path = this.route.url['_value'][0]['path']+"/"+this.route.url['_value'][1]['path'];
+    const ruta = this.mapPathToRoute[this.path];
+    if (ruta === "search/game") {
+      this.gameService.searchGame(this.route.snapshot.params['searchValue'])
+        .subscribe(
+          (res) => { this.gamesRes = res; },
+          (error) => console.log(error)
+        )
+    } else if (ruta) {
+      this.advSearchService.searchByPath(ruta, this.route.snapshot.params['searchValue'])
+        .subscribe(
+          (res) => { this.gamesRes = res; },
+          (error) => this.router.navigate(['/denied'])
+        )
+    } else {
+      this.router.navigate(['/denied'])
+    }
   }
 
 }

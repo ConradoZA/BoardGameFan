@@ -17,7 +17,7 @@ export class GameService {
   getGameById(id:string){
     return this.httpClient.get('http://localhost:3000/search/' + id)
   }
-  getAllNames(){
+  getAllGames(){
     return this.httpClient.get('http://localhost:3000/search/all')
   }
 }

@@ -21,8 +21,8 @@
                     <mat-divider [vertical]=true [inset]=true></mat-divider>
                     <div class="text">
                         <h4>Duración: </h4>
-                        <p *ngIf="gameDetail['minTime']===gameDetail['maxTime'];else variable">{{gameDetail['minTime']}} min. aprox.</p>
-                        <ng-template #variable>
+                        <p *ngIf="gameDetail['minTime']===gameDetail['maxTime'];else variable2">{{gameDetail['minTime']}} min. aprox.</p>
+                        <ng-template #variable2>
                             <p>{{gameDetail['minTime']}} - {{gameDetail['maxTime']}} min. aprox.</p>
                         </ng-template>
 

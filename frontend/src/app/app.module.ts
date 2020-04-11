@@ -34,6 +34,11 @@ import { RegisterComponent } from './containers/user/register/register.component
 import { TableComponent } from './components/table/table.component';
 import { getSpanishPaginatorIntl } from './esp-paginator-intl';
 import { BasicComponent } from './components/searches/basic/basic.component';
+import { ByNameComponent } from './components/searches/by-name/by-name.component';
+import { ByTimeComponent } from './components/searches/by-time/by-time.component';
+import { ByPlayersComponent } from './components/searches/by-players/by-players.component';
+import { ByYearComponent } from './components/searches/by-year/by-year.component';
+import { ByAgeComponent } from './components/searches/by-age/by-age.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +55,11 @@ import { BasicComponent } from './components/searches/basic/basic.component';
     RegisterComponent,
     TableComponent,
     BasicComponent,
+    ByNameComponent,
+    ByTimeComponent,
+    ByPlayersComponent,
+    ByYearComponent,
+    ByAgeComponent,
   ],
   imports: [
     BrowserModule,

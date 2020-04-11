@@ -1,9 +1,19 @@
 <div class="center">
     <mat-tab-group dynamicHeight class="mat-elevation-z4">
-        <mat-tab label="Por Nombre"> Content 1 </mat-tab>
-        <mat-tab label="Por Tiempo"> Content 2 </mat-tab>
-        <mat-tab label="Por Jugadores"> Content 3 </mat-tab>
-        <mat-tab label="Por Año"> Content 4</mat-tab>
-        <mat-tab label="Por Edad"> Content 5</mat-tab>
+        <mat-tab label="Por Nombre">
+            <app-by-name></app-by-name>
+        </mat-tab>
+        <mat-tab label="Por Tiempo">
+            <app-by-time></app-by-time>
+        </mat-tab>
+        <mat-tab label="Por Jugadores">
+            <app-by-players></app-by-players>
+        </mat-tab>
+        <mat-tab label="Por Año">
+            <app-by-year></app-by-year>
+        </mat-tab>
+        <mat-tab label="Por Edad">
+            <app-by-age></app-by-age>
+        </mat-tab>
     </mat-tab-group>
 </div>

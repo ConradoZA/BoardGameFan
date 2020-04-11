@@ -7,39 +7,36 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-basic',
-  templateUrl: './basic.component.html',
-  styleUrls: ['./basic.component.scss']
+  selector: 'app-by-year',
+  templateUrl: './by-year.component.html',
+  styleUrls: ['./by-year.component.scss']
 })
-export class BasicComponent implements OnInit {
+export class ByYearComponent implements OnInit {
   searchValue: string = "";
-  basicControl = new FormControl();
+  control = new FormControl();
   options: Array<string> = [];
   filteredOptions: Observable<string[]>;
-  gamesName: object;
-  ID;
 
   constructor(public gameService: GameService, public userService: UserService, public router: Router) { }
   ngOnInit() {
     this.gameService.getAllGames().subscribe(
-      (res: Array<{}>) => res.forEach(game => { this.options.push(game['name']); }))
-    this.filteredOptions = this.basicControl.valueChanges
+      (res: Array<{}>) => res.forEach(game => { this.options.push(game['year']); }))
+    this.filteredOptions = this.control.valueChanges
       .pipe(
         startWith(''),
         map(value => this.filter(value))
       );
   }
 
-  searchGame(event): void {
-    if (event.key === 'Enter') {
-      this.gameService.searchGame(this.searchValue)
-        .subscribe(res => {this.ID = res[0]['id']; this.router.navigate(['detail', this.ID]);this.searchValue=""; });
+  searchYear(event): void {
 
+    if (event.key === 'Enter') {
+      this.router.navigate(['search/year', this.searchValue])
     }
   }
 
   private filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    return this.options.filter((x, i, a) => a.indexOf(x) == i).filter(option => option.toLowerCase().includes(filterValue));
   }
 }
