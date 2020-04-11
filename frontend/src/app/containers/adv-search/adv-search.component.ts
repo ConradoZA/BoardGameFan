@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AdvSearchService } from 'src/app/services/adv-search.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adv-search',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdvSearchComponent implements OnInit {
 
-  constructor() { }
+  constructor(public advSearchService:AdvSearchService, public router:Router) { }
 
   ngOnInit(): void {
+    this.advSearchService.getMyInfo()
+    .subscribe(
+      (res)=>{},
+      (error)=>{this.router.navigate(['/denied'])}
+    )
   }
 
 }

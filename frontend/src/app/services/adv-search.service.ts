@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,25 +8,16 @@ export class AdvSearchService {
 
   private token:string;
 
-  constructor(public httpClient:HttpClient, public userService:UserService) { }
+  constructor(public httpClient:HttpClient) { }
 
-  searchAuthor(search:string) {
+  searchByPath(path:string ,search:string) {
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.get(`http://localhost:3000/authors/${search}`,{headers: {Authorization: this.token}})
+    return this.httpClient.get(`http://localhost:3000/${path}/${search}`,{headers: {Authorization: this.token}})
   }
-  searchArtist(search:string) {
+  getMyInfo(){
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.get(`http://localhost:3000/artists/${search}`,{headers: {Authorization: this.token}})
+    return this.httpClient.get(`http://localhost:3000/users/info`, {headers: {Authorization: this.token}})
   }
-  searchMechanic(search:string) {
-    this.token = localStorage.getItem('authToken')
-    return this.httpClient.get(`http://localhost:3000/mechanics/${search}`,{headers: {Authorization: this.token}})
-  }
-  searchCategory(search:string) {
-    this.token = localStorage.getItem('authToken')
-    return this.httpClient.get(`http://localhost:3000/categories/${search}`,{headers: {Authorization: this.token}})
-  }
-  
 
 
 

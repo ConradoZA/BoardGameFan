@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -11,15 +9,10 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public router:Router, public userService:UserService) { }
+  constructor(public userService:UserService) { }
 
 public searchValue:string="";
 
-  searchGame(event):void{
-    if(event.key==='Enter'){
-      this.router.navigate(['search', this.searchValue])
-    }
-  }
   logout():void{
     localStorage.removeItem('authToken');
     this.userService.setUser({});

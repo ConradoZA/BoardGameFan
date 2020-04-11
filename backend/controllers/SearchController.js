@@ -4,6 +4,15 @@ const { Game, Category, Mechanic, Author, Artist, sequelize, Sequelize } = requi
 const { Op } = Sequelize;
 
 const SearchController = {
+    getAllGamesNames(req, res) {
+        Game.findAll({
+                order: [
+                    ['name', 'ASC']
+                ]
+            })
+            .then(games => res.send(games))
+            .catch(err => res.status(500).send({ message: 'Ha habido problemas al tratar de obtener los juegos.', err }))
+    },
     getByName(req, res) {
         Game.findAll({
                 include: [Category, Mechanic, Author, Artist],

@@ -18,22 +18,22 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatPaginatorModule, MatPaginatorIntl} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './containers/home/home.component';
-import { NotfoundComponent } from './containers/notfound/notfound.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AdvSearchComponent } from './containers/adv-search/adv-search.component';
 import { ProfileComponent } from './containers/user/profile/profile.component';
-import { SearchComponent } from './components/search/search.component';
+import { ResultsComponent } from './components/results/results.component';
 import { GameDetailComponent } from './containers/game-detail/game-detail.component';
 import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
-import { DesignerComponent } from './containers/designer/designer.component';
+import { TableComponent } from './components/table/table.component';
 import { getSpanishPaginatorIntl } from './esp-paginator-intl';
-import { ArtistComponent } from './containers/artist/artist.component';
-import { MechanicComponent } from './containers/mechanic/mechanic.component';
-import { CategoryComponent } from './containers/category/category.component';
+import { BasicComponent } from './components/searches/basic/basic.component';
 
 @NgModule({
   declarations: [
@@ -44,14 +44,12 @@ import { CategoryComponent } from './containers/category/category.component';
     NotfoundComponent,
     AdvSearchComponent,
     ProfileComponent,
-    SearchComponent,
+    ResultsComponent,
     GameDetailComponent,
     LoginComponent,
     RegisterComponent,
-    DesignerComponent,
-    ArtistComponent,
-    MechanicComponent,
-    CategoryComponent,
+    TableComponent,
+    BasicComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +70,8 @@ import { CategoryComponent } from './containers/category/category.component';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    MatTabsModule,
+    MatAutocompleteModule,
 
   ],
   providers: [

@@ -1,6 +1,9 @@
 <div class="class-table">
     <div class="row">
-        <h2>{{mecanica}} está presente en estos juegos:</h2>
+        <h2 *ngIf="path==='artist'">Estos son los juegos ilustrados por {{name}}:</h2>
+        <h2 *ngIf="path==='category'">Estos son los juegos pertenecientes a la categoría {{name}}:</h2>
+        <h2 *ngIf="path==='designer'">Estos son los juegos diseñados por {{name}}:</h2>
+        <h2 *ngIf="path==='mechanic'">{{name}} está presente en estos juegos:</h2>
         <mat-form-field>
             <mat-label>Filtrar resultados</mat-label>
             <input matInput (keyup)="applyFilter($event.target.value)">

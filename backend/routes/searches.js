@@ -2,6 +2,7 @@ const router = require('express').Router();
 const SearchController = require('../controllers/SearchController.js');
 const { authentication } = require("../middleware/authentication.js")
 
+router.get('/all', SearchController.getAllGamesNames);
 router.get('/game=:game', SearchController.getByName);
 router.get('/year=:year', authentication, SearchController.getByYear);
 router.get('/players=:player', authentication, SearchController.getByPlayers);
