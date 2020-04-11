@@ -1,1 +1,41 @@
-<p>by-name works!</p>
+<mat-horizontal-stepper labelPosition="bottom">
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>¿Qué buscas?</ng-template>
+            <mat-form-field appearance="fill" color="primary">
+                <mat-label>Tipo de búsqueda</mat-label>
+                <mat-select [(value)]="selected" required formControlName="firstCtrl">
+                    <mat-option value="game">Juego</mat-option>
+                    <mat-option value="designer">Autor</mat-option>
+                    <mat-option value="artist">Ilustrador</mat-option>
+                    <mat-option value="mechanic">Mecánica</mat-option>
+                    <mat-option value="category">Categoría</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-stroked-button matStepperNext (click)="getNames()"><i class="material-icons-round">arrow_forward</i></button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Encuéntralo</ng-template>
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="secondCtrl" required>
+            </mat-form-field>
+            <div>
+                <button mat-stroked-button matStepperPrevious><i class="material-icons-round">arrow_back</i></button>
+                <button mat-stroked-button matStepperNext><i class="material-icons-round">arrow_forward</i></button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Hecho</ng-template>
+        <p>¿Preparado?</p>
+        <div>
+            <button mat-stroked-button matStepperPrevious><i class="material-icons-round">arrow_back</i></button>
+            <button mat-stroked-button (click)="goToResult()">Buscar</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>

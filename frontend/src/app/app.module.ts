@@ -20,6 +20,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -39,6 +41,7 @@ import { ByTimeComponent } from './components/searches/by-time/by-time.component
 import { ByPlayersComponent } from './components/searches/by-players/by-players.component';
 import { ByYearComponent } from './components/searches/by-year/by-year.component';
 import { ByAgeComponent } from './components/searches/by-age/by-age.component';
+
 
 @NgModule({
   declarations: [
@@ -82,6 +85,8 @@ import { ByAgeComponent } from './components/searches/by-age/by-age.component';
     MatTableModule,
     MatTabsModule,
     MatAutocompleteModule,
+    MatStepperModule,
+    MatSelectModule,
 
   ],
   providers: [
