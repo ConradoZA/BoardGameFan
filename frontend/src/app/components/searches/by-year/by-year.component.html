@@ -2,7 +2,7 @@
     <br>
     <h3>Bien, así que te interesa buscar los juegos de un año concreto, ¿eh?</h3>
     <br>
-    <form [style.fontSize.px]="16">
+    <form>
         <mat-form-field appearance="fill" color="primary">
             <mat-label>Buscar por Año</mat-label>
             <input matInput type="text" [(ngModel)]="searchValue" placeholder="2042" (keyup)="searchYear($event)" [formControl]="control" [matAutocomplete]="auto">

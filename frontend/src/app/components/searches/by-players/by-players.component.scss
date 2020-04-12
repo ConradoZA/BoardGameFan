@@ -1,0 +1,14 @@
+.center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: auto;
+}
+
+.row {
+    justify-content: center;
+}
+
+.column {
+    margin-left: 2rem;
+}

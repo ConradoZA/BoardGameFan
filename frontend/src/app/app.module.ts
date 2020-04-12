@@ -22,6 +22,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -87,6 +88,7 @@ import { ByAgeComponent } from './components/searches/by-age/by-age.component';
     MatAutocompleteModule,
     MatStepperModule,
     MatSelectModule,
+    MatRadioModule,
 
   ],
   providers: [

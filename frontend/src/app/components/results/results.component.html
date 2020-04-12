@@ -1,11 +1,11 @@
 <div class="row wrap">
     <mat-card *ngFor="let game of gamesRes">
-        <div class="column center">
+        <div class="column center button" (click)="goToGame(game.id)">
             <mat-card-header>
                 <mat-card-title>{{game.name}}</mat-card-title>
                 <mat-card-subtitle>{{game.year}}</mat-card-subtitle>
             </mat-card-header>
-            <img src="{{game.image}}" (click)="goToGame(game.id)">
+            <img src="{{game.image}}">
         </div>
     </mat-card>
 </div>

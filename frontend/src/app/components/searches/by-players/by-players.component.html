@@ -1,1 +1,24 @@
-<p>by-players works!</p>
+<mat-card class="center">
+    <br>
+    <h3>Ah, un tema espinoso... ¿A cuántos inocentes has convencido para jugar?</h3>
+    <br>
+    <form [formGroup]="validateForm">
+        <div class="row">
+            <mat-form-field appearance="fill" color="primary">
+                <mat-label>Nº de jugadores</mat-label>
+                <input matInput type="number" min="1" [formControl]="number" required>
+            </mat-form-field>
+            <mat-divider [vertical]=true [inset]=true></mat-divider>
+            <div class="column">
+                <mat-radio-group [formControl]="limit" required class="column">
+                    <mat-radio-button value="more">o más</mat-radio-button>
+                    <mat-radio-button value="less">o menos</mat-radio-button>
+                    <mat-radio-button value="none">... Lo que sea, no me importa</mat-radio-button>
+                </mat-radio-group>
+                <mat-error align="exist" *ngIf="error">Tienes que elegir uno</mat-error>
+            </div>
+        </div>
+        <br><br>
+        <button mat-raised-button color="primary" (click)="searchPlayers()" type="submit">Enviar</button>
+    </form>
+</mat-card>

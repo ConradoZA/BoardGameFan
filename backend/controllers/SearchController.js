@@ -46,7 +46,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['name', 'ASC']
+                    ['maxPlayer', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -60,7 +60,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['name', 'ASC']
+                    ['maxPlayer', 'DESC']
                 ]
             })
             .then(games => res.send(games))
@@ -80,7 +80,7 @@ const SearchController = {
                     }]
                 },
                 order: [
-                    ['name', 'ASC']
+                    ['minPlayer', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -158,7 +158,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['name', 'ASC']
+                    ['maxTime', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -172,7 +172,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['name', 'ASC']
+                    ['maxTime', 'DESC']
                 ]
             })
             .then(games => res.send(games))
@@ -192,7 +192,7 @@ const SearchController = {
                     }]
                 },
                 order: [
-                    ['name', 'ASC']
+                    ['minTime', 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -200,18 +200,13 @@ const SearchController = {
     },
     getByAge(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 where: {
                     age: {
                         [Op.lte]: +req.params.age
                     }
                 },
                 order: [
-                    ['name', 'ASC'],
-                    [Author, 'name', 'ASC'],
-                    [Mechanic, 'name', 'ASC'],
-                    [Category, 'name', 'ASC'],
-                    [Artist, 'name', 'ASC']
+                    ['age', 'ASC']
                 ]
             })
             .then(games => res.send(games))

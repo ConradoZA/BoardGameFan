@@ -16,11 +16,11 @@ export class ResultsComponent implements OnInit {
   mapPathToRoute = {
     'search/game': 'search/game',
     'search/year': 'search/year',
-    'search/minPlayers': 'search/players/plus',
-    'search/maxPlayers': 'search/players/minus',
+    'search/maxPlayers': 'search/players/plus',
+    'search/minPlayers': 'search/players/minus',
     'search/players': 'search/players',
-    'search/minTime': 'search/time/plus',
-    'search/maxTime': 'search/time/minus',
+    'search/maxTime': 'search/time/plus',
+    'search/minTime': 'search/time/minus',
     'search/time': 'search/time',
     'search/age': 'search/age'
   }

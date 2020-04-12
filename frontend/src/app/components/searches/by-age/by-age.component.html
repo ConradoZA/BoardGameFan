@@ -1,1 +1,12 @@
-<p>by-age works!</p>
+<mat-card class="center">
+    <br>
+    <h3>No te emociones, la edad recomendada suele estar relacionada con su duración y complejidad.</h3>
+    <br>
+    <form>
+        <mat-form-field appearance="fill" color="primary">
+            <mat-label>Buscar por Edad</mat-label>
+            <input matInput type="number" min="0" (keyup)="searchByAge($event)" required>
+            <mat-hint>Edad mínima</mat-hint>
+        </mat-form-field>
+    </form>
+</mat-card>
