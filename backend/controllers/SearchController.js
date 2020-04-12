@@ -6,7 +6,6 @@ const { Op } = Sequelize;
 const SearchController = {
     getAllGamesNames(req, res) {
         Game.findAll({
-                include: [Category, Mechanic, Author, Artist],
                 order: [
                     ['name', 'ASC']
                 ]

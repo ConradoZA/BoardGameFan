@@ -1,41 +1,69 @@
-<mat-horizontal-stepper labelPosition="bottom">
+<mat-horizontal-stepper linear labelPosition="bottom">
     <mat-step [stepControl]="firstFormGroup">
+        <ng-template matStepperIcon="edit">
+            <i class="material-icons-round">done</i>
+        </ng-template>
         <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>¿Qué buscas?</ng-template>
-            <mat-form-field appearance="fill" color="primary">
-                <mat-label>Tipo de búsqueda</mat-label>
-                <mat-select [(value)]="selected" required formControlName="firstCtrl">
-                    <mat-option value="game">Juego</mat-option>
-                    <mat-option value="designer">Autor</mat-option>
-                    <mat-option value="artist">Ilustrador</mat-option>
-                    <mat-option value="mechanic">Mecánica</mat-option>
-                    <mat-option value="category">Categoría</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <div>
-                <button mat-stroked-button matStepperNext (click)="getNames()"><i class="material-icons-round">arrow_forward</i></button>
+            <div class="center">
+                <br>
+                <h3>Veamos, ¿qué tipo de búsqueda vamos a realizar?</h3>
+                <br>
+                <mat-form-field appearance="fill" color="primary">
+                    <mat-label>Tipo de búsqueda</mat-label>
+                    <mat-select [(value)]="selected" required formControlName="firstCtrl">
+                        <mat-option value="game">Juego</mat-option>
+                        <mat-option value="designer">Autor</mat-option>
+                        <mat-option value="artist">Ilustrador</mat-option>
+                        <mat-option value="mechanic">Mecánica</mat-option>
+                        <mat-option value="category">Categoría</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div>
+                    <button mat-stroked-button matStepperNext (click)="getNames()"><i class="material-icons-round">arrow_forward</i></button>
+                </div>
             </div>
         </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
+        <br>
         <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Encuéntralo</ng-template>
-            <mat-form-field>
-                <mat-label>Nombre</mat-label>
-                <input matInput formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-stroked-button matStepperPrevious><i class="material-icons-round">arrow_back</i></button>
-                <button mat-stroked-button matStepperNext><i class="material-icons-round">arrow_forward</i></button>
+            <div class="center">
+                <br>
+                <h3>Perfecto.</h3>
+                <h4>Ahora, vamos a buscarlo por su nombre.</h4>
+                <br>
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [(ngModel)]="searchValue" formControlName="secondCtrl" [matAutocomplete]="auto" required>
+                </mat-form-field>
+                <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption>
+                    <div *ngIf="searchValue!==''">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                            <mat-divider></mat-divider>
+                        </mat-option>
+                    </div>
+                </mat-autocomplete>
+                <div>
+                    <button mat-stroked-button matStepperPrevious><i class="material-icons-round">arrow_back</i></button>
+                    <button mat-stroked-button matStepperNext (click)="getId()"><i class="material-icons-round">arrow_forward</i></button>
+                </div>
             </div>
         </form>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Hecho</ng-template>
-        <p>¿Preparado?</p>
-        <div>
-            <button mat-stroked-button matStepperPrevious><i class="material-icons-round">arrow_back</i></button>
-            <button mat-stroked-button (click)="goToResult()">Buscar</button>
+        <div class="center">
+            <br>
+            <h3>¿Preparado?</h3>
+            <p>Qué nervios...</p>
+            <br>
+            <div>
+                <button mat-stroked-button matStepperPrevious><i class="material-icons-round">arrow_back</i></button>
+                <button mat-flat-button color="accent" (click)="goToResult()">Buscar</button>
+            </div>
         </div>
     </mat-step>
 </mat-horizontal-stepper>
