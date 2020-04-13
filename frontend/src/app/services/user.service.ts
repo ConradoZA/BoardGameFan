@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   private user: object = {};
-  
+
   constructor(public httpClient: HttpClient) { }
 
   register(user: object): Observable<any> {
@@ -28,6 +28,13 @@ export class UserService {
       headers: {
         authorization: token
       }
+    })
+  }
+  newGameInCollection(gameId: string, token: string) {
+    return this.httpClient.post('http://localhost:3000/users/collection', {"GameId":`${gameId}`,"comment":"","rating":""}, {
+      headers: {
+        authorization: token
+      },
     })
   }
 }

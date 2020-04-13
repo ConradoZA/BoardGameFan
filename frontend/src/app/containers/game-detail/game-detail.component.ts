@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-game-detail',
@@ -10,30 +11,44 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class GameDetailComponent implements OnInit {
 
   public gameDetail: Object;
+  public exists;
+  private token: string = localStorage.getItem('authToken');
 
-  constructor(public gameService:GameService, public route: ActivatedRoute, public router:Router) { }
+  constructor(public userService: UserService, public gameService: GameService, public route: ActivatedRoute, public router: Router) { }
 
-  goToArtist(id){
+  goToArtist(id: string) {
     this.router.navigate(['/artist', id])
   }
-  goToAuthor(id:string){
+  goToAuthor(id: string) {
     this.router.navigate(['/designer', id])
   }
-  goToMechanic(id){
+  goToMechanic(id: string) {
     this.router.navigate(['/mechanic', id])
   }
-  goToCategory(id){
+  goToCategory(id: string) {
     this.router.navigate(['/category', id])
+  }
+  addToCollection() {
+    return this.userService.newGameInCollection(this.gameDetail['id'], this.token)
   }
 
   ngOnInit(): void {
     this.route.params
-    .subscribe(param => {this.gameService.getGameById(param.id)
-        .subscribe(
-          (res) => {this.gameDetail = res;},
-          (error) => console.log(error)
-        )
-    });
+      .subscribe(param => {
+        this.gameService.getGameById(param.id)
+          .subscribe(
+            (res) => {
+              this.gameDetail = res;
+              const userCollection = this.userService.getUser();
+              console.log(userCollection)
+              this.exists = userCollection['Games'].filter(game => game['id'] === this.gameDetail['id']);
+            },
+            (error) => console.log(error)
+          )
+      });
   }
-
+  ngAfterViewChecked(){
+    console.log(this.gameDetail)
+    console.log(this.exists)
+  }
 }

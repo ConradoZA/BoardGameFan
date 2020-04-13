@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Game, Category, Mechanic, Author, Artist, sequelize, Sequelize } = require('../models/index.js')
+const { Game, Category, Mechanic, Author, Artist, User, sequelize, Sequelize } = require('../models/index.js')
 const { Op } = Sequelize;
 
 const SearchController = {
@@ -46,7 +46,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['maxPlayer', 'ASC']
+                    [sequelize.cast(sequelize.col('maxPlayer'), 'INTEGER'), 'DESC']
                 ]
             })
             .then(games => res.send(games))
@@ -60,7 +60,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['maxPlayer', 'DESC']
+                    [sequelize.cast(sequelize.col('maxPlayer'), 'INTEGER'), 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -80,7 +80,7 @@ const SearchController = {
                     }]
                 },
                 order: [
-                    ['minPlayer', 'ASC']
+                    [sequelize.cast(sequelize.col('minPlayer'), 'INTEGER'), 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -158,7 +158,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['maxTime', 'ASC']
+                    [sequelize.cast(sequelize.col('maxTime'), 'INTEGER'), 'DESC']
                 ]
             })
             .then(games => res.send(games))
@@ -172,7 +172,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['maxTime', 'DESC']
+                    [sequelize.cast(sequelize.col('maxTime'), 'INTEGER'), 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -192,7 +192,7 @@ const SearchController = {
                     }]
                 },
                 order: [
-                    ['minTime', 'ASC']
+                    [sequelize.cast(sequelize.col('minTime'), 'INTEGER'), 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -206,7 +206,7 @@ const SearchController = {
                     }
                 },
                 order: [
-                    ['age', 'ASC']
+                    [sequelize.cast(sequelize.col('age'), 'INTEGER'), 'ASC']
                 ]
             })
             .then(games => res.send(games))
@@ -227,7 +227,7 @@ const SearchController = {
     },
     getById(req, res) {
         Game.findOne({
-                include: [Category, Mechanic, Author, Artist],
+                include: [Category, Mechanic, Author, Artist, User],
                 where: { id: req.params.id }
             })
             .then(game => res.send(game))

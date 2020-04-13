@@ -23,6 +23,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -42,6 +44,10 @@ import { ByTimeComponent } from './components/searches/by-time/by-time.component
 import { ByPlayersComponent } from './components/searches/by-players/by-players.component';
 import { ByYearComponent } from './components/searches/by-year/by-year.component';
 import { ByAgeComponent } from './components/searches/by-age/by-age.component';
+import { LegalComponent } from './components/legal/legal.component';
+import { DataComponent } from './containers/user/data/data.component';
+import { CollectionComponent } from './containers/user/collection/collection.component';
+
 
 
 @NgModule({
@@ -64,6 +70,9 @@ import { ByAgeComponent } from './components/searches/by-age/by-age.component';
     ByPlayersComponent,
     ByYearComponent,
     ByAgeComponent,
+    LegalComponent,
+    DataComponent,
+    CollectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +98,9 @@ import { ByAgeComponent } from './components/searches/by-age/by-age.component';
     MatStepperModule,
     MatSelectModule,
     MatRadioModule,
+    MatListModule,
+    MatSidenavModule,
+
 
   ],
   providers: [

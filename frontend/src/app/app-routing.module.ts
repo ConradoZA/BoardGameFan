@@ -9,6 +9,7 @@ import { GameDetailComponent } from './containers/game-detail/game-detail.compon
 import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
 import { TableComponent } from './components/table/table.component';
+import { LegalComponent } from './components/legal/legal.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path:"mechanic/:id", component: TableComponent},
   {path:"category/:id", component: TableComponent},
   {path:"artist/:id", component: TableComponent},
+  {path:"legal", component: LegalComponent},
   {path:'**',component:NotfoundComponent},
 ];
 

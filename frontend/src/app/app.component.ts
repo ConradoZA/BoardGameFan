@@ -8,18 +8,19 @@ import { UserService } from './services/user.service';
 })
 export class AppComponent {
 
-  constructor(public userService:UserService){}
-  
-ngOnInit(){
-  const token:string=localStorage.getItem('authToken');
-  if(token){
-    this.userService.getUserInfo(token)
-    .subscribe(
-      (res)=>this.userService.setUser(res),
-      (error)=>{
-        console.error(error);
-        localStorage.removeItem('authToken');
-      }
-    )
-  }}
+  constructor(public userService: UserService) { }
+
+  ngOnInit() {
+    const token: string = localStorage.getItem('authToken');
+    if (token) {
+      this.userService.getUserInfo(token)
+        .subscribe(
+          (res) => this.userService.setUser(res),
+          (error) => {
+            console.error(error);
+            localStorage.removeItem('authToken');
+          }
+        )
+    }
+  }
 }

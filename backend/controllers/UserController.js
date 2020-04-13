@@ -1,4 +1,4 @@
-const { User, Token, UserGame, Sequelize } = require('../models/index');
+const { User, Token, UserGame, Sequelize, Game } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
@@ -46,7 +46,15 @@ const UserController = {
         }
     },
     async getMyInfo(req, res) {
-        res.send(req.user);
+        try {
+            const user = await User.findOne({
+                where: { username: req.user.dataValues.username },
+                include: [Game]
+            })
+            res.send(user)
+        } catch (error) {
+            res.status(500).send({ message: 'Hubo un problema al tratar de obtener los datos del usuario' });
+        }
     },
     async getMyCol(req, res) {
         try {

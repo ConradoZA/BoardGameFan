@@ -1,1 +1,15 @@
-<p>profile works!</p>
+<mat-sidenav-container>
+    <mat-sidenav mode="side" opened fixedInViewport fixedTopGap="83" fixedBottomGap="64">
+        <mat-action-list>
+            <br><br>
+            <button mat-list-item (click)="showData()"><i class="material-icons-round">face</i> Datos Personales</button>
+            <mat-divider></mat-divider>
+            <button mat-list-item (click)="showCol()"><i class="material-icons-round">casino</i> Tu Colección</button>
+        </mat-action-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-collection *ngIf="!data"></app-collection>
+        <app-data *ngIf="data"></app-data>
+    </mat-sidenav-content>
+</mat-sidenav-container>

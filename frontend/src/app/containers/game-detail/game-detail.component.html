@@ -91,6 +91,15 @@
                 <h4>Descripción:</h4>
                 <p [innerHTML]="gameDetail['description']"></p>
             </div>
+            <mat-divider [inset]=true></mat-divider>
+            <br>
+            <div *ngIf="exists.length==0" class="flex left">
+                <button mat-icon-button color="primary" (click)="addToCollection()"><i class="material-icons-round">check_box_outline_blank</i></button>
+                <p> Añadir a mi colección.</p>
+            </div>
+            <div *ngIf="exists.length>0" class="flex left"><i class="material-icons-round">check_box</i>
+                <p> ¡Ya lo tengo en mi colección!</p>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

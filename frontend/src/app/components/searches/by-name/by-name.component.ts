@@ -43,8 +43,8 @@ export class ByNameComponent implements OnInit {
         .subscribe((res) => { this.all = res; this.all.forEach(cate => { this.names.push({ name: cate['name'], id: cate['id'] }) }); })
     }
   }
-  getId(){
-    this.filteredName= this.names.filter(game=>game['name']==this.secondFormGroup.value['secondCtrl']);
+  getId() {
+    this.filteredName = this.names.filter(game => game['name'] == this.secondFormGroup.value['secondCtrl']);
   }
   goToResult() {
     if (this.selected === "game") {
@@ -61,9 +61,10 @@ export class ByNameComponent implements OnInit {
     this.secondFormGroup = this.fb.group({
       secondCtrl: ['', Validators.required]
     });
-    this.filteredOptions = this.secondFormGroup.valueChanges
+    this.filteredOptions = this.secondFormGroup.controls.secondCtrl.valueChanges
       .pipe(
-        map(value => this.filter(value['secondCtrl']))
+        startWith(''),
+        map(value => this.filter(value))
       );
   }
 
