@@ -3,13 +3,13 @@
         <mat-table [dataSource]="collection" matSort>
 
             <ng-container matColumnDef="edit">
-                <mat-header-cell class="a2" *matHeaderCellDef mat-sort-header>Editar</mat-header-cell>
-                <mat-cell class="button a2" *matCellDef="let element"><i class="material-icons-round">create</i></mat-cell>
+                <mat-header-cell class="a2" *matHeaderCellDef sticky>Editar</mat-header-cell>
+                <mat-cell class="button a2" *matCellDef="let element"><i class="material-icons-round" (click)="openModal(element.gameId)">create</i></mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="year">
-                <mat-header-cell class="a1" *matHeaderCellDef mat-sort-header>Año</mat-header-cell>
-                <mat-cell class="a1" *matCellDef="let element">{{element.year}}</mat-cell>
+            <ng-container matColumnDef="name">
+                <mat-header-cell class="a1" *matHeaderCellDef mat-sort-header>Título</mat-header-cell>
+                <mat-cell class="a1" *matCellDef="let element">{{element.name}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="image">
@@ -17,10 +17,16 @@
                 <mat-cell class="button a1" *matCellDef="let element" (click)="goToDetail(element.name)"><img src="{{element.image}}"></mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Título</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+            <ng-container matColumnDef="comment">
+                <mat-header-cell *matHeaderCellDef>Comentarios</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.comment}}"</mat-cell>
             </ng-container>
+
+            <ng-container matColumnDef="rating">
+                <mat-header-cell class="a2" *matHeaderCellDef mat-sort-header>Puntuación</mat-header-cell>
+                <mat-cell class="a2" *matCellDef="let element">{{element.rating}}</mat-cell>
+            </ng-container>
+
 
             <mat-header-row class="back" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

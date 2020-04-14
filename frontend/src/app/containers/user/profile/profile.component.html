@@ -9,7 +9,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <app-collection *ngIf="!data"></app-collection>
-        <app-data *ngIf="data"></app-data>
+        <app-collection *ngIf="!switch" [user]="userService.getUser()"></app-collection>
+        <app-data *ngIf="switch" [user]="userService.getUser()"></app-data>
     </mat-sidenav-content>
 </mat-sidenav-container>

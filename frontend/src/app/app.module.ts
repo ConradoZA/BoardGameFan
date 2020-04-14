@@ -25,6 +25,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -47,6 +48,7 @@ import { ByAgeComponent } from './components/searches/by-age/by-age.component';
 import { LegalComponent } from './components/legal/legal.component';
 import { DataComponent } from './containers/user/data/data.component';
 import { CollectionComponent } from './containers/user/collection/collection.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
@@ -73,6 +75,7 @@ import { CollectionComponent } from './containers/user/collection/collection.com
     LegalComponent,
     DataComponent,
     CollectionComponent,
+    ModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +103,7 @@ import { CollectionComponent } from './containers/user/collection/collection.com
     MatRadioModule,
     MatListModule,
     MatSidenavModule,
-
+    MatDialogModule,
 
   ],
   providers: [
