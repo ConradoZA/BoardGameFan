@@ -13,13 +13,13 @@
         <mat-table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="year">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Año</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.year}}</mat-cell>
+                <mat-header-cell class="a1" *matHeaderCellDef mat-sort-header>Año</mat-header-cell>
+                <mat-cell class="a1" *matCellDef="let element">{{element.year}}</mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="image">
-                <mat-header-cell *matHeaderCellDef>Portada</mat-header-cell>
-                <mat-cell class="button" *matCellDef="let element" (click)="goToDetail(element.name)"><img src="{{element.image}}"></mat-cell>
+                <mat-header-cell class="a1" *matHeaderCellDef>Portada</mat-header-cell>
+                <mat-cell class="button a1" *matCellDef="let element" (click)="goToDetail(element.name)"><img src="{{element.image}}"></mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="name">

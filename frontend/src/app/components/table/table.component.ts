@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdvSearchService } from 'src/app/services/adv-search.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { GameService } from 'src/app/services/game.service';
-import { Observable } from 'rxjs';
 
 export interface Game {
   year: string;

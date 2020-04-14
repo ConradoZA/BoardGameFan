@@ -29,7 +29,8 @@ export class GameDetailComponent implements OnInit {
     this.router.navigate(['/category', id])
   }
   addToCollection() {
-    return this.userService.newGameInCollection(this.gameDetail['id'], this.token)
+    this.userService.newGameInCollection(this.gameDetail['id'], this.token)
+    .subscribe(res=>{this.exists=["something"]})
   }
 
   ngOnInit(): void {
@@ -40,15 +41,14 @@ export class GameDetailComponent implements OnInit {
             (res) => {
               this.gameDetail = res;
               const userCollection = this.userService.getUser();
-              console.log(userCollection)
               this.exists = userCollection['Games'].filter(game => game['id'] === this.gameDetail['id']);
             },
             (error) => console.log(error)
           )
       });
   }
-  ngAfterViewChecked(){
-    console.log(this.gameDetail)
-    console.log(this.exists)
-  }
+  // ngAfterViewChecked(){
+  //   console.log(this.gameDetail)
+  //   console.log(this.exists)
+  // }
 }

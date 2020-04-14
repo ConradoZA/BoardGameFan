@@ -30,8 +30,8 @@ export class UserService {
       }
     })
   }
-  newGameInCollection(gameId: string, token: string) {
-    return this.httpClient.post('http://localhost:3000/users/collection', {"GameId":`${gameId}`,"comment":"","rating":""}, {
+  newGameInCollection(gameId: string, token: string): Observable<any> {
+    return this.httpClient.post('http://localhost:3000/users/collection', {GameId:gameId,comment:"",rating:""}, {
       headers: {
         authorization: token
       },

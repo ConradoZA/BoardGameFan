@@ -3,6 +3,7 @@ const { User, Token, Sequelize } = require('../models/index');
 const { Op } = Sequelize;
 const env = process.env.NODE_ENV || 'development';
 const { jwt_secret } = require('../config/config.json')[env];
+
 const authentication = async(req, res, next) => {
     try {
         const token = req.headers.authorization;
