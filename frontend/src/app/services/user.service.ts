@@ -31,7 +31,21 @@ export class UserService {
     })
   }
   newGameInCollection(gameId: string, token: string): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/users/collection', {GameId:gameId,comment:"",rating:""}, {
+    return this.httpClient.post('http://localhost:3000/users/collection', { GameId: gameId, comment: "", rating: "" }, {
+      headers: {
+        authorization: token
+      },
+    })
+  }
+  updateGameCollection(comment: string, rating: number | string, id, token) {
+    return this.httpClient.put('http://localhost:3000/users/collection', { comment: comment, rating: rating, GameId: id }, {
+      headers: {
+        authorization: token
+      },
+    })
+  }
+  deleteGameCollection(id, token) {
+    return this.httpClient.delete(`http://localhost:3000/users/collection/${id}`, {
       headers: {
         authorization: token
       },

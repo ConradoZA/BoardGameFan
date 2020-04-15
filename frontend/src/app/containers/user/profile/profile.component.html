@@ -1,15 +1,15 @@
-<mat-sidenav-container>
-    <mat-sidenav mode="side" opened fixedInViewport fixedTopGap="83" fixedBottomGap="64">
+<mat-drawer-container class="hundred">
+    <mat-drawer mode="side" opened fixedInViewport fixedTopGap="83" fixedBottomGap="64">
         <mat-action-list>
             <br><br>
             <button mat-list-item (click)="showData()"><i class="material-icons-round">face</i> Datos Personales</button>
             <mat-divider></mat-divider>
             <button mat-list-item (click)="showCol()"><i class="material-icons-round">casino</i> Tu Colección</button>
         </mat-action-list>
-    </mat-sidenav>
+    </mat-drawer>
 
-    <mat-sidenav-content>
+    <mat-drawer-content>
         <app-collection *ngIf="!switch" [user]="userService.getUser()"></app-collection>
         <app-data *ngIf="switch" [user]="userService.getUser()"></app-data>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-drawer-content>
+</mat-drawer-container>

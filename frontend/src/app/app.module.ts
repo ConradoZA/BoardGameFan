@@ -26,6 +26,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -104,8 +105,10 @@ import { ModalComponent } from './components/modal/modal.component';
     MatListModule,
     MatSidenavModule,
     MatDialogModule,
+    MatSlideToggleModule,
 
   ],
+  entryComponents:[ModalComponent],
   providers: [
     { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
   bootstrap: [AppComponent]
