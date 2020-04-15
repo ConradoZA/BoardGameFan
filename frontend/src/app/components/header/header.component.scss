@@ -19,6 +19,12 @@ mat-toolbar {
     align-items: baseline;
 }
 
+.between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .char {
     font-size: 2rem;
     font-weight: bolder;
@@ -29,4 +35,9 @@ mat-toolbar {
 
 .center {
     align-items: center;
+}
+
+.user {
+    object-fit: contain;
+    max-height: 3rem;
 }

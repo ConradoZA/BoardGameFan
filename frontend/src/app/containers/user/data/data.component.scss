@@ -1,0 +1,26 @@
+.format {
+    max-width: 80%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+img {
+    max-width: 200px;
+    object-fit: contain;
+}
+
+.char {
+    border: thick solid rgb(110, 110, 110);
+    box-shadow: -5px -5px 3px rgba(0, 0, 0, 0.6) inset, 5px 5px 3px rgba(255, 255, 255, 0.6) inset;
+    font-size: 2.6rem;
+    font-weight: bolder;
+    width: 5rem;
+    height: 5rem;
+}
+
+.baseline {
+    display: flex;
+    align-items: baseline;
+}

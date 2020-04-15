@@ -51,4 +51,11 @@ export class UserService {
       },
     })
   }
+  updateInfo(object:object, token){
+    return this.httpClient.put('http://localhost:3000/users/info',object,{
+      headers: {
+        authorization: token
+      },
+    })
+  }
 }

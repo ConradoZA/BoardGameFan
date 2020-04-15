@@ -1,8 +1,9 @@
 <header *ngIf="userService.getUser() as user">
     <mat-toolbar color="primary" class="row">
 
-        <div class="baseline button" *ngIf="user['id']" routerLink="profile">
-            <button mat-fab color="accent" class="char">{{user.username.charAt()}}</button>
+        <div class="between button" *ngIf="user['id']" routerLink="profile">
+            <button mat-fab color="accent" *ngIf="!user.image" class="char">{{user.username.charAt()}}</button>
+            <img class="button user" *ngIf="user.image" src="{{user.image}}">
             <p>{{user.username}}</p>
         </div>
         <div class="row button center" routerLink="" *ngIf="!user['id']">

@@ -27,6 +27,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSliderModule} from '@angular/material/slider';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -50,6 +51,7 @@ import { LegalComponent } from './components/legal/legal.component';
 import { DataComponent } from './containers/user/data/data.component';
 import { CollectionComponent } from './containers/user/collection/collection.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { PhotoSelectComponent } from './components/photo-select/photo-select.component';
 
 
 
@@ -77,6 +79,7 @@ import { ModalComponent } from './components/modal/modal.component';
     DataComponent,
     CollectionComponent,
     ModalComponent,
+    PhotoSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +109,7 @@ import { ModalComponent } from './components/modal/modal.component';
     MatSidenavModule,
     MatDialogModule,
     MatSlideToggleModule,
+    MatSliderModule,
 
   ],
   entryComponents:[ModalComponent],

@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
-import { CollectionComponent } from '../collection/collection.component';
-import { DataComponent } from '../data/data.component';
 
 @Component({
   selector: 'app-profile',

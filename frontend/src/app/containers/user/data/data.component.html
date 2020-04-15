@@ -1,1 +1,12 @@
-<p>data works!</p>
+<div class="format">
+    <mat-card>
+        <button mat-fab color="accent" class="char" *ngIf="!user.image" (click)="openPhotoModal()">{{user['username'].charAt()}}</button>
+        <img class="button" *ngIf="user.image" (click)="openPhotoModal()" src="{{user.image}}">
+        <p>username: {{user.username}}</p>
+        <p>email: {{user.email}}</p>
+        <p>role: {{user.role}}</p>
+        <p>gender: {{user.gender}}</p>
+        <p>confirmed: {{user.confirmed}}</p>
+        <p>password: {{user.password}}</p>
+    </mat-card>
+</div>

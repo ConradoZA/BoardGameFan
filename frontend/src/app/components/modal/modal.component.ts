@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { prepareEventListenerParameters } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-modal',
@@ -25,7 +24,7 @@ export class ModalComponent implements OnInit {
     if (update.deleteCtrl === true) {
       this.userService.deleteGameCollection(this.data['gameId'], token)
         .subscribe(
-          (res) => this.snackBar.open("Juego eliminado &#128546", "X", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+          (res) => this.snackBar.open("Juego eliminado (╥﹏╥)", "X", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
         )
     } else {
       this.userService.updateGameCollection(update.commentCtrl, update.ratingCtrl, this.data['gameId'], token)

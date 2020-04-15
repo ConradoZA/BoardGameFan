@@ -1,0 +1,25 @@
+<mat-card>
+    <div class="row">
+        <img mat-card-image *ngIf="data['image']" src="{{data['image']}}">
+        <img mat-card-image *ngIf="!data['image']" src="../../../assets/imgs/alien.png">
+        <mat-divider [vertical]=true [inset]=true></mat-divider>
+        <mat-card-content class="column">
+            <h3>¿Quieres camiar tu imagen de perfil?</h3>
+            <h4>Busca en internet, selecciona una imagen que te guste (mejor cuadrada) y copia la url aquí:</h4>
+            <form #photo="ngForm" (submit)="onClickUpdate()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Url</mat-label>
+                    <input matInput [(ngModel)]="imageValue" [value]="data['image']" name="image" #image="ngModel" id="image">
+                </mat-form-field>
+                <br>
+                <mat-divider [inset]=true></mat-divider>
+                <br>
+                <p>Commin Soon: Subir archivos desde tu ordenador</p>
+                <br>
+                <mat-divider [inset]=true></mat-divider>
+                <br>
+                <button mat-raised-button type="submit">Hecho</button>
+            </form>
+        </mat-card-content>
+    </div>
+</mat-card>

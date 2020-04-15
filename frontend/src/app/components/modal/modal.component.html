@@ -5,23 +5,23 @@
         </mat-toolbar>
     </div>
     <form #edit="ngForm" (submit)="onClickUpdate()">
-        <div mat-dialog-content class="height">
-            <mat-form-field appearance="fill">
-                <mat-label>Puntuación</mat-label>
-                <input matInput [(ngModel)]="ratingValue" type="number" [value]="data['rating']" name="rating" #rating="ngModel" id="rating" min="0" max="10">
-            </mat-form-field>
+        <div mat-dialog-content class="height flexCenter">
+            <div class="width">
+                <h3>Puntuación</h3>
+                <mat-slider class="width2" matInput [(ngModel)]="ratingValue" min="0" max="10" step="1" thumbLabel tickInterval="1" [value]="data['rating'] || 0" name="rating" #rating="ngModel" id="rating"></mat-slider>
+            </div>
             <br>
             <mat-divider [inset]=true></mat-divider>
             <br>
-            <mat-form-field appearance="fill">
+            <mat-form-field class="width" appearance="fill">
                 <mat-label>Comentario</mat-label>
                 <textarea matInput [(ngModel)]="commentValue" [value]="data['comment']" name="comment" #comment="ngModel" id="comment"></textarea>
             </mat-form-field>
             <br>
             <mat-divider [inset]=true></mat-divider>
             <br>
-            <mat-slide-toggle color="warn" [(ngModel)]="deleteValue" #achtung name="delete" #delete="ngModel" id="delete">¡Borrar de mi colección!</mat-slide-toggle>
-            <mat-error align="start" *ngIf="achtung.checked">¿Estás seguro?</mat-error>
+            <mat-slide-toggle class="self" color="warn" [(ngModel)]="deleteValue" #achtung name="delete" #delete="ngModel" id="delete">¡Borrar de mi colección!</mat-slide-toggle>
+            <mat-error class="self" align="start" *ngIf="achtung.checked">¿Estás seguro?</mat-error>
         </div>
         <div mat-dialog-actions align="end">
             <button mat-raised-button color="primary" (click)="onClickClose($event)">Cancelar</button>
