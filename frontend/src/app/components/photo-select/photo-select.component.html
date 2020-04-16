@@ -9,7 +9,7 @@
             <form #photo="ngForm" (submit)="onClickUpdate()">
                 <mat-form-field appearance="fill">
                     <mat-label>Url</mat-label>
-                    <input matInput [(ngModel)]="imageValue" [value]="data['image']" name="image" #image="ngModel" id="image">
+                    <input matInput [(ngModel)]="imageValue" placeholder="{{data['image']}}" name="image" #image="ngModel" id="image">
                 </mat-form-field>
                 <br>
                 <mat-divider [inset]=true></mat-divider>

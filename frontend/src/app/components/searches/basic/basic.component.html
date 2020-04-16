@@ -2,7 +2,7 @@
     <mat-form-field appearance="standard" color="accent" class="search">
         <mat-label>Buscar Juego</mat-label>
         <input matInput type="text" [(ngModel)]="searchValue" placeholder="Nombre del juego" (keyup)="searchGame($event)" [formControl]="basicControl" [matAutocomplete]="auto">
-        <button class="size" mat-button *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
+        <button class="size" *ngIf="searchValue" matSuffix mat-icon-button (click)="searchValue=''">
         <i class="material-icons-round">close</i>
     </button>
         <mat-hint align="end" class="button" *ngIf="user['id']" routerLink="advSearch">Búsqueda Avanzada</mat-hint>

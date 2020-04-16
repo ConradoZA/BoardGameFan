@@ -12,9 +12,9 @@
     <mat-form-field>
         <mat-label>Contraseña</mat-label>
         <input id="password" matInput #message minlength="8" maxlength="16" [formControl]="passwordFormControl" [type]="hide ? 'password' : 'text'">
-        <div class="button" mat-icon-button matSuffix (click)="hide = !hide">
-            <i class="material-icons-round">{{hide ? 'visibility_off' : 'visibility'}}</i>
-        </div>
+        <!-- <div class="button" mat-icon-button matSuffix (click)="hide = !hide"> -->
+        <i class="material-icons-round" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</i>
+        <!-- </div> -->
         <mat-hint align="start" *ngIf="message.value.length<8">Min. 8 caracteres </mat-hint>
         <mat-hint align="end" *ngIf="message.value.length<8">{{message.value.length}} / 8</mat-hint>
         <mat-error *ngIf="passwordFormControl.hasError('required')">

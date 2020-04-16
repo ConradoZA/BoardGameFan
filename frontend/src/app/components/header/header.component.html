@@ -2,24 +2,19 @@
     <mat-toolbar color="primary" class="row">
 
         <div class="between button" *ngIf="user['id']" routerLink="profile">
-            <button mat-fab color="accent" *ngIf="!user.image" class="char">{{user.username.charAt()}}</button>
+            <button mat-fab color="accent" *ngIf="!user.image" class="char">{{user.username?.charAt()}}</button>
             <img class="button user" *ngIf="user.image" src="{{user.image}}">
             <p>{{user.username}}</p>
+            <i class="material-icons-round green" *ngIf="user.confirmed">verified_user</i>
+            <i class="material-icons-round yellow" *ngIf="user.role!=='user'">emoji_events</i>
         </div>
         <div class="row button center" routerLink="" *ngIf="!user['id']">
             <img src="../../../favicon.ico">
             <p class="title">Board Game Fan</p>
         </div>
-
-        <!--
-    <button mat-button [matMenuTriggerFor]="admin" *ngIf="expression">Administración</button>
-    <mat-menu #admin="matMenu">
-        <button mat-menu-item>Nuevo Juego</button>
-        <button mat-menu-item>Item 2</button>
-    </mat-menu> -->
         <div class="row">
-            <button mat-button *ngIf="!user['id']" routerLink="login">Login</button>
-            <button mat-button *ngIf="user['id']" (click)="logout()">Logout</button>
+            <button mat-stroked-button *ngIf="!user['id']" routerLink="login">Login</button>
+            <button mat-stroked-button *ngIf="user['id']" (click)="logout()">Logout</button>
 
             <app-basic></app-basic>
         </div>

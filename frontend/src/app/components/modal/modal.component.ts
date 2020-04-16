@@ -24,12 +24,12 @@ export class ModalComponent implements OnInit {
     if (update.deleteCtrl === true) {
       this.userService.deleteGameCollection(this.data['gameId'], token)
         .subscribe(
-          (res) => this.snackBar.open("Juego eliminado (╥﹏╥)", "X", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+          (res) => this.snackBar.open("Juego eliminado", "(╥﹏╥)", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
         )
     } else {
       this.userService.updateGameCollection(update.commentCtrl, update.ratingCtrl, this.data['gameId'], token)
         .subscribe(
-          (res) => this.snackBar.open("Juego actualizado con éxito", "X", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
+          (res) => this.snackBar.open("Juego actualizado con éxito", "ᕙ(`▽´)ᕗ", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
         )
     }
   }

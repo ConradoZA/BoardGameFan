@@ -10,19 +10,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PhotoSelectComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: object, public userService:UserService, public dialogRef: MatDialogRef<PhotoSelectComponent>, public snackBar: MatSnackBar,) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: object, public userService: UserService, public dialogRef: MatDialogRef<PhotoSelectComponent>, public snackBar: MatSnackBar, ) { }
 
-public imageValue="";
-public lastImage=this.data['image']
+  public imageValue = "";
+  public lastImage = this.data['image']
+
   ngOnInit(): void {
   }
-  onClickUpdate(){
-if(this.imageValue!==this.lastImage){
-  this.userService.updateInfo({image:`${this.imageValue}`}, this.data['token'])
-  .subscribe(
-    (res) => this.snackBar.open("Imagen actualizada ٩(^‿^)۶", "X", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
-  )
-}
-this.dialogRef.close()
+
+  onClickUpdate() {
+    if (this.imageValue !== this.lastImage) {
+      this.userService.updateInfo({ image: `${this.imageValue}` }, this.data['token'])
+        .subscribe(
+          (res) => this.snackBar.open("Imagen actualizada", "٩(^‿^)۶", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
+        )
+    }
+    this.dialogRef.close();
+    location.reload();
   }
 }

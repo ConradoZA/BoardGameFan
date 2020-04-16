@@ -45,13 +45,13 @@ export class RegisterComponent implements OnInit {
           .subscribe(
             (res) =>{
               this.validateForm.reset();
-              this.snackBar.open(res['message'],"",{duration:3000,horizontalPosition:"center", verticalPosition:"bottom",});
+              this.snackBar.open(res['message'],"(ʘ‿ʘ)╯",{duration:3000,horizontalPosition:"center", verticalPosition:"bottom",});
               setTimeout(() => {
               this.router.navigate(['/login'])
               }, 1000);
             },
             (error)=>{
-              this.snackBar.open(error['error']['message'],"",{duration:2000,horizontalPosition:"center", verticalPosition:"bottom",});
+              this.snackBar.open(error['error']['message'],"(ಠ_ಠ)",{duration:2000,horizontalPosition:"center", verticalPosition:"bottom",});
             }
           )
         }
