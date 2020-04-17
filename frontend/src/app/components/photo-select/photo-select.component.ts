@@ -20,7 +20,7 @@ export class PhotoSelectComponent implements OnInit {
 
   onClickUpdate() {
     if (this.imageValue !== this.lastImage) {
-      this.userService.updateInfo({ image: `${this.imageValue}` }, this.data['token'])
+      this.userService.updateInfo({ image: `${this.imageValue}` })
         .subscribe(
           (res) => this.snackBar.open("Imagen actualizada", "٩(^‿^)۶", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
         )

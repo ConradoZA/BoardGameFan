@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class UserService {
 
   private user: object = {};
+  private token:string;
 
   constructor(public httpClient: HttpClient) { }
 
@@ -23,38 +24,43 @@ export class UserService {
   getUser(): object {
     return this.user;
   }
-  getUserInfo(token: string): Observable<any> {
+  getUserInfo(): Observable<any> {
+    this.token = localStorage.getItem('authToken')
     return this.httpClient.get('http://localhost:3000/users/info', {
       headers: {
-        authorization: token
+        authorization: this.token
       }
     })
   }
-  newGameInCollection(gameId: string, token: string): Observable<any> {
+  newGameInCollection(gameId: string): Observable<any> {
+    this.token = localStorage.getItem('authToken')
     return this.httpClient.post('http://localhost:3000/users/collection', { GameId: gameId, comment: "", rating: "" }, {
       headers: {
-        authorization: token
+        authorization: this.token
       },
     })
   }
-  updateGameCollection(comment: string, rating: number | string, id, token) {
+  updateGameCollection(comment: string, rating: number | string, id:string|number) {
+    this.token = localStorage.getItem('authToken')
     return this.httpClient.put('http://localhost:3000/users/collection', { comment: comment, rating: rating, GameId: id }, {
       headers: {
-        authorization: token
+        authorization: this.token
       },
     })
   }
-  deleteGameCollection(id, token) {
+  deleteGameCollection(id:string|number) {
+    this.token = localStorage.getItem('authToken')
     return this.httpClient.delete(`http://localhost:3000/users/collection/${id}`, {
       headers: {
-        authorization: token
+        authorization: this.token
       },
     })
   }
-  updateInfo(object:object, token){
+  updateInfo(object:object){
+    this.token = localStorage.getItem('authToken')
     return this.httpClient.put('http://localhost:3000/users/info',object,{
       headers: {
-        authorization: token
+        authorization: this.token
       },
     })
   }

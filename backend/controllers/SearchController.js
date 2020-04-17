@@ -214,11 +214,10 @@ const SearchController = {
     },
     getLatest(req, res) {
         Game.findAll({
-                offset: 5,
-                limit: 5,
                 order: [
-                    ['createdAt', 'DESC']
-                ]
+                    ['id', 'DESC']
+                ],
+                limit: 5,
             })
             .then(games => {
                 res.send(games)

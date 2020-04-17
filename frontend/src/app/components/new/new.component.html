@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Hola Maestro, ¿Preparado para crear unos cuantos juegos?</mat-card-title>
+        <mat-card-subtitle>Tú dame el código, que yo me encargo...</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <form #new="ngForm" (submit)="onClickCreate()">
+            <mat-form-field appearance="outline" color="accent">
+                <mat-label>Código Secreto</mat-label>
+                <input matInput [(ngModel)]="newValue" placeholder="42" name="code" #code="ngModel" id="code">
+            </mat-form-field>
+            <br>
+            <mat-divider [inset]=true></mat-divider>
+            <br>
+            <button mat-raised-button color="warn" type="submit">¡Que empiece la mágia!</button>
+        </form>
+    </mat-card-content>
+</mat-card>

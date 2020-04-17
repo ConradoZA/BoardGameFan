@@ -19,15 +19,14 @@ export class ModalComponent implements OnInit {
   ngOnInit(): void { }
 
   onClickUpdate(): void {
-    const token: string = localStorage.getItem('authToken');
     const update = { commentCtrl: this.commentValue, ratingCtrl: this.ratingValue, deleteCtrl: this.deleteValue }
     if (update.deleteCtrl === true) {
-      this.userService.deleteGameCollection(this.data['gameId'], token)
+      this.userService.deleteGameCollection(this.data['gameId'])
         .subscribe(
           (res) => this.snackBar.open("Juego eliminado", "(╥﹏╥)", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
         )
     } else {
-      this.userService.updateGameCollection(update.commentCtrl, update.ratingCtrl, this.data['gameId'], token)
+      this.userService.updateGameCollection(update.commentCtrl, update.ratingCtrl, this.data['gameId'])
         .subscribe(
           (res) => this.snackBar.open("Juego actualizado con éxito", "ᕙ(`▽´)ᕗ", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
         )

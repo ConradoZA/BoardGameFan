@@ -11,8 +11,8 @@ import { UserService } from 'src/app/services/user.service';
 export class GameDetailComponent implements OnInit {
 
   public gameDetail: Object;
-  public exists;
-  private token: string = localStorage.getItem('authToken');
+  public exists=[];
+  public token: string = localStorage.getItem('authToken');
 
   constructor(public userService: UserService, public gameService: GameService, public route: ActivatedRoute, public router: Router) { }
 
@@ -29,8 +29,8 @@ export class GameDetailComponent implements OnInit {
     this.router.navigate(['/category', id])
   }
   addToCollection() {
-    this.userService.newGameInCollection(this.gameDetail['id'], this.token)
-    .subscribe(res=>{this.exists=["something"]})
+    this.userService.newGameInCollection(this.gameDetail['id'])
+      .subscribe(res => { this.exists = ["something"] })
   }
 
   ngOnInit(): void {
@@ -47,8 +47,4 @@ export class GameDetailComponent implements OnInit {
           )
       });
   }
-  // ngAfterViewChecked(){
-  //   console.log(this.gameDetail)
-  //   console.log(this.exists)
-  // }
 }

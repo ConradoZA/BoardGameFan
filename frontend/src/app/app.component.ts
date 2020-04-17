@@ -13,7 +13,7 @@ export class AppComponent {
   ngOnInit() {
     const token: string = localStorage.getItem('authToken');
     if (token) {
-      this.userService.getUserInfo(token)
+      this.userService.getUserInfo()
         .subscribe(
           (res) => this.userService.setUser(res),
           (error) => {

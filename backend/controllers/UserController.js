@@ -1,9 +1,10 @@
-const { User, Token, UserGame, Sequelize, Game } = require('../models/index');
+const { User, Token, UserGame, Sequelize, Game, sequelize } = require('../models/index');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const env = process.env.NODE_ENV || 'development';
-const { jwt_secret } = require('../config/config.json')[env];
+const { jwt_secret, API_URL } = require('../config/config.json')[env];
 const { Op } = Sequelize;
+const transporter = require('../config/nodemailer');
 
 const UserController = {
     async register(req, res) {
@@ -15,7 +16,8 @@ const UserController = {
                 email: req.body.email,
                 role: 'user',
                 gender: "",
-                image: ""
+                image: "",
+                confirmed: false,
             });
             res.status(201).send({ user, message: 'Usuario creado con éxito' });
         } catch (error) {
@@ -117,6 +119,102 @@ const UserController = {
             res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
             res.status(500).send({ message: "¡Problemas jefe!", error })
+        }
+    },
+    async getTrueUsers(req, res) {
+        try {
+            res.send(await User.findAll({ where: { confirmed: true || 1 } }))
+        } catch (error) {
+            res.status(500).send({ message: "¡Problemas jefe!", error })
+        }
+    },
+    async deleteUser(req, res) {
+        await User.destroy({ where: { id: req.params.id } })
+        sequelize.query(`DELETE FROM UserGames where UserId = ${req.params.id}`);
+        res.send('Usuario eliminado.')
+    },
+    async getAllUsers(req, res) {
+        try {
+            res.send(await User.findAll())
+        } catch (error) {
+            res.status(500).send({ message: "¡Problemas jefe!", error })
+        }
+    },
+    async confirmUser(req, res) {
+        try {
+            const email = req.body.email;
+            const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '24h' });
+            const url = API_URL + "/users/confirm/" + emailToken;
+            await transporter.sendMail({
+                to: email,
+                subject: 'Confirma tu usuario en BoardGame Fan',
+                html: `
+                <h2>¡Bienvenid@ ${req.body.username}!</h2>
+                <h3>Así que vas en serio, ¿eh?</h3>
+                <br>
+                <p>Pues haz click </p><a href="${url}">aquí</a><p> para confirmar tu email</p>
+                <br>
+                <p>Recordatorio: El link expira en 24 horas... Si no activas la cuenta antes, tendrás que volver a solicitar otro link de confirmación</p>
+                `
+            })
+            res.send({ message: "Mail enviado" })
+        } catch (error) {
+            res.status(500).send({ message: "Problemas al enviar el email.", error })
+        }
+    },
+    async confirmed(req, res) {
+        try {
+            const emailToken = req.params.emailToken;
+            const payload = jwt.verify(emailToken, jwt_secret);
+            const email = payload.email;
+            await User.update({ confirmed: true }, { where: { email: email } })
+                // const user = await User.findOne({ where: { email } });
+                // const authToken = jwt.sign({ id: user.id }, jwt_secret);
+                // await Token.create({
+                //     token: authToken,
+                //     UserId: user.id
+                // })
+            res.redirect('http://localhost:4200/userconfirmed' + authToken);
+        } catch (error) {
+            res.status(500).send({ message: "No hemos podido confirmar tu email." })
+        }
+    },
+    async changePassword(req, res) {
+        try {
+            const email = req.body.email;
+            const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '24h' });
+            const url = API_URL + "/users/change/" + emailToken;
+            await transporter.sendMail({
+                to: email,
+                subject: 'Cambiar tu contraseña de BoardGame Fan',
+                html: `
+                <h2>¡Hola ${req.body.username}!</h2>
+                <br>
+                <p>Aquí tienes tu </p><a href="${url}">link</a><p> para cambiar tu contraseña.</p>
+                <br>
+                <p>Recordatorio: El link expira en 24 horas...</p>
+                `
+            })
+            res.send({ message: "Mail enviado" })
+        } catch (error) {
+            res.status(500).send({ message: "Problemas al enviar el email.", error })
+        }
+    },
+    async newPassword(req, res) {
+        try {
+            const emailToken = req.params.emailToken;
+            const payload = jwt.verify(emailToken, jwt_secret);
+            const email = payload.email;
+            await User.update({ password: req.body.password }, { where: { email: email } })
+                // const user = await User.findOne({ where: { email } });
+                // const authToken = jwt.sign({ id: user.id }, jwt_secret);
+                // await Token.create({
+                //     token: authToken,
+                //     UserId: user.id
+                // })
+            res.send({ message: "Contraseña cambiada." });
+        } catch (error) {
+            res.status(500).send({ message: "No hemos podido cambiar tu contraseña." })
         }
     }
 }

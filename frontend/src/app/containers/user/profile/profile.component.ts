@@ -10,22 +10,25 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   public user: object={};
-  public switch: boolean = true;
+  public switch: string = "data";
 
   constructor(public userService: UserService, public router: Router) { }
-  showData() { this.switch = true }
-  showCol() { this.switch = false }
+  showData() { this.switch = "data" }
+  showCol() { this.switch = "collection" }
+  showAdmin() { this.switch = "admin" }
+  showHacks() { this.switch = "hacks" }
 
   ngOnInit(): void {
     const token: string = localStorage.getItem('authToken');
     if (token) {
-      this.userService.getUserInfo(token)
+      this.userService.getUserInfo()
         .subscribe(
           (res) => {
             this.userService.setUser(res);
             this.user = this.userService.getUser()
           },
           (error) => {
+            console.log(error)
             localStorage.removeItem('authToken');
             this.router.navigate(['denied'])
           }

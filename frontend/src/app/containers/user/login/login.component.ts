@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     ]);
     passwordFormControl = new FormControl('', [
       Validators.required,
-      Validators.pattern(/^().{8,16}$/g),
+      // Validators.pattern(/^().{8,16}$/g),
     ]);
 
     submitForm(): void {

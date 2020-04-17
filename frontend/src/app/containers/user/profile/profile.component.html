@@ -5,11 +5,17 @@
             <button mat-list-item (click)="showData()"><i class="material-icons-round">face</i> Datos Personales</button>
             <mat-divider></mat-divider>
             <button mat-list-item (click)="showCol()"><i class="material-icons-round">casino</i> Tu Colección</button>
+            <mat-divider></mat-divider>
+            <button mat-list-item *ngIf="user['role']!=='user'" (click)="showAdmin()"><i class="material-icons-round">gps_fixed</i> Administración</button>
+            <mat-divider></mat-divider>
+            <button mat-list-item *ngIf="user['role']==='god'" (click)="showHacks()"><i class="material-icons-round">memory</i> Nuevo Juego</button>
         </mat-action-list>
     </mat-drawer>
 
     <mat-drawer-content>
-        <app-collection *ngIf="!switch" [user]="userService.getUser()"></app-collection>
-        <app-data *ngIf="switch" [user]="userService.getUser()"></app-data>
+        <app-collection *ngIf="switch==='collection'" [user]="userService.getUser()"></app-collection>
+        <app-data *ngIf="switch==='data'" [user]="userService.getUser()"></app-data>
+        <app-admin *ngIf="switch==='admin'" [user]="userService.getUser()"></app-admin>
+        <app-new *ngIf="switch==='hacks'" [user]="userService.getUser()"></app-new>
     </mat-drawer-content>
 </mat-drawer-container>

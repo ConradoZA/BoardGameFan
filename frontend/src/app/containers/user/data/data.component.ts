@@ -32,15 +32,13 @@ export class DataComponent implements OnInit {
   }
 
   openPhotoModal() {
-    const token: string = localStorage.getItem('authToken');
-    this.dialog.open(PhotoSelectComponent, { data: { userID: this.user['id'], token: token, image: this.user['image'] } })
+    this.dialog.open(PhotoSelectComponent, { data: { userID: this.user['id'], image: this.user['image'] } })
       .afterClosed().subscribe(res => { if (res === true) { location.reload() } })
   }
 
   editName() {
-    const token: string = localStorage.getItem('authToken');
     if (this.nameFormControl.value !== this.lastName) {
-      this.userService.updateInfo({ username: `${this.nameFormControl.value}` }, token)
+      this.userService.updateInfo({ username: `${this.nameFormControl.value}` })
         .subscribe(
           (res) => {
             this.snackBar.open("Nombre actualizado", "(☞ﾟヮﾟ)☞",
@@ -53,9 +51,8 @@ export class DataComponent implements OnInit {
   }
 
   editMail() {
-    const token: string = localStorage.getItem('authToken');
     if (this.emailFormControl.value !== this.lastMail) {
-      this.userService.updateInfo({ email: `${this.emailFormControl.value}` }, token)
+      this.userService.updateInfo({ email: `${this.emailFormControl.value}` })
         .subscribe(
           (res) => {
             this.snackBar.open("E-mail actualizado", "( ﾟヮﾟ)/",
@@ -68,9 +65,8 @@ export class DataComponent implements OnInit {
   }
 
   editGender() {
-    const token: string = localStorage.getItem('authToken');
     if (this.genderFormControl.value !== this.lastGender) {
-      this.userService.updateInfo({ gender: `${this.genderFormControl.value}` }, token)
+      this.userService.updateInfo({ gender: `${this.genderFormControl.value}` })
         .subscribe(
           (res) => {
             this.snackBar.open("Has cambiado de género", "(⊙_☉)",
