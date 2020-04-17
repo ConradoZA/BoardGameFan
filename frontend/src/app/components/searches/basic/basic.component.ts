@@ -30,12 +30,11 @@ export class BasicComponent implements OnInit {
       );
   }
 
-  searchGame(event): void {
-    if (event.key === 'Enter') {
+  searchGame(): void {
       this.gameService.searchGame(this.searchValue)
         .subscribe(res => { this.ID = res[0]['id']; this.searchValue = ""; this.router.navigate(['detail', this.ID]); });
 
-    }
+    // }
   }
 
   private filter(value: string): string[] {
