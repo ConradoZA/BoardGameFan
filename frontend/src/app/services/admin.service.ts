@@ -30,4 +30,14 @@ export class AdminService {
     return this.httpClient.delete(`http://localhost:3000/games/${id}`, { headers: { authorization: this.token } })
   }
 
+  promoteUser(id:string|number){
+    this.token = localStorage.getItem('authToken')
+    return this.httpClient.put(`http://localhost:3000/users/info/${id}`, { headers: { authorization: this.token } })
+  }
+
+  degradeUser(id:string|number){
+    this.token = localStorage.getItem('authToken')
+    return this.httpClient.put(`http://localhost:3000/users/info/downgrade/${id}`, { headers: { authorization: this.token } })
+  }
+
 }

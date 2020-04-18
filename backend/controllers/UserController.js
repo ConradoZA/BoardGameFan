@@ -113,17 +113,18 @@ const UserController = {
             res.status(500).send({ message: "Ha habido problemas al actualizar tu información.", error })
         }
     },
-    async changeRole(req, res) {
+    async upgradeRole(req, res) {
         try {
-            await User.update({ role: req.body.role }, { where: { id: +req.params.id } });
+            await User.update({ role: "admin" }, { where: { id: +req.params.id } });
             res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
             res.status(500).send({ message: "¡Problemas jefe!", error })
         }
     },
-    async getTrueUsers(req, res) {
+    async degradeRole(req, res) {
         try {
-            res.send(await User.findAll({ where: { confirmed: true || 1 } }))
+            await User.update({ role: "user" }, { where: { id: +req.params.id } });
+            res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
             res.status(500).send({ message: "¡Problemas jefe!", error })
         }

@@ -1,0 +1,25 @@
+<div class="format">
+    <mat-card>
+        <table matSort (matSortChange)="sortUsers($event)">
+            <tr>
+                <th id="name" mat-sort-header="username">Nombre</th>
+                <th mat-sort-header="confirmed">Confirmado</th>
+                <th mat-sort-header="role">Categoría</th>
+            </tr>
+
+            <tr *ngFor="let user of sortedUsers">
+                <td id="left">{{user.username}}</td>
+                <td>
+                    <i class="material-icons-round green" *ngIf="user.confirmed">verified_user</i>
+                    <i class="material-icons-round red" *ngIf="!user.confirmed">remove_circle</i>
+                </td>
+                <td>
+                    <i class="material-icons-round yellow" *ngIf="user.role==='admin'">emoji_events</i>
+                    <i class="material-icons-round orange" *ngIf="user.role==='superAdmin'">emoji_events</i>
+                    <i class="material-icons-round" *ngIf="user.role==='user'">perm_identity</i>
+                    <i class="material-icons-round green" *ngIf="user.role==='god'">code</i>
+                </td>
+            </tr>
+        </table>
+    </mat-card>
+</div>

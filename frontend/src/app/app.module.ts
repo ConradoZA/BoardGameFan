@@ -53,8 +53,9 @@ import { CollectionComponent } from './containers/user/collection/collection.com
 import { ModalComponent } from './components/modal/modal.component';
 import { PhotoSelectComponent } from './components/photo-select/photo-select.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { NewComponent } from './components/new/new.component';
-import { SureComponent } from './components/sure/sure.component';
+import { NewComponent } from './components/admin/new/new.component';
+import { SureComponent } from './components/admin/sure/sure.component';
+import { ViewsComponent } from './components/admin/views/views.component';
 
 
 
@@ -86,6 +87,7 @@ import { SureComponent } from './components/sure/sure.component';
     AdminComponent,
     NewComponent,
     SureComponent,
+    ViewsComponent,
   ],
   imports: [
     BrowserModule,

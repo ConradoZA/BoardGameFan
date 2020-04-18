@@ -1,6 +1,6 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Hola jefe, ¿qué maldades vamos a rectificar hoy?</mat-card-title>
+        <mat-card-title>Hola jefe, ¿qué injusticias vamos a rectificar hoy?</mat-card-title>
         <mat-card-subtitle>Jejeje... ┌( ͝° ͜ʖ͡°)=ε/̵͇̿̿/’̿’̿’̿</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -17,13 +17,31 @@
             <button mat-raised-button color="primary" type="submit">Borrar</button>
         </form>
         <br><br>
-        <form (ngSubmit)="onClickDeleteGame()">
+        <form *ngIf="user['role']==='superAdmin'||'god'" (ngSubmit)="onClickDeleteGame()">
             <h3>¿Estás SEGURO de que quieres borrar un juego?...</h3>
-            <mat-form-field *ngIf="user['role']==='superAdmin'||'god'" appearance="fill" color="primary">
+            <mat-form-field appearance="fill" color="primary">
                 <mat-label>Nombre del juego</mat-label>
                 <input matInput [(ngModel)]="deleteGameValue" name="deleteGame" #deleteGame="ngModel">
             </mat-form-field>
             <button mat-raised-button color="warn" type="submit">Borrar</button>
+        </form>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <form (ngSubmit)="onClickChangeUser()" *ngIf="user['role']==='superAdmin'||'god'">
+            <h3>¿Alguien ha sido un niño bueno?... ¿o malo?</h3>
+            <mat-form-field appearance="fill" color="primary">
+                <mat-label>Tipo</mat-label>
+                <mat-select [(ngModel)]="changeValue" name="change" #change="ngModel" required>
+                    <mat-option value="upgrade">Promocionar</mat-option>
+                    <mat-option value="downgrade">Degradar</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" color="primary">
+                <mat-label>¿A quién?</mat-label>
+                <input matInput [(ngModel)]="userValue" name="user" #user="ngModel">
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Let's go...</button>
         </form>
 
     </mat-card-content>

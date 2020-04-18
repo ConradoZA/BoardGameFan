@@ -9,6 +9,8 @@
             <button mat-list-item *ngIf="user['role']!=='user'" (click)="showAdmin()"><i class="material-icons-round">gps_fixed</i> Administración</button>
             <mat-divider></mat-divider>
             <button mat-list-item *ngIf="user['role']==='god'" (click)="showHacks()"><i class="material-icons-round">memory</i> Nuevo Juego</button>
+            <mat-divider></mat-divider>
+            <button mat-list-item *ngIf="user['role']!=='user'" (click)="showUsers()"><i class="material-icons-round">recent_actors</i> Ver Usuarios</button>
         </mat-action-list>
     </mat-drawer>
 
@@ -17,5 +19,6 @@
         <app-data *ngIf="switch==='data'" [user]="userService.getUser()"></app-data>
         <app-admin *ngIf="switch==='admin'" [user]="userService.getUser()"></app-admin>
         <app-new *ngIf="switch==='hacks'" [user]="userService.getUser()"></app-new>
+        <app-views *ngIf="switch==='viewUsers'"></app-views>
     </mat-drawer-content>
 </mat-drawer-container>

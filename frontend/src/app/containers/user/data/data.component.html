@@ -50,7 +50,7 @@
                 <p *ngIf="user.role==='superAdmin'"> jefazo.</p>
                 <p *ngIf="user.role==='god'"> eres Conrado, mi creador. &nbsp;<i class="material-icons-round green">emoji_emotions</i></p>
             </div>
-            <mat-hint>¿Quieres cambiar de tipo de cuenta? Contacta con un administrador.</mat-hint>
+            <mat-hint *ngIf="user.role==='user'">¿Quieres ser administrador? Pídelo por favor...</mat-hint>
             <br>
             <mat-divider [inset]=true></mat-divider>
             <br>

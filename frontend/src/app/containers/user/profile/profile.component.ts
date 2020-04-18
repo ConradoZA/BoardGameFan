@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   showCol() { this.switch = "collection" }
   showAdmin() { this.switch = "admin" }
   showHacks() { this.switch = "hacks" }
+  showUsers() { this.switch = "viewUsers" }
 
   ngOnInit(): void {
     const token: string = localStorage.getItem('authToken');

@@ -5,7 +5,7 @@
             <button mat-fab color="accent" *ngIf="!user.image" class="char">{{user.username?.charAt()}}</button>
             <img class="button user" *ngIf="user.image" src="{{user.image}}">
             <p>{{user.username}}</p>
-            <i class="material-icons-round green" *ngIf="user.confirmed">verified_user</i>
+            <i class="material-icons-round green bold" *ngIf="user.confirmed">check</i>
             <i class="material-icons-round yellow" *ngIf="user.role!=='user'">emoji_events</i>
         </div>
         <div class="row button center" routerLink="" *ngIf="!user['id']">
