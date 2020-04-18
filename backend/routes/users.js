@@ -5,8 +5,9 @@ const { authentication, isSuper, isAdmin } = require("../middleware/authenticati
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
 router.post('/send', authentication, UserController.confirmUser);
-router.get('/confirm/:emailToken', authentication, UserController.confirmed);
-router.get('/change/:emailToken', authentication, UserController.confirmed);
+router.get('/confirm/:emailToken', UserController.confirmed);
+router.post('/change', authentication, UserController.changePassword);
+// router.post('/change/:emailToken', authentication, UserController.newPassword);
 router.get('/info', authentication, UserController.getMyInfo);
 router.put('/info', authentication, UserController.updateUser);
 router.get('/info/all', authentication, isAdmin, UserController.getAllUsers);

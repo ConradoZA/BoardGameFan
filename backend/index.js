@@ -10,7 +10,8 @@ const artistsRouter = require("./routes/artists.js")
 const searchesRouter = require("./routes/searches.js")
 const usersRouter = require("./routes/users.js")
 const hacksRouter = require("./routes/hacks.js")
-const { authentication, isAdmin, isGod } = require("./middleware/authentication.js")
+const backsRouter = require('./routes/backs.js')
+const { authentication, isGod } = require("./middleware/authentication.js")
 
 app.use(express.json());
 
@@ -30,5 +31,6 @@ app.use("/artists", authentication, artistsRouter);
 app.use("/search", searchesRouter);
 app.use("/users", usersRouter);
 app.use("/hacks", authentication, isGod, hacksRouter);
+app.use("/back", backsRouter);
 
 app.listen(PORT, () => console.log('server running on ' + PORT));

@@ -24,7 +24,6 @@ export class NewComponent implements OnInit {
     }
   }
   onClickCreate() {
-console.log(this.newValue)
     this.adminService.createNewGame(this.newValue)
       .subscribe(
         (res) => this.snackBar.open("Ya sé Kung-Fu...", "☜(⌒▽⌒)☞", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", }),

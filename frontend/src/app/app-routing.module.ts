@@ -10,6 +10,8 @@ import { LoginComponent } from './containers/user/login/login.component';
 import { RegisterComponent } from './containers/user/register/register.component';
 import { TableComponent } from './components/table/table.component';
 import { LegalComponent } from './components/legal/legal.component';
+import { ConfirmedComponent } from './containers/user/confirmed/confirmed.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,8 @@ const routes: Routes = [
   {path:"category/:id", component: TableComponent},
   {path:"artist/:id", component: TableComponent},
   {path:"legal", component: LegalComponent},
+  {path:"confirmed/:token", component: ConfirmedComponent},
+  {path:"recover/:token", component:RecoverPasswordComponent},
   {path:'**',component:NotfoundComponent},
 ];
 

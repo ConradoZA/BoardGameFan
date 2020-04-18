@@ -3,7 +3,7 @@
         <i class="material-icons-round">policy</i>
         <a [routerLink]="['/legal']" routerLinkActive="router-link-active">Some legal stuff</a>
     </div>
-    <div class="row button center" routerLink="">
+    <div class="row button center" (click)="onClickHome()">
         <p class="title">Board Game Fan</p>
         <img src="../../../favicon.ico">
     </div>

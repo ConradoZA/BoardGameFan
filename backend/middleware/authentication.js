@@ -18,7 +18,6 @@ const authentication = async(req, res, next) => {
                 }]
             }
         })
-        console.log(tokenFound)
         if (!user || !tokenFound) {
             res.status(401).send({
                 message: 'No estas autorizado',
@@ -57,7 +56,6 @@ const isSuper = async(req, res, next) => {
 
 const isGod = async(req, res, next) => {
     const admins = ['god'];
-    console.log(req.user)
     if (!admins.includes(req.user.role)) {
         return res.status(403).send({
             message: 'No tienes permisos para ver esta sección'

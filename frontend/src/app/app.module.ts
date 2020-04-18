@@ -56,6 +56,9 @@ import { AdminComponent } from './components/admin/admin.component';
 import { NewComponent } from './components/admin/new/new.component';
 import { SureComponent } from './components/admin/sure/sure.component';
 import { ViewsComponent } from './components/admin/views/views.component';
+import { ConfirmedComponent } from './containers/user/confirmed/confirmed.component';
+import { ChangePasswordComponent } from './containers/user/change-password/change-password.component';
+import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 
 
 
@@ -88,6 +91,9 @@ import { ViewsComponent } from './components/admin/views/views.component';
     NewComponent,
     SureComponent,
     ViewsComponent,
+    ConfirmedComponent,
+    ChangePasswordComponent,
+    RecoverPasswordComponent,
   ],
   imports: [
     BrowserModule,

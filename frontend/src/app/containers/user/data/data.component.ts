@@ -4,6 +4,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PhotoSelectComponent } from 'src/app/components/photo-select/photo-select.component';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AdminService } from 'src/app/services/admin.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-data',
@@ -13,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DataComponent implements OnInit {
   @Input() user;
 
-  constructor(public userService: UserService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(public userService: UserService, public adminService: AdminService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   public lastName;
   public lastMail;
@@ -28,7 +30,7 @@ export class DataComponent implements OnInit {
     this.lastGender = this.user['gender']
     this.nameFormControl = new FormControl({ value: this.user['username'], disabled: true }, [Validators.required,]);
     this.emailFormControl = new FormControl({ value: this.user['email'], disabled: true }, [Validators.required, Validators.email,]);
-    this.genderFormControl = new FormControl({ value: this.user['gender'], disabled: true }, );
+    this.genderFormControl = new FormControl({ value: this.user['gender'], disabled: true });
   }
 
   openPhotoModal() {
@@ -78,12 +80,17 @@ export class DataComponent implements OnInit {
     this.genderFormControl.disable()
   }
 
-  confirmMail(){
-
+  confirmMail() {
+    this.adminService.confirmUser(this.user['email'], this.user['username'])
+      .subscribe(
+        (res) => {
+          this.snackBar.open(res['message'], "ԅ(≖‿≖ԅ)", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" });
+        }
+      )
   }
 
-  changePass(){
-    
+  changePass() {
+    this.dialog.open(ChangePasswordComponent, { data: { userID: this.user['id'], password: this.user['password'] } });
   }
 
 }

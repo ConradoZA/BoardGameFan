@@ -7,7 +7,7 @@
 
 img {
     max-height: 3rem;
-    margin-right: 1rem;
+    margin-right: 2rem;
 }
 
 mat-toolbar {
@@ -53,4 +53,12 @@ mat-toolbar {
 .user {
     object-fit: contain;
     max-height: 3rem;
+}
+
+.inline {
+    align-items: baseline;
+}
+
+#line {
+    line-height: 0px;
 }

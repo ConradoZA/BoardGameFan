@@ -1,14 +1,14 @@
 <header *ngIf="userService.getUser() as user">
     <mat-toolbar color="primary" class="row">
 
-        <div class="between button" *ngIf="user['id']" routerLink="profile">
+        <div class="row button inline" *ngIf="user['id']" (click)="onClickProfile()">
             <button mat-fab color="accent" *ngIf="!user.image" class="char">{{user.username?.charAt()}}</button>
             <img class="button user" *ngIf="user.image" src="{{user.image}}">
-            <p>{{user.username}}</p>
+            <p id="line">{{user.username}}</p>
             <i class="material-icons-round green bold" *ngIf="user.confirmed">check</i>
             <i class="material-icons-round yellow" *ngIf="user.role!=='user'">emoji_events</i>
         </div>
-        <div class="row button center" routerLink="" *ngIf="!user['id']">
+        <div class="row button center" (click)="onClickHome()" *ngIf="!user['id']">
             <img src="../../../favicon.ico">
             <p class="title">Board Game Fan</p>
         </div>

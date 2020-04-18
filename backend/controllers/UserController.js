@@ -107,7 +107,10 @@ const UserController = {
     },
     async updateUser(req, res) {
         try {
-            await User.update({...req.body }, { where: { id: +req.user.id } });
+            if (req.body.password) {
+                var newPassword = await bcrypt.hash(req.body.password, 9)
+            }
+            await User.update({...req.body, password: newPassword }, { where: { id: +req.user.id } });
             res.send({ message: "Has actualizado con éxito tu información." })
         } catch (error) {
             res.status(500).send({ message: "Ha habido problemas al actualizar tu información.", error })
@@ -153,7 +156,7 @@ const UserController = {
                 <h2>¡Bienvenid@ ${req.body.username}!</h2>
                 <h3>Así que vas en serio, ¿eh?</h3>
                 <br>
-                <p>Pues haz click </p><a href="${url}">aquí</a><p> para confirmar tu email</p>
+                <p>Pues haz click <a href="${url}">aquí</a> para confirmar tu email</p>
                 <br>
                 <p>Recordatorio: El link expira en 24 horas... Si no activas la cuenta antes, tendrás que volver a solicitar otro link de confirmación</p>
                 `
@@ -168,14 +171,11 @@ const UserController = {
             const emailToken = req.params.emailToken;
             const payload = jwt.verify(emailToken, jwt_secret);
             const email = payload.email;
-            await User.update({ confirmed: true }, { where: { email: email } })
-                // const user = await User.findOne({ where: { email } });
-                // const authToken = jwt.sign({ id: user.id }, jwt_secret);
-                // await Token.create({
-                //     token: authToken,
-                //     UserId: user.id
-                // })
-            res.redirect('http://localhost:4200/userconfirmed' + authToken);
+            await User.update({ confirmed: true }, { where: { email: email } });
+            const user = await User.findOne({ where: { email: email } });
+            const token = await Token.findOne({ where: { UserId: user.id } });
+            const authToken = token.token
+            res.redirect('http://localhost:4200/confirmed/' + authToken)
         } catch (error) {
             res.status(500).send({ message: "No hemos podido confirmar tu email." })
         }
@@ -183,8 +183,8 @@ const UserController = {
     async changePassword(req, res) {
         try {
             const email = req.body.email;
-            const emailToken = jwt.sign({ email }, jwt_secret, { expiresIn: '24h' });
-            const url = API_URL + "/users/change/" + emailToken;
+            const id = req.body.id;
+            const url = "http://localhost:4200/   /" + id;
             await transporter.sendMail({
                 to: email,
                 subject: 'Cambiar tu contraseña de BoardGame Fan',
@@ -200,23 +200,17 @@ const UserController = {
         } catch (error) {
             res.status(500).send({ message: "Problemas al enviar el email.", error })
         }
-    },
-    async newPassword(req, res) {
-        try {
-            const emailToken = req.params.emailToken;
-            const payload = jwt.verify(emailToken, jwt_secret);
-            const email = payload.email;
-            await User.update({ password: req.body.password }, { where: { email: email } })
-                // const user = await User.findOne({ where: { email } });
-                // const authToken = jwt.sign({ id: user.id }, jwt_secret);
-                // await Token.create({
-                //     token: authToken,
-                //     UserId: user.id
-                // })
-            res.send({ message: "Contraseña cambiada." });
-        } catch (error) {
-            res.status(500).send({ message: "No hemos podido cambiar tu contraseña." })
-        }
+        // },
+        // async newPassword(req, res) {
+        //     try {
+        //         const emailToken = req.params.emailToken;
+        //         const payload = jwt.verify(emailToken, jwt_secret);
+        //         const email = payload.email;
+        //         await User.update({ password: req.body.password }, { where: { email: email } })
+        //         res.send({ message: "Contraseña cambiada." });
+        //     } catch (error) {
+        //         res.status(500).send({ message: "No hemos podido cambiar tu contraseña." })
+        //     }
     }
 }
 module.exports = UserController;
