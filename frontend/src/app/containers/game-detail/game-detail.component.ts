@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from 'src/app/services/game.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BigPictureComponent } from 'src/app/components/big-picture/big-picture.component';
 
 @Component({
   selector: 'app-game-detail',
@@ -11,10 +13,14 @@ import { UserService } from 'src/app/services/user.service';
 export class GameDetailComponent implements OnInit {
 
   public gameDetail: Object;
-  public exists=[];
+  public exists = [];
   public token: string = localStorage.getItem('authToken');
 
-  constructor(public userService: UserService, public gameService: GameService, public route: ActivatedRoute, public router: Router) { }
+  constructor(public userService: UserService,
+    public gameService: GameService,
+    public route: ActivatedRoute,
+    public router: Router,
+    public dialog: MatDialog, ) { }
 
   goToArtist(id: string) {
     this.router.navigate(['/artist', id])
@@ -31,6 +37,10 @@ export class GameDetailComponent implements OnInit {
   addToCollection() {
     this.userService.newGameInCollection(this.gameDetail['id'])
       .subscribe(res => { this.exists = ["something"] })
+  }
+
+  openImage() {
+    this.dialog.open(BigPictureComponent, { data: { image: this.gameDetail['image'] } });
   }
 
   ngOnInit(): void {

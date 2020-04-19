@@ -1,7 +1,7 @@
 <div class="center">
     <mat-card class="mat-elevation-z8" *ngIf="gameDetail">
         <mat-card-header class="flex">
-            <img mat-card-image src="{{gameDetail['image']}}">
+            <img mat-card-image class="button" (click)="openImage()" src="{{gameDetail['image']}}">
             <mat-divider [vertical]=true [inset]=true></mat-divider>
             <div class="column">
                 <div class="selfCenter">

@@ -59,6 +59,7 @@ import { ViewsComponent } from './components/admin/views/views.component';
 import { ConfirmedComponent } from './containers/user/confirmed/confirmed.component';
 import { ChangePasswordComponent } from './containers/user/change-password/change-password.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { BigPictureComponent } from './components/big-picture/big-picture.component';
 
 
 
@@ -94,6 +95,7 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
     ConfirmedComponent,
     ChangePasswordComponent,
     RecoverPasswordComponent,
+    BigPictureComponent,
   ],
   imports: [
     BrowserModule,
