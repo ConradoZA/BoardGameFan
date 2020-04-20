@@ -1,3 +1,3 @@
-<div class="size">
-    <img [ngClass]="{'adapt': toggle, 'back': !toggle}" (click)="switch()" src="{{image}}">
+<div class="size" cdkDrop>
+    <img cdkDrag cdkDragDisabled="{{toggle}}" (cdkDragEnded)="onDragEnded($event)" [ngClass]="{'adapt': toggle, 'back': !toggle}" (dblclick)="switch()" src="{{image}}">
 </div>

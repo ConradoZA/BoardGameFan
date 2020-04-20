@@ -28,6 +28,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSliderModule} from '@angular/material/slider';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -126,6 +127,7 @@ import { BigPictureComponent } from './components/big-picture/big-picture.compon
     MatDialogModule,
     MatSlideToggleModule,
     MatSliderModule,
+    DragDropModule,
 
   ],
   entryComponents:[ModalComponent],
