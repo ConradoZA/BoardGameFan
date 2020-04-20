@@ -37,10 +37,7 @@ export class CollectionComponent implements OnInit {
   constructor(public userService: UserService, public router: Router, public gameService: GameService, public dialog: MatDialog, ) { }
 
   ngOnInit(): void {
-    this.user['Games'].forEach(game => { this.datos3 = { edit: false, image: game['image'], name: game['name'], comment: game['UserGame']['comment'], rating: game['UserGame']['rating'], gameId: game['id'] }; this.datos2.push(this.datos3) });
-    this.collection = new MatTableDataSource<Game>(this.datos2);
-    this.collection.sort = this.sort;
-    setTimeout(() => this.collection.paginator = this.paginator, 0);
+    this.printTable();
   }
 
   goToDetail(gameName: string) {
@@ -51,6 +48,15 @@ export class CollectionComponent implements OnInit {
   openModal(id) {
     this.game = this.datos2.filter(game => game['gameId'] === id);
     this.dialog.open(ModalComponent, { data: { comment: this.game[0]['comment'], gameId: this.game[0]['gameId'], name: this.game[0]['name'], rating: this.game[0]['rating'] } })
-      .afterClosed().subscribe(res => {if(res===true){location.reload()}})
+      .afterClosed().subscribe(res => { if (res === true) { this.userService.getUserInfo().subscribe((res) => { this.user = res; this.printTable() }) } })
+  }
+
+  printTable() {
+    this.collection = [];
+    this.datos2 = [];
+    this.user['Games'].forEach(game => { this.datos3 = { edit: false, image: game['image'], name: game['name'], comment: game['UserGame']['comment'], rating: game['UserGame']['rating'], gameId: game['id'] }; this.datos2.push(this.datos3) });
+    this.collection = new MatTableDataSource<Game>(this.datos2);
+    this.collection.sort = this.sort;
+    setTimeout(() => this.collection.paginator = this.paginator, 0);
   }
 }

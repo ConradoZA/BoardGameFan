@@ -27,7 +27,7 @@ export class NewComponent implements OnInit {
     this.adminService.createNewGame(this.newValue)
       .subscribe(
         (res) => this.snackBar.open("Ya sé Kung-Fu...", "☜(⌒▽⌒)☞", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", }),
-        (error)=> this.snackBar.open("Fly, you fools!", "	༼ つ ◕_◕ ༽つ", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", }),
+        (error)=> this.snackBar.open("¡Corred, insensatos!", "༼ つ ◕_◕ ༽つ", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", }),
       )
   }
 }

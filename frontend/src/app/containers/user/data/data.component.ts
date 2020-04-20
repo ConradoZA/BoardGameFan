@@ -43,9 +43,13 @@ export class DataComponent implements OnInit {
       this.userService.updateInfo({ username: `${this.nameFormControl.value}` })
         .subscribe(
           (res) => {
-            this.snackBar.open("Nombre actualizado", "(☞ﾟヮﾟ)☞",
-              { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
-            setTimeout(() => { location.reload() }, 2000);
+            this.userService.getUserInfo()
+              .subscribe((res) => {
+                this.user = res;
+                this.snackBar.open("Nombre actualizado", "(☞ﾟヮﾟ)☞",
+                  { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
+                  location.reload();
+              })
           }
         )
     }
@@ -57,11 +61,13 @@ export class DataComponent implements OnInit {
       this.userService.updateInfo({ email: `${this.emailFormControl.value}` })
         .subscribe(
           (res) => {
-            this.snackBar.open("E-mail actualizado", "( ﾟヮﾟ)/",
-              { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
-            setTimeout(() => { location.reload() }, 2000);
-          }
-        )
+            this.userService.getUserInfo()
+              .subscribe((res) => {
+                this.user = res;
+                this.snackBar.open("E-mail actualizado", "( ﾟヮﾟ)/",
+                  { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
+              })
+          })
     }
     this.emailFormControl.disable()
   }
@@ -71,9 +77,12 @@ export class DataComponent implements OnInit {
       this.userService.updateInfo({ gender: `${this.genderFormControl.value}` })
         .subscribe(
           (res) => {
-            this.snackBar.open("Has cambiado de género", "(⊙_☉)",
-              { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
-            setTimeout(() => { location.reload() }, 2000);
+            this.userService.getUserInfo()
+            .subscribe((res) => {
+              this.user = res;
+              this.snackBar.open("Has cambiado de género", "(⊙_☉)",
+                { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
+            })
           }
         )
     }

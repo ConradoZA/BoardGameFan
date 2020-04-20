@@ -32,6 +32,14 @@ export class UserService {
       }
     })
   }
+getGameCollection(userId:string){
+  this.token = localStorage.getItem('authToken')
+  return this.httpClient.get('http://localhost:3000/users/collection', {
+    headers: {
+      authorization: this.token
+    }
+  })
+}
   newGameInCollection(gameId: string): Observable<any> {
     this.token = localStorage.getItem('authToken')
     return this.httpClient.post('http://localhost:3000/users/collection', { GameId: gameId, comment: "", rating: "" }, {
