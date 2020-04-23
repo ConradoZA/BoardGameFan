@@ -1,9 +1,10 @@
-<div class="format">
+<div class="format" *ngIf="user">
     <mat-card>
         <div class="column">
             <div class="row">
                 <button mat-fab color="accent" class="char" *ngIf="!user.image" (click)="openPhotoModal()">{{user['username']?.charAt()}}</button>
-                <img class="button" *ngIf="user.image" (click)="openPhotoModal()" src="{{user.image}}">
+                <img class="button" *ngIf="!user.image.includes('http')" (click)="openPhotoModal()" [src]="API_URL+'/uploads/'+user['image']">
+                <img class="button" *ngIf="user.image.includes('http')" (click)="openPhotoModal()" src="{{user.image}}">
                 <mat-divider [vertical]=true [inset]=true></mat-divider>
                 <div class="column">
                     <br>

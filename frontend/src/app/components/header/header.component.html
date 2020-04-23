@@ -3,7 +3,8 @@
 
         <div class="row button inline" *ngIf="user['id']" (click)="onClickProfile()">
             <button mat-fab color="accent" *ngIf="!user.image" class="char">{{user.username?.charAt()}}</button>
-            <img class="button user" *ngIf="user.image" src="{{user.image}}">
+            <img class="button user" *ngIf="!user.image.includes('http')" [src]="API_URL+'/uploads/'+user['image']">
+            <img class="button user" *ngIf="user.image.includes('http')" src="{{user.image}}">
             <p id="line">{{user.username}}</p>
             <i class="material-icons-round green bold" *ngIf="user.confirmed">check</i>
             <i class="material-icons-round yellow" *ngIf="user.role!=='user'">emoji_events</i>

@@ -6,6 +6,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from 'src/app/services/admin.service';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-data',
@@ -13,6 +14,7 @@ import { ChangePasswordComponent } from '../change-password/change-password.comp
   styleUrls: ['./data.component.scss']
 })
 export class DataComponent implements OnInit {
+  API_URL = environment.API_URL;
   @Input() user;
 
   constructor(public userService: UserService, public adminService: AdminService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
@@ -48,7 +50,7 @@ export class DataComponent implements OnInit {
                 this.user = res;
                 this.snackBar.open("Nombre actualizado", "(☞ﾟヮﾟ)☞",
                   { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
-                  location.reload();
+                location.reload();
               })
           }
         )
@@ -78,11 +80,11 @@ export class DataComponent implements OnInit {
         .subscribe(
           (res) => {
             this.userService.getUserInfo()
-            .subscribe((res) => {
-              this.user = res;
-              this.snackBar.open("Has cambiado de género", "(⊙_☉)",
-                { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
-            })
+              .subscribe((res) => {
+                this.user = res;
+                this.snackBar.open("Has cambiado de género", "(⊙_☉)",
+                  { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
+              })
           }
         )
     }

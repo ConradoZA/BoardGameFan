@@ -52,6 +52,15 @@ const BackController = {
         } catch (error) {
             res.status(500).send({ message: "Problemas al cambiar la contraseña.", error })
         }
+    },
+    async uploadImage(req, res) {
+        try {
+
+            await User.update({ image: req.file.filename }, { where: { id: req.user.id } });
+            res.send({ message: "Imagen actualizada." })
+        } catch (error) {
+            res.status(500).send({ message: "No se han actualizado los datos en la base.", error })
+        }
     }
 }
 module.exports = BackController;

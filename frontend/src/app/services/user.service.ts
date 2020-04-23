@@ -72,4 +72,12 @@ getGameCollection(userId:string){
       },
     })
   }
+  uploadImage(fd:FormData){
+    this.token = localStorage.getItem('authToken')
+    return this.httpClient.post('http://localhost:3000/back/upload',fd,{
+      headers: {
+        authorization: this.token
+      }, reportProgress:true, observe:'events'
+    })
+  }
 }

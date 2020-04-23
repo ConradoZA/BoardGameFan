@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -10,22 +11,22 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public userService:UserService, public router:Router,) { }
+  constructor(public userService: UserService, public router: Router, ) { }
+  API_URL = environment.API_URL;
+  public searchValue: string = "";
 
-public searchValue:string="";
-
-  logout():void{
+  logout(): void {
     localStorage.removeItem('authToken');
     this.userService.setUser({});
     this.router.navigate(['']);
   }
 
-  onClickProfile(){
+  onClickProfile() {
     event.preventDefault()
     this.router.navigate(['profile'])
   }
-  
-  onClickHome(){
+
+  onClickHome() {
     event.preventDefault()
     this.router.navigate([''])
   }

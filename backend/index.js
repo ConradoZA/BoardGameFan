@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+const path = require('path')
 const gamesRouter = require("./routes/games.js")
 const mechanicsRouter = require("./routes/mechanics.js")
 const categoriesRouter = require("./routes/categories.js")
@@ -10,7 +10,7 @@ const artistsRouter = require("./routes/artists.js")
 const searchesRouter = require("./routes/searches.js")
 const usersRouter = require("./routes/users.js")
 const hacksRouter = require("./routes/hacks.js")
-const backsRouter = require('./routes/backs.js')
+const backsRouter = require("./routes/backs.js")
 const { authentication, isGod } = require("./middleware/authentication.js")
 
 app.use(express.json());
@@ -22,6 +22,8 @@ app.use((req, res, next) => {
     next();
 })
 app.options('/*', (req, res) => res.send()); //para que las peticiones OPTIONS no requieran autentificación
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/games", authentication, gamesRouter);
 app.use("/mechanics", authentication, mechanicsRouter);
