@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./basic.component.scss']
 })
 export class BasicComponent implements OnInit {
+  user: object = {};
   searchValue: string = "";
   basicControl = new FormControl();
   options: Array<string> = [];
@@ -21,18 +22,24 @@ export class BasicComponent implements OnInit {
 
   constructor(public gameService: GameService, public userService: UserService, public router: Router) { }
   ngOnInit() {
-    this.gameService.getAllGames().subscribe(
-      (res: Array<{}>) => res.forEach(game => { this.options.push(game['name']); }))
-    this.filteredOptions = this.basicControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this.filter(value))
-      );
+    this.userService.user$.subscribe(
+      res => {
+        this.user = res,
+          this.gameService.getAllGames()
+            .subscribe(
+              (res: Array<{}>) => res.forEach(game => { this.options.push(game['name']); })),
+          this.filteredOptions = this.basicControl.valueChanges
+            .pipe(
+              startWith(''),
+              map(value => this.filter(value))
+            )
+      }
+    )
   }
 
   searchGame(): void {
-      this.gameService.searchGame(this.searchValue)
-        .subscribe(res => { this.ID = res[0]['id']; this.searchValue = ""; this.router.navigate(['detail', this.ID]); });
+    this.gameService.searchGame(this.searchValue)
+      .subscribe(res => { this.ID = res[0]['id']; this.searchValue = ""; this.router.navigate(['detail', this.ID]); });
 
     // }
   }

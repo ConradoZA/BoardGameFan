@@ -16,4 +16,4 @@ const uploader = multer({
         cb("Sólo se admiten estos tipos de archivos: " + filetypes);
     },
 }).single('image');
-module.exports = { uploader };
+module.exports = uploader;

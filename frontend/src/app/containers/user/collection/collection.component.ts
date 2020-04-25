@@ -25,7 +25,7 @@ export interface Game {
 export class CollectionComponent implements OnInit {
 
   displayedColumns = ['edit', 'image', 'name', 'comment', 'rating'];
-  @Input() user = {};
+  public user = {};
   collection;
   datos2 = [];
   datos3: Game;
@@ -37,6 +37,7 @@ export class CollectionComponent implements OnInit {
   constructor(public userService: UserService, public router: Router, public gameService: GameService, public dialog: MatDialog, ) { }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe(res => this.user = res)
     this.printTable();
   }
 

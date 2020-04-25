@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class DataComponent implements OnInit {
   API_URL = environment.API_URL;
-  @Input() user;
+  public user:object={};
 
   constructor(public userService: UserService, public adminService: AdminService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
@@ -27,19 +27,27 @@ export class DataComponent implements OnInit {
   genderFormControl;
 
   ngOnInit(): void {
-    this.lastName = this.user['username']
-    this.lastMail = this.user['email']
-    this.lastGender = this.user['gender']
-    this.nameFormControl = new FormControl({ value: this.user['username'], disabled: true }, [Validators.required,]);
-    this.emailFormControl = new FormControl({ value: this.user['email'], disabled: true }, [Validators.required, Validators.email,]);
-    this.genderFormControl = new FormControl({ value: this.user['gender'], disabled: true });
+    this.userService.user$
+      .subscribe((res) => {
+        this.user = res;
+        this.lastName = this.user['username'];
+        this.lastMail = this.user['email'];
+        this.lastGender = this.user['gender'];
+        this.nameFormControl = new FormControl({ value: this.user['username'], disabled: true }, [Validators.required,]);
+        this.emailFormControl = new FormControl({ value: this.user['email'], disabled: true }, [Validators.required, Validators.email,]);
+        this.genderFormControl = new FormControl({ value: this.user['gender'], disabled: true });
+      })
   }
 
   openPhotoModal() {
     this.dialog.open(PhotoSelectComponent, { data: { userID: this.user['id'], image: this.user['image'] } })
-      .afterClosed().subscribe(res => { if (res === true) { location.reload() } })
+      .afterClosed().subscribe(res => {
+        if (res === true) {
+          this.userService.getUserInfo()
+            .subscribe((res) => { this.userService.setUser(res); })
+        }
+      })
   }
-
   editName() {
     if (this.nameFormControl.value !== this.lastName) {
       this.userService.updateInfo({ username: `${this.nameFormControl.value}` })
@@ -47,7 +55,7 @@ export class DataComponent implements OnInit {
           (res) => {
             this.userService.getUserInfo()
               .subscribe((res) => {
-                this.user = res;
+                this.userService.setUser(res);
                 this.snackBar.open("Nombre actualizado", "(☞ﾟヮﾟ)☞",
                   { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", });
                 location.reload();

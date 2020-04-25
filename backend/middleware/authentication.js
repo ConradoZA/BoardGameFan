@@ -25,7 +25,9 @@ const authentication = async(req, res, next) => {
             })
         }
         req.user = user;
+        console.log('AUTH')
         next();
+        console.log('AUTH')
     } catch (error) {
         res.status(401).send({
             message: 'No estas autorizado',
@@ -37,11 +39,11 @@ const authentication = async(req, res, next) => {
 const isAdmin = async(req, res, next) => {
     const admins = ['superAdmin', 'admin', 'god'];
     if (!admins.includes(req.user.role)) {
-        return res.status(403).send({
-            message: 'No tienes permisos para ver esta sección'
-        });
+        return res.status(403).send({ message: 'No tienes permisos para ver esta sección' });
     }
+    console.log('ADMIN')
     next();
+    console.log('ADMIN')
 }
 
 const isSuper = async(req, res, next) => {
@@ -51,7 +53,9 @@ const isSuper = async(req, res, next) => {
             message: 'No tienes permisos para ver esta sección'
         });
     }
+    console.log('SUPER')
     next();
+    console.log('SUPER')
 }
 
 const isGod = async(req, res, next) => {
@@ -61,7 +65,9 @@ const isGod = async(req, res, next) => {
             message: 'No tienes permisos para ver esta sección'
         });
     }
+    console.log('GOD')
     next();
+    console.log('GOD')
 }
 module.exports = {
     authentication,

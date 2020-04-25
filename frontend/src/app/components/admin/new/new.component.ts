@@ -10,11 +10,12 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./new.component.scss']
 })
 export class NewComponent implements OnInit {
-  @Input() user;
+  public user:object={};
   public newValue;
   constructor(public adminService: AdminService, public userService: UserService, public snackBar: MatSnackBar, public router: Router) { }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe(res => this.user = res);
     if (this.user['role'] !== 'god') {
       localStorage.removeItem('authToken');
       this.snackBar.open("No lo intentes de nuevo", "┌П┐(ಠ_ಠ)", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })

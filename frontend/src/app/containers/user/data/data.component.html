@@ -2,15 +2,15 @@
     <mat-card>
         <div class="column">
             <div class="row">
-                <button mat-fab color="accent" class="char" *ngIf="!user.image" (click)="openPhotoModal()">{{user['username']?.charAt()}}</button>
-                <img class="button" *ngIf="!user.image.includes('http')" (click)="openPhotoModal()" [src]="API_URL+'/uploads/'+user['image']">
-                <img class="button" *ngIf="user.image.includes('http')" (click)="openPhotoModal()" src="{{user.image}}">
+                <button mat-fab color="accent" class="char" *ngIf="!user['image']" (click)="openPhotoModal()">{{user['username']?.charAt()}}</button>
+                <img class="button" *ngIf="user['image'] && !user['image']?.includes('http')" (click)="openPhotoModal()" [src]="API_URL+'/uploads/'+user['image']">
+                <img class="button" *ngIf="user['image']?.includes('http')" (click)="openPhotoModal()" src="{{user['image']}}">
                 <mat-divider [vertical]=true [inset]=true></mat-divider>
                 <div class="column">
                     <br>
                     <mat-form-field>
                         <mat-label>Tu Nombre</mat-label>
-                        <input type="text" matInput [formControl]="nameFormControl" [value]="user.username">
+                        <input type="text" matInput [formControl]="nameFormControl" [value]="user['username']">
                         <i class="material-icons-round button" matSuffix *ngIf="nameFormControl.disabled" (click)="nameFormControl.enable()">edit</i>
                         <i class="material-icons-round button" matSuffix *ngIf="!nameFormControl.disabled" (click)="editName()">send</i>
                         <mat-error *ngIf="nameFormControl.hasError('required')">
@@ -21,9 +21,9 @@
                     <br>
                     <mat-form-field>
                         <mat-label>Email</mat-label>
-                        <input type="email" matInput [formControl]="emailFormControl" [value]="user.email">
-                        <i class="material-icons-round button" matSuffix *ngIf="emailFormControl.disabled && !user.confirmed" (click)="emailFormControl.enable()">edit</i>
-                        <i class="material-icons-round button" matSuffix *ngIf="!emailFormControl.disabled && !user.confirmed" (click)="editMail()">send</i>
+                        <input type="email" matInput [formControl]="emailFormControl" [value]="user['email']">
+                        <i class="material-icons-round button" matSuffix *ngIf="emailFormControl.disabled && !user['confirmed']" (click)="emailFormControl.enable()">edit</i>
+                        <i class="material-icons-round button" matSuffix *ngIf="!emailFormControl.disabled && !user['confirmed']" (click)="editMail()">send</i>
                         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                             Por favor, introduce un e-mail válido
                         </mat-error>
@@ -38,27 +38,27 @@
             <div class="row">
                 <div class="baseline">
                     <h4>Usuario confirmado: &nbsp;</h4>
-                    <p *ngIf="user.confirmed"> Sí &nbsp;<i class="material-icons-round green">add_circle</i></p>
-                    <p *ngIf="!user.confirmed"> No &nbsp;<i class="material-icons-round red">remove_circle</i></p>
+                    <p *ngIf="user['confirmed']"> Sí &nbsp;<i class="material-icons-round green">add_circle</i></p>
+                    <p *ngIf="!user['confirmed']"> No &nbsp;<i class="material-icons-round red">remove_circle</i></p>
                 </div>
-                <button mat-raised-button *ngIf="!user.confirmed" (click)="confirmMail()">Confirmar E-mail</button>
+                <button mat-raised-button *ngIf="!user['confirmed']" (click)="confirmMail()">Confirmar E-mail</button>
             </div>
             <br>
             <div class="baseline">
                 <h4>Tipo de cuenta: &nbsp;</h4>
-                <p *ngIf="user.role==='user'"> usuario.</p>
-                <p *ngIf="user.role==='admin'"> administrador.</p>
-                <p *ngIf="user.role==='superAdmin'"> jefazo.</p>
-                <p *ngIf="user.role==='god'"> eres Conrado, mi creador. &nbsp;<i class="material-icons-round green">emoji_emotions</i></p>
+                <p *ngIf="user['role']==='user'"> usuario.</p>
+                <p *ngIf="user['role']==='admin'"> administrador.</p>
+                <p *ngIf="user['role']==='superAdmin'"> jefazo.</p>
+                <p *ngIf="user['role']==='god'"> eres Conrado, mi creador. &nbsp;<i class="material-icons-round green">emoji_emotions</i></p>
             </div>
-            <mat-hint *ngIf="user.role==='user'">¿Quieres ser administrador? Pídelo por favor...</mat-hint>
+            <mat-hint *ngIf="user['role']==='user'">¿Quieres ser administrador? Pídelo por favor...</mat-hint>
             <br>
             <mat-divider [inset]=true></mat-divider>
             <br>
             <div class="row">
                 <div class="baseline">
                     <label>Tu género: &nbsp;</label>
-                    <mat-radio-group [formControl]="genderFormControl" [value]="user.gender">
+                    <mat-radio-group [formControl]="genderFormControl" [value]="user['gender']">
                         <mat-radio-button value="male"> Hombre</mat-radio-button>
                         <mat-radio-button value="female"> Mujer</mat-radio-button>
                         <mat-radio-button value=""> Privado</mat-radio-button>

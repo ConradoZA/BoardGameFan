@@ -1,6 +1,6 @@
 <mat-card>
     <div class="row">
-        <img mat-card-image *ngIf="!data['image'].includes('http')" [src]="API_URL+'/uploads/'+data['image']">
+        <img mat-card-image *ngIf="data['image'] && !data['image'].includes('http')" [src]="API_URL+'/uploads/'+data['image']">
         <img mat-card-image *ngIf="data['image'].includes('http')" src="{{data['image']}}">
         <img mat-card-image *ngIf="!data['image']" src="../../../assets/imgs/alien.png">
 
@@ -16,7 +16,7 @@
                 <mat-divider [inset]=true></mat-divider>
                 <br>
                 <h4>... O elige una imagen que tengas en tu ordenador:</h4>
-                <form class="row" method="POST" enctype="multipart/form-data">
+                <form class="row">
                     <button mat-raised-button type="button" (click)="fileInput.click()">Elegir archivo</button>
                     <input style="display:none" type="file" (change)="onFileSelected($event)" #fileInput>
                     <input matInput class="search" disabled type="text" *ngIf="selectedFile!==null" [value]="selectedFile.name">

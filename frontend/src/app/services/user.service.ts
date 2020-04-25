@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
-  private user: object = {};
+  private user = new BehaviorSubject<object>({});
+  user$ = this.user.asObservable();
+  // private user: object = {};
   private token:string;
 
   constructor(public httpClient: HttpClient) { }
@@ -19,10 +20,7 @@ export class UserService {
     return this.httpClient.post('http://localhost:3000/users/login', user);
   }
   setUser(user: object): void {
-    this.user = user;
-  }
-  getUser(): object {
-    return this.user;
+    this.user.next(user);
   }
   getUserInfo(): Observable<any> {
     this.token = localStorage.getItem('authToken')

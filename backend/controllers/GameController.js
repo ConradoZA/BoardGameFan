@@ -64,6 +64,7 @@ const GameController = {
     },
     async delete(req, res) {
         try {
+            console.log('DELETE GAME')
             await Game.destroy({ where: { id: req.params.id } })
             sequelize.query(`DELETE FROM CategoryGames where GameId = ${req.params.id}`);
             sequelize.query(`DELETE FROM MechanicGames where GameId = ${req.params.id}`);

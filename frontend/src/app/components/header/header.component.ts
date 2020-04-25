@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   constructor(public userService: UserService, public router: Router, ) { }
   API_URL = environment.API_URL;
   public searchValue: string = "";
+  public user: object = {};
 
   logout(): void {
     localStorage.removeItem('authToken');
@@ -32,6 +33,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.user$.subscribe(
+      res => this.user = res
+    )
   }
 
 }

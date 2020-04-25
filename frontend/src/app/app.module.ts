@@ -61,6 +61,8 @@ import { ConfirmedComponent } from './containers/user/confirmed/confirmed.compon
 import { ChangePasswordComponent } from './containers/user/change-password/change-password.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { BigPictureComponent } from './components/big-picture/big-picture.component';
+import { WhoAmIComponent } from './components/who-am-i/who-am-i.component';
+import { TechnologiesComponent } from './components/technologies/technologies.component';
 
 
 
@@ -97,6 +99,8 @@ import { BigPictureComponent } from './components/big-picture/big-picture.compon
     ChangePasswordComponent,
     RecoverPasswordComponent,
     BigPictureComponent,
+    WhoAmIComponent,
+    TechnologiesComponent,
   ],
   imports: [
     BrowserModule,

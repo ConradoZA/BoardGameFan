@@ -12,6 +12,8 @@ import { TableComponent } from './components/table/table.component';
 import { LegalComponent } from './components/legal/legal.component';
 import { ConfirmedComponent } from './containers/user/confirmed/confirmed.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { WhoAmIComponent } from './components/who-am-i/who-am-i.component';
+import { TechnologiesComponent } from './components/technologies/technologies.component';
 
 
 const routes: Routes = [
@@ -36,6 +38,8 @@ const routes: Routes = [
   {path:"category/:id", component: TableComponent},
   {path:"artist/:id", component: TableComponent},
   {path:"legal", component: LegalComponent},
+  {path:"aboutme", component: WhoAmIComponent},
+  {path:"tech", component: TechnologiesComponent},
   {path:"confirmed/:token", component: ConfirmedComponent},
   {path:"recover/:token", component:RecoverPasswordComponent},
   {path:'**',component:NotfoundComponent},

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SureComponent } from './sure/sure.component';
 import { MatDialog } from '@angular/material/dialog';
 import { GameService } from 'src/app/services/game.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,16 +13,20 @@ import { GameService } from 'src/app/services/game.service';
 })
 export class AdminComponent implements OnInit {
 
-  @Input() user;
+  public user: object = {};
   deleteValue;
   changeValue;
   userValue;
   deleteGameValue;
   users;
 
-  constructor(public adminService: AdminService, public gameSercice: GameService, public snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(public adminService: AdminService,
+    public gameSercice: GameService,
+    public userService: UserService,
+    public snackBar: MatSnackBar,
+    public dialog: MatDialog) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { this.userService.user$.subscribe(res => this.user = res) }
 
   onClickDeleteUser() {
     this.adminService.getAllUsers()
@@ -39,6 +44,7 @@ export class AdminComponent implements OnInit {
         }
       )
   }
+
   onClickDeleteGame() {
     this.dialog.open(SureComponent)
       .afterClosed().subscribe(
@@ -47,7 +53,10 @@ export class AdminComponent implements OnInit {
             this.gameSercice.searchGame(this.deleteGameValue)
               .subscribe(
                 (res) => {
-                  this.adminService.deleteGame(res[0]['id'])
+                  console.log(res);
+                  const id=res[0]['id'];
+                  console.log(id)
+                  this.adminService.deleteGame(id)
                 }
               )
           }
@@ -56,10 +65,10 @@ export class AdminComponent implements OnInit {
       )
   }
 
-  onClickChangeUser(){
-    if(this.changeValue=='upgrade'){
+  onClickChangeUser() {
+    if (this.changeValue == 'upgrade') {
       this.upgradeUser()
-    }else if(this.changeValue=='downgrade'){
+    } else if (this.changeValue == 'downgrade') {
       this.degradeUser()
     }
   }
@@ -71,7 +80,7 @@ export class AdminComponent implements OnInit {
           this.users = res;
           this.userValue = this.userValue.toLowerCase();
           this.users = this.users.filter(user => user['username'].toLowerCase() === this.userValue);
-          if (this.user[0]['role'] === 'user' && this.users[0]['confirmed']) {
+          if (this.users[0]['role'] === 'user' && this.users[0]['confirmed']) {
             this.adminService.promoteUser(this.users[0]['id'])
             this.snackBar.open("Usuario promocionado a Administrador", "[̲̅$̲̅(̲̅ιο̲̅̅)̲̅$̲̅]", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
           } else { this.snackBar.open("No puedes hacer eso", "( ✜︵✜ )", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" }) }
@@ -86,7 +95,7 @@ export class AdminComponent implements OnInit {
           this.users = res;
           this.userValue = this.userValue.toLowerCase();
           this.users = this.users.filter(user => user['username'].toLowerCase() === this.userValue);
-          if (this.user[0]['role'] === 'admin') {
+          if (this.users[0]['role'] === 'admin') {
             this.adminService.degradeUser(this.users[0]['id'])
             this.snackBar.open("Administrador suspendido", "(ノ ゜Д゜)ノ ︵ ┻━┻", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
           } else { this.snackBar.open("No puedes hacer eso", "( ✜︵✜ )", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" }) }

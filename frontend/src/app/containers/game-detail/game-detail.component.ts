@@ -50,8 +50,11 @@ export class GameDetailComponent implements OnInit {
           .subscribe(
             (res) => {
               this.gameDetail = res;
-              const userCollection = this.userService.getUser();
-              this.exists = userCollection['Games'].filter(game => game['id'] === this.gameDetail['id']);
+              this.userService.user$
+                .subscribe((res) => {
+                  const userCollection = res;
+                  this.exists = userCollection['Games'].filter(game => game['id'] === this.gameDetail['id']);
+                })
             },
             (error) => console.log(error)
           )

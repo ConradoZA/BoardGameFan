@@ -1,4 +1,4 @@
-<form *ngIf="userService.getUser() as user" [style.fontSize.px]="16" (submit)="searchGame()">
+<form *ngIf="user" [style.fontSize.px]="16" (submit)="searchGame()">
     <mat-form-field appearance="standard" color="accent" class="search">
         <mat-label>Buscar Juego</mat-label>
         <input matInput type="text" [(ngModel)]="searchValue" placeholder="Nombre del juego" [formControl]="basicControl" [matAutocomplete]="auto">
