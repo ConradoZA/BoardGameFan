@@ -1,17 +1,21 @@
 <mat-card>
     <div class="row">
-        <img mat-card-image *ngIf="data['image'] && !data['image'].includes('http')" [src]="API_URL+'/uploads/'+data['image']">
-        <img mat-card-image *ngIf="data['image'].includes('http')" src="{{data['image']}}">
-        <img mat-card-image *ngIf="!data['image']" src="../../../assets/imgs/alien.png">
+        <img mat-card-image *ngIf="user['image'] && !user['image'].includes('http')" [src]="API_URL+'/uploads/'+user['image']">
+        <img mat-card-image *ngIf="user['image'].includes('http')" src="{{user['image']}}">
+        <img mat-card-image *ngIf="!user['image']" src="../../../assets/imgs/alien.png">
 
         <mat-card-content class="column">
             <h3>¿Quieres cambiar tu imagen de perfil?</h3>
             <h4>Busca en internet, selecciona una imagen que te guste (mejor cuadrada) y copia la url aquí:</h4>
             <form #photo="ngForm" (submit)="onClickUpdate()">
-                <mat-form-field appearance="fill">
-                    <mat-label>Url</mat-label>
-                    <input matInput [(ngModel)]="imageValue" placeholder="{{data['image']}}" name="image" #image="ngModel" id="image">
-                </mat-form-field>
+                <div class="row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Url</mat-label>
+                        <input matInput [(ngModel)]="imageValue" placeholder="{{user['image']}}" name="image" #image="ngModel" id="image">
+                    </mat-form-field>
+                    <br>
+                    <button mat-raised-button type="submit" [mat-dialog-close]="true">Hecho</button>
+                </div>
                 <br>
                 <mat-divider [inset]=true></mat-divider>
                 <br>
@@ -20,13 +24,9 @@
                     <button mat-raised-button type="button" (click)="fileInput.click()">Elegir archivo</button>
                     <input style="display:none" type="file" (change)="onFileSelected($event)" #fileInput>
                     <input matInput class="search" disabled type="text" *ngIf="selectedFile!==null" [value]="selectedFile.name">
-                    <button mat-raised-button type="button" (click)="onUpload()">Subir archivo</button>
+                    <button mat-raised-button type="button" (click)="onUpload()" [mat-dialog-close]="true">Subir archivo</button>
                 </form>
 
-                <br>
-                <mat-divider [inset]=true></mat-divider>
-                <br>
-                <button mat-raised-button type="submit">Hecho</button>
             </form>
 
         </mat-card-content>

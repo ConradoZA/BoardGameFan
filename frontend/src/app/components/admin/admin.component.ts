@@ -34,12 +34,16 @@ export class AdminComponent implements OnInit {
         (res) => {
           this.users = res;
           this.deleteValue = this.deleteValue.toLowerCase();
-          this.users = this.users.filter(user => user['username'].toLowerCase() === this.deleteValue);
+          this.users = this.users.find(user => user['username'].toLowerCase() === this.deleteValue);
+          console.log(this.users)
           if (this.users) {
-            if (this.user['role'] === 'admin' && this.users[0]['confirmed']) {
+            if (this.user['role'] === 'admin' && this.users['confirmed']) {
               this.snackBar.open("No puedes borrar a ese usuario", "(-_-)", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
             }
-            this.adminService.deleteUser(this.users[0]['id'])
+            this.adminService.deleteUser(this.users['id'])
+              .subscribe(
+                res => this.snackBar.open("Usuario eliminado", "卌", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+              )
           } else { this.snackBar.open("No existe ese usuario", "(-_-)", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" }) }
         }
       )
@@ -53,10 +57,11 @@ export class AdminComponent implements OnInit {
             this.gameSercice.searchGame(this.deleteGameValue)
               .subscribe(
                 (res) => {
-                  console.log(res);
-                  const id=res[0]['id'];
-                  console.log(id)
+                  const id = res[0]['id'];
                   this.adminService.deleteGame(id)
+                    .subscribe(
+                      res => this.snackBar.open("Adiós juego...", "( ╥﹏╥) ノシ", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+                    )
                 }
               )
           }
@@ -82,7 +87,10 @@ export class AdminComponent implements OnInit {
           this.users = this.users.filter(user => user['username'].toLowerCase() === this.userValue);
           if (this.users[0]['role'] === 'user' && this.users[0]['confirmed']) {
             this.adminService.promoteUser(this.users[0]['id'])
-            this.snackBar.open("Usuario promocionado a Administrador", "[̲̅$̲̅(̲̅ιο̲̅̅)̲̅$̲̅]", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+              .subscribe(
+                res => this.snackBar.open("Usuario promocionado a Administrador", "[̲̅$̲̅(̲̅ιο̲̅̅)̲̅$̲̅]", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+              )
+
           } else { this.snackBar.open("No puedes hacer eso", "( ✜︵✜ )", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" }) }
         }
       )
@@ -97,7 +105,10 @@ export class AdminComponent implements OnInit {
           this.users = this.users.filter(user => user['username'].toLowerCase() === this.userValue);
           if (this.users[0]['role'] === 'admin') {
             this.adminService.degradeUser(this.users[0]['id'])
-            this.snackBar.open("Administrador suspendido", "(ノ ゜Д゜)ノ ︵ ┻━┻", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+              .subscribe(
+                res => this.snackBar.open("Administrador suspendido", "(ノ ゜Д゜)ノ ︵ ┻━┻", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" })
+              )
+
           } else { this.snackBar.open("No puedes hacer eso", "( ✜︵✜ )", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom" }) }
         }
       )

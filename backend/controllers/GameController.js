@@ -70,7 +70,8 @@ const GameController = {
             sequelize.query(`DELETE FROM MechanicGames where GameId = ${req.params.id}`);
             sequelize.query(`DELETE FROM AuthorGames where GameId = ${req.params.id}`);
             sequelize.query(`DELETE FROM ArtistGames where GameId = ${req.params.id}`);
-            res.send('Juego eliminado.')
+            sequelize.query(`DELETE FROM UserGames where GameId = ${req.params.id}`);
+            res.send({ message: "Juego eliminado." })
         } catch (error) {
             res.status(500).send(error)
         }

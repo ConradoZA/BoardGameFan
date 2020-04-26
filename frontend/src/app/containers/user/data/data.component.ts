@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoSelectComponent } from 'src/app/components/photo-select/photo-select.component';
@@ -40,7 +40,7 @@ export class DataComponent implements OnInit {
   }
 
   openPhotoModal() {
-    this.dialog.open(PhotoSelectComponent, { data: { userID: this.user['id'], image: this.user['image'] } })
+    this.dialog.open(PhotoSelectComponent)
       .afterClosed().subscribe(res => {
         if (res === true) {
           this.userService.getUserInfo()

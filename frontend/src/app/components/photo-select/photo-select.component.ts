@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit} from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
@@ -10,17 +10,19 @@ import { environment } from 'src/environments/environment';
 })
 export class PhotoSelectComponent implements OnInit {
   API_URL = environment.API_URL;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: object,
+  constructor(
     public userService: UserService,
     public dialogRef: MatDialogRef<PhotoSelectComponent>,
     public snackBar: MatSnackBar, ) { }
 
+  public user: object = {};
   public imageValue = "";
-  public lastImage = this.data['image']
+  public lastImage = this.user['image']
   public selectedFile: File = null;
   public loading: boolean = false;
 
   ngOnInit(): void {
+    this.userService.user$.subscribe(res => this.user = res)
   }
 
   onClickUpdate() {
@@ -30,8 +32,6 @@ export class PhotoSelectComponent implements OnInit {
           (res) => this.snackBar.open("Imagen actualizada", "٩(^‿^)۶", { duration: 3000, horizontalPosition: "center", verticalPosition: "bottom", })
         )
     }
-    this.dialogRef.close();
-    location.reload();
   }
 
   onFileSelected(event) {

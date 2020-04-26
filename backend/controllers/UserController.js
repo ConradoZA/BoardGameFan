@@ -119,7 +119,7 @@ const UserController = {
     },
     async upgradeRole(req, res) {
         try {
-            console.log('UPGRADE', req.params.id)
+            console.log('UPGRADE USER', req.params.id)
             await User.update({ role: "admin" }, { where: { id: +req.params.id } });
             res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
@@ -128,6 +128,7 @@ const UserController = {
     },
     async degradeRole(req, res) {
         try {
+            console.log('SUSPENDIDO')
             await User.update({ role: "user" }, { where: { id: +req.params.id } });
             res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
@@ -135,10 +136,13 @@ const UserController = {
         }
     },
     async deleteUser(req, res) {
-        console.log('ESTOY AQUI', req.params.id)
-        await User.destroy({ where: { id: req.params.id } })
-        sequelize.query(`DELETE FROM UserGames where UserId = ${req.params.id}`);
-        res.send({ message: 'Usuario eliminado.' })
+        try {
+            await User.destroy({ where: { id: req.params.id } })
+            sequelize.query(`DELETE FROM UserGames where UserId = ${req.params.id}`);
+            res.send({ message: 'Usuario eliminado.' })
+        } catch (error) {
+            res.status(500).send({ message: "¡Problemas jefe!", error })
+        }
     },
     async getAllUsers(req, res) {
         try {

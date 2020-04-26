@@ -134,7 +134,7 @@ import { TechnologiesComponent } from './components/technologies/technologies.co
     DragDropModule,
 
   ],
-  entryComponents: [ModalComponent],
+  entryComponents: [ModalComponent, PhotoSelectComponent],
   providers: [
     { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() }],
   bootstrap: [AppComponent]
