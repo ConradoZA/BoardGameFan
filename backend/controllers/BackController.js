@@ -24,7 +24,7 @@ const BackController = {
             })
             const userId = user.id;
             const passToken = jwt.sign({ userId }, jwt_secret, { expiresIn: '24h' });
-            const url = "http://localhost:4200/recover/" + passToken;
+            const url = "https://boardgamefan.herokuapp.com/recover/" + passToken;
             await transporter.sendMail({
                 to: user.email,
                 subject: 'Recupera tu contraseña de BoardGame Fan',

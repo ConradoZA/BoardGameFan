@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,23 +9,23 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class UserService {
   private user = new BehaviorSubject<object>({});
   user$ = this.user.asObservable();
-  // private user: object = {};
+  API_URL = environment.API_URL;
   private token:string;
 
   constructor(public httpClient: HttpClient) { }
 
   register(user: object): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/users/register', user);
+    return this.httpClient.post(this.API_URL+'/users/register', user);
   }
   login(user: object): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/users/login', user);
+    return this.httpClient.post(this.API_URL+'/users/login', user);
   }
   setUser(user: object): void {
     this.user.next(user);
   }
   getUserInfo(): Observable<any> {
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.get('http://localhost:3000/users/info', {
+    return this.httpClient.get(this.API_URL+'/users/info', {
       headers: {
         authorization: this.token
       }
@@ -32,7 +33,7 @@ export class UserService {
   }
 getGameCollection(userId:string){
   this.token = localStorage.getItem('authToken')
-  return this.httpClient.get('http://localhost:3000/users/collection', {
+  return this.httpClient.get(this.API_URL+'/users/collection', {
     headers: {
       authorization: this.token
     }
@@ -40,7 +41,7 @@ getGameCollection(userId:string){
 }
   newGameInCollection(gameId: string): Observable<any> {
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.post('http://localhost:3000/users/collection', { GameId: gameId, comment: "", rating: "" }, {
+    return this.httpClient.post(this.API_URL+'/users/collection', { GameId: gameId, comment: "", rating: "" }, {
       headers: {
         authorization: this.token
       },
@@ -48,7 +49,7 @@ getGameCollection(userId:string){
   }
   updateGameCollection(comment: string, rating: number | string, id:string|number) {
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.put('http://localhost:3000/users/collection', { comment: comment, rating: rating, GameId: id }, {
+    return this.httpClient.put(this.API_URL+'/users/collection', { comment: comment, rating: rating, GameId: id }, {
       headers: {
         authorization: this.token
       },
@@ -56,7 +57,7 @@ getGameCollection(userId:string){
   }
   deleteGameCollection(id:string|number) {
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.delete(`http://localhost:3000/users/collection/${id}`, {
+    return this.httpClient.delete(`${this.API_URL}/users/collection/${id}`, {
       headers: {
         authorization: this.token
       },
@@ -64,7 +65,7 @@ getGameCollection(userId:string){
   }
   updateInfo(object:object){
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.put('http://localhost:3000/users/info',object,{
+    return this.httpClient.put(this.API_URL+'/users/info',object,{
       headers: {
         authorization: this.token
       },
@@ -72,7 +73,7 @@ getGameCollection(userId:string){
   }
   uploadImage(fd:FormData){
     this.token = localStorage.getItem('authToken')
-    return this.httpClient.post('http://localhost:3000/back/upload',fd,{
+    return this.httpClient.post(this.API_URL+'/back/upload',fd,{
       headers: {
         authorization: this.token
       }, reportProgress:true, observe:'events'

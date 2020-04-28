@@ -23,9 +23,10 @@ const HackController = {
             };
 
             for (let name of juego.name) {
-                let nam = await Game.findOne({ where: { name: name._ } })
-                if (nam) { throw new Error("El juego ya existe") }
+
                 if (name.$.primary == "true") {
+                    let nam = await Game.findOne({ where: { name: name._ } })
+                    if (nam) { throw new Error("El juego ya existe") }
                     juegoFinal.name += name._;
                 }
             };

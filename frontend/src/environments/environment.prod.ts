@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL:'https://midominio.herokuapp.com'
+  API_URL:'https://boardgamefan-api.herokuapp.com'
 };

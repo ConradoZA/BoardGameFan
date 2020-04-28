@@ -95,7 +95,6 @@ const UserController = {
     },
     async deleteColGame(req, res) {
         try {
-            console.log('DELETE FROM COLLECTION')
             await UserGame.destroy({
                 where: {
                     [Op.and]: [{ UserId: +req.user.id }, { GameId: +req.params.game }]
@@ -119,7 +118,6 @@ const UserController = {
     },
     async upgradeRole(req, res) {
         try {
-            console.log('UPGRADE USER', req.params.id)
             await User.update({ role: "admin" }, { where: { id: +req.params.id } });
             res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
@@ -128,7 +126,6 @@ const UserController = {
     },
     async degradeRole(req, res) {
         try {
-            console.log('SUSPENDIDO')
             await User.update({ role: "user" }, { where: { id: +req.params.id } });
             res.send({ message: "Has cambiado el rol del usuario." })
         } catch (error) {
@@ -182,7 +179,7 @@ const UserController = {
             const user = await User.findOne({ where: { email: email } });
             const token = await Token.findOne({ where: { UserId: user.id } });
             const authToken = token.token
-            res.redirect('http://localhost:4200/confirmed/' + authToken)
+            res.redirect('https://boardgamefan.herokuapp.com/confirmed/' + authToken)
         } catch (error) {
             res.status(500).send({ message: "No hemos podido confirmar tu email." })
         }
@@ -191,7 +188,7 @@ const UserController = {
         try {
             const email = req.body.email;
             const id = req.body.id;
-            const url = "http://localhost:4200/   /" + id;
+            const url = "https://boardgamefan.herokuapp.com/" + id;
             await transporter.sendMail({
                 to: email,
                 subject: 'Cambiar tu contraseña de BoardGame Fan',
