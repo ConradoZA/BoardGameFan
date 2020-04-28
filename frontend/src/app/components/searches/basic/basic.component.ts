@@ -24,17 +24,17 @@ export class BasicComponent implements OnInit {
   ngOnInit() {
     this.userService.user$.subscribe(
       res => {
-        this.user = res,
-          this.gameService.getAllGames()
-            .subscribe(
-              (res: Array<{}>) => res.forEach(game => { this.options.push(game['name']); })),
-          this.filteredOptions = this.basicControl.valueChanges
-            .pipe(
-              startWith(''),
-              map(value => this.filter(value))
-            )
-      }
-    )
+        this.user = res
+      })
+    this.gameService.getAllGames()
+      .subscribe(
+        (res: Array<{}>) => res.forEach(game => { this.options.push(game['name']); })),
+      console.log(this.options)
+    this.filteredOptions = this.basicControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this.filter(value))
+      )
   }
 
   searchGame(): void {

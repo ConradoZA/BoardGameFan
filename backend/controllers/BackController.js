@@ -59,6 +59,7 @@ const BackController = {
             await User.update({ image: req.file.filename }, { where: { id: req.user.id } });
             res.send({ message: "Imagen actualizada." })
         } catch (error) {
+            console.error(error)
             res.status(500).send({ message: "No se han actualizado los datos en la base.", error })
         }
     }
