@@ -1,17 +1,28 @@
 {
-    "name": "bgf",
-    "version": "0.0.1",
-    "description": "Full-Stack project with sequelize and angular",
-    "main": "index.js",
-    "scripts": {
-        "start": "concurrently \"npm run start:front\" \"npm run start:back\" ",
-        "start:back": "cd backend && nodemon index.js",
-        "start:front": "cd frontend && ng serve --open",
-        "install:back": "cd backend && npm install",
-        "install:front": "cd frontend && npm install",
-        "postinstall": "concurrently \"npm run install:front\" \"npm run install:back\" "
-    },
-    "author": "Conrado Zafra",
-    "license": "ISC",
-    "dependencies": {}
+	"name": "boardgamefan",
+	"version": "0.1.0",
+	"description": "A web for board games fans to search their favorites games",
+	"main": "index.js",
+	"scripts": {
+		"start": "concurrently \"npm run start:front\" \"npm run start:back\" ",
+		"start:back": "cd backend && npx nodemon index.js",
+		"start:front": "cd frontend && ng serve --open",
+		"install:back": "cd backend && npm install",
+		"install:front": "cd frontend && npm install",
+		"postinstall": "concurrently \"npm run install:front\" \"npm run install:back\" "
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ConradoZA/BoardGameFan.git"
+	},
+	"author": "Conrado Zafra",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ConradoZA/BoardGameFan/issues"
+	},
+	"homepage": "https://github.com/ConradoZA/BoardGameFan#readme",
+	"dependencies": {},
+	"devDependencies": {
+		"concurrently": "^5.2.0"
+	}
 }
