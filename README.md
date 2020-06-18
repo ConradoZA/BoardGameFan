@@ -9,10 +9,10 @@ A tribute (and reinterpretation) to the all-powerful Board Game Geek, THE refere
 
 ### Getting started 🔧
 
-_You want to try this poject in your computer?_<br />
+_You want to try this project in your computer?_<br />
 
 First, you need to have [node.js](https://nodejs.org/en/) installed in your computer.
-Second, you need to have [Angular cli](https://angular.io/cli) installed too: ```npm install -g @angular/cli```
+Second, you need to have [Angular cli](https://angular.io/cli) installed too:<br /> ```npm install -g @angular/cli```
 
 Run ```npm install``` in the root folder and concurrently will install all the node_modules in both folders.<br />
 Remember to rename "backend/config/config.example.json" to "backend/config/config.json" and configure your own variables.<br />
