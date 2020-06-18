@@ -7,7 +7,8 @@
         "dialect": "mysql",
         "operatorsAliases": false,
         "jwt_secret": "HelloWorld",
-        "GMAIL": { "user": "your@account.com", "pass": "whatever" }
+        "GMAIL": { "user": "your@account.com", "pass": "whatever" },
+        "API_URL": "http://localhost:3000"
     },
     "test": {
         "username": "root",
